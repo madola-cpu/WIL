@@ -1,0 +1,83 @@
+{
+  "schema_version": "phase4-input/1.0",
+  "run": {
+    "run_id": "acquisition-starter",
+    "scenario": "B",
+    "client_name": "Acquisition sample: Acquirer Co. and Target Co. (synthetic)",
+    "generated_at": "2026-11-22T00:00:00Z",
+    "source_steps": ["step7", "step8"],
+    "synthetic": true,
+    "notes": "Placeholder for option B until the two Salesforce exports (deals, stage history, approvals) exist. Every number here is invented to exercise the engine; replace it with step 7 and 8 output."
+  },
+  "company": {
+    "short_name": "the combined company",
+    "employees_total": 64,
+    "current_tools": ["Salesforce (Acquirer org)", "Salesforce (Target org)", "Slack"],
+    "capabilities": {
+      "ai_policy_in_place": false,
+      "customer_data_sharing_cleared": true,
+      "stage_history_months": 12,
+      "crm_orgs": 2
+    },
+    "volumes": {
+      "sales_reps": 40,
+      "approval_seats": 48
+    }
+  },
+  "assumptions": {
+    "currency": "USD",
+    "loaded_hourly_rate": 85,
+    "working_weeks_per_year": 48,
+    "adoption_rate": {"low": 0.5, "base": 0.7, "high": 0.85},
+    "max_payback_months": 12,
+    "sources": {
+      "loaded_hourly_rate": "Placeholder until the combined company's finance figures are available"
+    }
+  },
+  "bottlenecks": [
+    {
+      "id": "BN-B1",
+      "rank": 1,
+      "name": "Stalled deals waiting on approvals",
+      "category": "stalled_deals",
+      "description": "Deals sit in a stage past the norm while discount, pricing and legal approvals wait on two different approval chains.",
+      "departments": ["Acquirer sales", "Target sales", "Deal desk"],
+      "employees_affected": 34,
+      "hours_lost_per_week": {"low": 34, "base": 40.8, "high": 47},
+      "deal_impact": {
+        "deals_lost_per_year": {"low": 10, "base": 14, "high": 18},
+        "avg_deal_value": 42000,
+        "contribution_margin": 0.38,
+        "source": "Placeholder: deals closed-lost or slipped a quarter after waiting more than 10 days on approval"
+      },
+      "annual_cost": 389904,
+      "feasibility": "medium",
+      "priority_score": 84,
+      "root_causes": ["Two approval chains after the acquisition", "No response-time target for approvers", "Stalled deals are noticed at quarter end"],
+      "evidence": [
+        {"signal": "Days between approval request and decision", "source": "Salesforce approvals export (both orgs)", "value": "placeholder"},
+        {"signal": "Days in stage against the stage norm", "source": "Opportunity stage history export", "value": "placeholder"}
+      ]
+    },
+    {
+      "id": "BN-B2",
+      "rank": 2,
+      "name": "Shared customers worked by both teams",
+      "category": "shared_customers",
+      "description": "The same customers sit in both CRMs, so both teams reach out, quote separately and argue over ownership.",
+      "departments": ["Acquirer sales", "Target sales"],
+      "employees_affected": 28,
+      "hours_lost_per_week": {"low": 25, "base": 30.8, "high": 36},
+      "deal_impact": {
+        "deals_lost_per_year": {"low": 5, "base": 8, "high": 11},
+        "avg_deal_value": 42000,
+        "contribution_margin": 0.38,
+        "source": "Placeholder: deals lost where both companies had an open opportunity on the same account"
+      },
+      "annual_cost": 253344,
+      "feasibility": "medium",
+      "priority_score": 71,
+      "root_causes": ["Two CRMs with no shared account list", "No rule for who owns a shared account", "Reps are not paid for referrals"]
+    }
+  ]
+}

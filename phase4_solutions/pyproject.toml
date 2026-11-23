@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phase4-solutions"
+version = "0.2.0"
+description = "Team Tom AI consultant, Phase 4 (step 9): AI, software, process and reskilling fixes per bottleneck"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+ai = ["anthropic"]
+dev = ["pytest", "jsonschema"]
+
+[project.scripts]
+phase4 = "phase4.cli:main"
+
+[tool.setuptools]
+packages = ["phase4"]
+
+[tool.setuptools.package-data]
+phase4 = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

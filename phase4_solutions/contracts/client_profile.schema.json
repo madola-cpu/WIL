@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://whitman-innovation-lab/team-tom/client_profile.schema.json",
+  "title": "Phase 4 client profile",
+  "description": "The facts Phase 4 needs that steps 7 and 8 do not produce, kept in profiles/<name>.json. Values found in the Phase 3 output win over the profile, except anything under 'overrides'.",
+  "type": "object",
+  "required": ["client_name", "company", "assumptions"],
+  "properties": {
+    "profile_version": {"type": "string"},
+    "client_name": {"type": "string"},
+    "scenario": {"enum": ["A", "B"]},
+    "synthetic": {"type": "boolean"},
+    "notes": {"type": "string"},
+    "company": {
+      "type": "object",
+      "required": ["employees_total"],
+      "properties": {
+        "short_name": {"type": "string"},
+        "employees_total": {"type": "integer", "minimum": 1},
+        "billable_employees": {"type": "integer", "minimum": 0},
+        "current_tools": {"type": "array", "items": {"type": "string"}},
+        "capabilities": {"type": "object", "additionalProperties": {"type": ["boolean", "number", "string"]}},
+        "volumes": {"type": "object", "additionalProperties": {"type": "number", "minimum": 0}}
+      }
+    },
+    "assumptions": {
+      "type": "object",
+      "properties": {
+        "currency": {"type": "string"},
+        "loaded_hourly_rate": {},
+        "working_weeks_per_year": {"type": "number"},
+        "adoption_rate": {},
+        "max_payback_months": {"type": "number"},
+        "realized_billing_rate": {"type": "number"},
+        "sources": {"type": "object", "additionalProperties": {"type": "string"}}
+      }
+    },
+    "category_map": {
+      "description": "Bottleneck id, exact name, or a word in the name -> fix category id. Used when Phase 3 sends no category.",
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    },
+    "bottleneck_extras": {
+      "description": "Extra fields merged into a bottleneck, keyed by bottleneck id or fix category id (for example upside_not_counted).",
+      "type": "object",
+      "additionalProperties": {"type": "object"}
+    },
+    "upside_not_counted": {"type": "array"},
+    "defaults": {
+      "type": "object",
+      "properties": {"contribution_margin": {"type": "number", "minimum": 0, "maximum": 1}}
+    },
+    "field_mapping": {
+      "description": "Explicit paths for Phase 3 fields the adapter cannot recognise by name.",
+      "type": "object",
+      "properties": {
+        "bottlenecks_path": {"type": "string"},
+        "roi_path": {"type": "string"},
+        "fields": {"type": "object", "additionalProperties": {"type": "string"}},
+        "roi_fields": {"type": "object", "additionalProperties": {"type": "string"}}
+      }
+    },
+    "overrides": {
+      "description": "Values that must win over the Phase 3 output.",
+      "type": "object"
+    }
+  }
+}

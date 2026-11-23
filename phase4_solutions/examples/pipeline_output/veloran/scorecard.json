@@ -1,0 +1,478 @@
+{
+  "reference": "Veloran Consulting Workflow Efficiency Report v1.0 (Nov 1, 2026): solution-option tables for Bottlenecks 1-3 and the Recommendations and ROI table",
+  "checks": 75,
+  "matched": 75,
+  "score_pct": 100.0,
+  "passed": true,
+  "rows": [
+    {
+      "where": "BN-1 ai_capacity_forecasting upfront_cost",
+      "expected": 40000,
+      "got": 40000,
+      "ok": true
+    },
+    {
+      "where": "BN-1 ai_capacity_forecasting ongoing_cost_per_year",
+      "expected": 24000,
+      "got": 24000,
+      "ok": true
+    },
+    {
+      "where": "BN-1 ai_capacity_forecasting hours_saved_per_week",
+      "expected": 45,
+      "got": 45,
+      "ok": true
+    },
+    {
+      "where": "BN-1 ai_capacity_forecasting annual_savings",
+      "expected": 136080,
+      "got": 136080,
+      "ok": true
+    },
+    {
+      "where": "BN-1 ai_capacity_forecasting payback_months",
+      "expected": 5.6,
+      "got": 5.6,
+      "ok": true
+    },
+    {
+      "where": "BN-1 ai_capacity_forecasting status",
+      "expected": "deferred",
+      "got": "deferred",
+      "ok": true
+    },
+    {
+      "where": "BN-1 psa_tool upfront_cost",
+      "expected": 26200,
+      "got": 26200,
+      "ok": true
+    },
+    {
+      "where": "BN-1 psa_tool ongoing_cost_per_year",
+      "expected": 28800,
+      "got": 28800,
+      "ok": true
+    },
+    {
+      "where": "BN-1 psa_tool hours_saved_per_week",
+      "expected": 60,
+      "got": 60,
+      "ok": true
+    },
+    {
+      "where": "BN-1 psa_tool annual_savings",
+      "expected": 181440,
+      "got": 181440,
+      "ok": true
+    },
+    {
+      "where": "BN-1 psa_tool payback_months",
+      "expected": 3.6,
+      "got": 3.6,
+      "ok": true
+    },
+    {
+      "where": "BN-1 capacity_council upfront_cost",
+      "expected": 3600,
+      "got": 3600,
+      "ok": true
+    },
+    {
+      "where": "BN-1 capacity_council ongoing_cost_per_year",
+      "expected": 0,
+      "got": 0,
+      "ok": true
+    },
+    {
+      "where": "BN-1 capacity_council hours_saved_per_week",
+      "expected": 30,
+      "got": 30,
+      "ok": true
+    },
+    {
+      "where": "BN-1 capacity_council annual_savings",
+      "expected": 90720,
+      "got": 90720,
+      "ok": true
+    },
+    {
+      "where": "BN-1 capacity_council payback_months",
+      "expected": 0.5,
+      "got": 0.5,
+      "ok": true
+    },
+    {
+      "where": "BN-1 recommended fixes",
+      "expected": [
+        "capacity_council",
+        "psa_tool"
+      ],
+      "got": [
+        "capacity_council",
+        "psa_tool"
+      ],
+      "ok": true
+    },
+    {
+      "where": "BN-1 recommendation hours_saved_per_week",
+      "expected": 85,
+      "got": 85,
+      "ok": true
+    },
+    {
+      "where": "BN-1 recommendation year_one_cost",
+      "expected": 58600,
+      "got": 58600,
+      "ok": true
+    },
+    {
+      "where": "BN-1 recommendation ongoing_cost_per_year",
+      "expected": 28800,
+      "got": 28800,
+      "ok": true
+    },
+    {
+      "where": "BN-1 recommendation annual_savings",
+      "expected": 257040,
+      "got": 257040,
+      "ok": true
+    },
+    {
+      "where": "BN-1 recommendation payback_months",
+      "expected": 2.7,
+      "got": 2.7,
+      "ok": true
+    },
+    {
+      "where": "BN-2 ai_meeting_notes upfront_cost",
+      "expected": 2000,
+      "got": 2000,
+      "ok": true
+    },
+    {
+      "where": "BN-2 ai_meeting_notes ongoing_cost_per_year",
+      "expected": 9000,
+      "got": 9000,
+      "ok": true
+    },
+    {
+      "where": "BN-2 ai_meeting_notes hours_saved_per_week",
+      "expected": 40,
+      "got": 40,
+      "ok": true
+    },
+    {
+      "where": "BN-2 ai_meeting_notes annual_savings",
+      "expected": 120960,
+      "got": 120960,
+      "ok": true
+    },
+    {
+      "where": "BN-2 ai_meeting_notes payback_months",
+      "expected": 1.1,
+      "got": 1.1,
+      "ok": true
+    },
+    {
+      "where": "BN-2 ai_meeting_notes status",
+      "expected": "on_hold",
+      "got": "on_hold",
+      "ok": true
+    },
+    {
+      "where": "BN-2 system_of_record upfront_cost",
+      "expected": 7200,
+      "got": 7200,
+      "ok": true
+    },
+    {
+      "where": "BN-2 system_of_record ongoing_cost_per_year",
+      "expected": 0,
+      "got": 0,
+      "ok": true
+    },
+    {
+      "where": "BN-2 system_of_record hours_saved_per_week",
+      "expected": 35,
+      "got": 35,
+      "ok": true
+    },
+    {
+      "where": "BN-2 system_of_record annual_savings",
+      "expected": 105840,
+      "got": 105840,
+      "ok": true
+    },
+    {
+      "where": "BN-2 system_of_record payback_months",
+      "expected": 0.8,
+      "got": 0.8,
+      "ok": true
+    },
+    {
+      "where": "BN-2 meeting_reset upfront_cost",
+      "expected": 2600,
+      "got": 2600,
+      "ok": true
+    },
+    {
+      "where": "BN-2 meeting_reset ongoing_cost_per_year",
+      "expected": 0,
+      "got": 0,
+      "ok": true
+    },
+    {
+      "where": "BN-2 meeting_reset hours_saved_per_week",
+      "expected": 50,
+      "got": 50,
+      "ok": true
+    },
+    {
+      "where": "BN-2 meeting_reset annual_savings",
+      "expected": 151200,
+      "got": 151200,
+      "ok": true
+    },
+    {
+      "where": "BN-2 meeting_reset payback_months",
+      "expected": 0.2,
+      "got": 0.2,
+      "ok": true
+    },
+    {
+      "where": "BN-2 recommended fixes",
+      "expected": [
+        "meeting_reset",
+        "system_of_record"
+      ],
+      "got": [
+        "meeting_reset",
+        "system_of_record"
+      ],
+      "ok": true
+    },
+    {
+      "where": "BN-2 recommendation hours_saved_per_week",
+      "expected": 75,
+      "got": 75,
+      "ok": true
+    },
+    {
+      "where": "BN-2 recommendation year_one_cost",
+      "expected": 9800,
+      "got": 9800,
+      "ok": true
+    },
+    {
+      "where": "BN-2 recommendation ongoing_cost_per_year",
+      "expected": 0,
+      "got": 0,
+      "ok": true
+    },
+    {
+      "where": "BN-2 recommendation annual_savings",
+      "expected": 226800,
+      "got": 226800,
+      "ok": true
+    },
+    {
+      "where": "BN-2 recommendation payback_months",
+      "expected": 0.5,
+      "got": 0.5,
+      "ok": true
+    },
+    {
+      "where": "BN-3 ai_timesheets upfront_cost",
+      "expected": 2000,
+      "got": 2000,
+      "ok": true
+    },
+    {
+      "where": "BN-3 ai_timesheets ongoing_cost_per_year",
+      "expected": 9120,
+      "got": 9120,
+      "ok": true
+    },
+    {
+      "where": "BN-3 ai_timesheets hours_saved_per_week",
+      "expected": 25,
+      "got": 25,
+      "ok": true
+    },
+    {
+      "where": "BN-3 ai_timesheets annual_savings",
+      "expected": 75600,
+      "got": 75600,
+      "ok": true
+    },
+    {
+      "where": "BN-3 ai_timesheets payback_months",
+      "expected": 1.8,
+      "got": 1.8,
+      "ok": true
+    },
+    {
+      "where": "BN-3 psa_time_module upfront_cost",
+      "expected": 0,
+      "got": 0,
+      "ok": true
+    },
+    {
+      "where": "BN-3 psa_time_module ongoing_cost_per_year",
+      "expected": 0,
+      "got": 0,
+      "ok": true
+    },
+    {
+      "where": "BN-3 psa_time_module hours_saved_per_week",
+      "expected": 12,
+      "got": 12,
+      "ok": true
+    },
+    {
+      "where": "BN-3 psa_time_module annual_savings",
+      "expected": 36288,
+      "got": 36288,
+      "ok": true
+    },
+    {
+      "where": "BN-3 psa_time_module payback_months",
+      "expected": 0,
+      "got": 0.0,
+      "ok": true
+    },
+    {
+      "where": "BN-3 psa_time_module status",
+      "expected": "follow_on",
+      "got": "follow_on",
+      "ok": true
+    },
+    {
+      "where": "BN-3 daily_time_rule upfront_cost",
+      "expected": 0,
+      "got": 0,
+      "ok": true
+    },
+    {
+      "where": "BN-3 daily_time_rule ongoing_cost_per_year",
+      "expected": 0,
+      "got": 0,
+      "ok": true
+    },
+    {
+      "where": "BN-3 daily_time_rule hours_saved_per_week",
+      "expected": 15,
+      "got": 15,
+      "ok": true
+    },
+    {
+      "where": "BN-3 daily_time_rule annual_savings",
+      "expected": 45360,
+      "got": 45360,
+      "ok": true
+    },
+    {
+      "where": "BN-3 daily_time_rule payback_months",
+      "expected": 0,
+      "got": 0.0,
+      "ok": true
+    },
+    {
+      "where": "BN-3 recommended fixes",
+      "expected": [
+        "ai_timesheets",
+        "daily_time_rule"
+      ],
+      "got": [
+        "ai_timesheets",
+        "daily_time_rule"
+      ],
+      "ok": true
+    },
+    {
+      "where": "BN-3 recommendation hours_saved_per_week",
+      "expected": 35,
+      "got": 35,
+      "ok": true
+    },
+    {
+      "where": "BN-3 recommendation year_one_cost",
+      "expected": 11120,
+      "got": 11120,
+      "ok": true
+    },
+    {
+      "where": "BN-3 recommendation ongoing_cost_per_year",
+      "expected": 9120,
+      "got": 9120,
+      "ok": true
+    },
+    {
+      "where": "BN-3 recommendation annual_savings",
+      "expected": 105840,
+      "got": 105840,
+      "ok": true
+    },
+    {
+      "where": "BN-3 recommendation payback_months",
+      "expected": 1.3,
+      "got": 1.3,
+      "ok": true
+    },
+    {
+      "where": "program year_one_cost",
+      "expected": 79520,
+      "got": 79520,
+      "ok": true
+    },
+    {
+      "where": "program ongoing_cost_per_year",
+      "expected": 37920,
+      "got": 37920,
+      "ok": true
+    },
+    {
+      "where": "program gross_hours_saved_per_week",
+      "expected": 195,
+      "got": 195,
+      "ok": true
+    },
+    {
+      "where": "program effective_hours_saved_per_week",
+      "expected": 136.5,
+      "got": 136.5,
+      "ok": true
+    },
+    {
+      "where": "program annual_savings",
+      "expected": 589680,
+      "got": 589680,
+      "ok": true
+    },
+    {
+      "where": "program net_benefit_year_one",
+      "expected": 510160,
+      "got": 510160,
+      "ok": true
+    },
+    {
+      "where": "program net_benefit_year_two_onward",
+      "expected": 551760,
+      "got": 551760,
+      "ok": true
+    },
+    {
+      "where": "program payback_months",
+      "expected": 1.6,
+      "got": 1.6,
+      "ok": true
+    },
+    {
+      "where": "program upside_not_counted_total",
+      "expected": 415171,
+      "got": 415171,
+      "ok": true
+    }
+  ],
+  "markdown": "**75 of 75 numbers match the reference report (100%).**\n\n| Check | Report | Phase 4 | Match |\n| --- | --- | --- | --- |\n| BN-1 ai_capacity_forecasting upfront_cost | 40000 | 40000 | yes |\n| BN-1 ai_capacity_forecasting ongoing_cost_per_year | 24000 | 24000 | yes |\n| BN-1 ai_capacity_forecasting hours_saved_per_week | 45 | 45 | yes |\n| BN-1 ai_capacity_forecasting annual_savings | 136080 | 136080 | yes |\n| BN-1 ai_capacity_forecasting payback_months | 5.6 | 5.6 | yes |\n| BN-1 ai_capacity_forecasting status | deferred | deferred | yes |\n| BN-1 psa_tool upfront_cost | 26200 | 26200 | yes |\n| BN-1 psa_tool ongoing_cost_per_year | 28800 | 28800 | yes |\n| BN-1 psa_tool hours_saved_per_week | 60 | 60 | yes |\n| BN-1 psa_tool annual_savings | 181440 | 181440 | yes |\n| BN-1 psa_tool payback_months | 3.6 | 3.6 | yes |\n| BN-1 capacity_council upfront_cost | 3600 | 3600 | yes |\n| BN-1 capacity_council ongoing_cost_per_year | 0 | 0 | yes |\n| BN-1 capacity_council hours_saved_per_week | 30 | 30 | yes |\n| BN-1 capacity_council annual_savings | 90720 | 90720 | yes |\n| BN-1 capacity_council payback_months | 0.5 | 0.5 | yes |\n| BN-1 recommended fixes | capacity_council, psa_tool | capacity_council, psa_tool | yes |\n| BN-1 recommendation hours_saved_per_week | 85 | 85 | yes |\n| BN-1 recommendation year_one_cost | 58600 | 58600 | yes |\n| BN-1 recommendation ongoing_cost_per_year | 28800 | 28800 | yes |\n| BN-1 recommendation annual_savings | 257040 | 257040 | yes |\n| BN-1 recommendation payback_months | 2.7 | 2.7 | yes |\n| BN-2 ai_meeting_notes upfront_cost | 2000 | 2000 | yes |\n| BN-2 ai_meeting_notes ongoing_cost_per_year | 9000 | 9000 | yes |\n| BN-2 ai_meeting_notes hours_saved_per_week | 40 | 40 | yes |\n| BN-2 ai_meeting_notes annual_savings | 120960 | 120960 | yes |\n| BN-2 ai_meeting_notes payback_months | 1.1 | 1.1 | yes |\n| BN-2 ai_meeting_notes status | on_hold | on_hold | yes |\n| BN-2 system_of_record upfront_cost | 7200 | 7200 | yes |\n| BN-2 system_of_record ongoing_cost_per_year | 0 | 0 | yes |\n| BN-2 system_of_record hours_saved_per_week | 35 | 35 | yes |\n| BN-2 system_of_record annual_savings | 105840 | 105840 | yes |\n| BN-2 system_of_record payback_months | 0.8 | 0.8 | yes |\n| BN-2 meeting_reset upfront_cost | 2600 | 2600 | yes |\n| BN-2 meeting_reset ongoing_cost_per_year | 0 | 0 | yes |\n| BN-2 meeting_reset hours_saved_per_week | 50 | 50 | yes |\n| BN-2 meeting_reset annual_savings | 151200 | 151200 | yes |\n| BN-2 meeting_reset payback_months | 0.2 | 0.2 | yes |\n| BN-2 recommended fixes | meeting_reset, system_of_record | meeting_reset, system_of_record | yes |\n| BN-2 recommendation hours_saved_per_week | 75 | 75 | yes |\n| BN-2 recommendation year_one_cost | 9800 | 9800 | yes |\n| BN-2 recommendation ongoing_cost_per_year | 0 | 0 | yes |\n| BN-2 recommendation annual_savings | 226800 | 226800 | yes |\n| BN-2 recommendation payback_months | 0.5 | 0.5 | yes |\n| BN-3 ai_timesheets upfront_cost | 2000 | 2000 | yes |\n| BN-3 ai_timesheets ongoing_cost_per_year | 9120 | 9120 | yes |\n| BN-3 ai_timesheets hours_saved_per_week | 25 | 25 | yes |\n| BN-3 ai_timesheets annual_savings | 75600 | 75600 | yes |\n| BN-3 ai_timesheets payback_months | 1.8 | 1.8 | yes |\n| BN-3 psa_time_module upfront_cost | 0 | 0 | yes |\n| BN-3 psa_time_module ongoing_cost_per_year | 0 | 0 | yes |\n| BN-3 psa_time_module hours_saved_per_week | 12 | 12 | yes |\n| BN-3 psa_time_module annual_savings | 36288 | 36288 | yes |\n| BN-3 psa_time_module payback_months | 0 | 0.0 | yes |\n| BN-3 psa_time_module status | follow_on | follow_on | yes |\n| BN-3 daily_time_rule upfront_cost | 0 | 0 | yes |\n| BN-3 daily_time_rule ongoing_cost_per_year | 0 | 0 | yes |\n| BN-3 daily_time_rule hours_saved_per_week | 15 | 15 | yes |\n| BN-3 daily_time_rule annual_savings | 45360 | 45360 | yes |\n| BN-3 daily_time_rule payback_months | 0 | 0.0 | yes |\n| BN-3 recommended fixes | ai_timesheets, daily_time_rule | ai_timesheets, daily_time_rule | yes |\n| BN-3 recommendation hours_saved_per_week | 35 | 35 | yes |\n| BN-3 recommendation year_one_cost | 11120 | 11120 | yes |\n| BN-3 recommendation ongoing_cost_per_year | 9120 | 9120 | yes |\n| BN-3 recommendation annual_savings | 105840 | 105840 | yes |\n| BN-3 recommendation payback_months | 1.3 | 1.3 | yes |\n| program year_one_cost | 79520 | 79520 | yes |\n| program ongoing_cost_per_year | 37920 | 37920 | yes |\n| program gross_hours_saved_per_week | 195 | 195 | yes |\n| program effective_hours_saved_per_week | 136.5 | 136.5 | yes |\n| program annual_savings | 589680 | 589680 | yes |\n| program net_benefit_year_one | 510160 | 510160 | yes |\n| program net_benefit_year_two_onward | 551760 | 551760 | yes |\n| program payback_months | 1.6 | 1.6 | yes |\n| program upside_not_counted_total | 415171 | 415171 | yes |"
+}

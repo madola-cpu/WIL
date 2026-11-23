@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://whitman-innovation-lab/team-tom/manager_view.schema.json",
+  "title": "Phase 4 manager view (what the frontend shows)",
+  "description": "Display-ready data built by phase4.connectors.manager_view(). Every number has a raw value and display text; ranges and the calculation behind a number are optional extras for tooltips.",
+  "type": "object",
+  "required": ["view_version", "client_name", "scenario", "generated_at", "engine", "headline", "summary", "bottlenecks",
+               "not_in_scope", "governance_actions", "upside_not_counted", "warnings", "badge_legend"],
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "required": ["value", "display"],
+      "properties": {
+        "value": {"type": ["number", "null"]},
+        "display": {"type": "string"},
+        "range": {
+          "type": "object",
+          "required": ["low", "high", "display"],
+          "properties": {
+            "low": {"type": ["number", "null"]},
+            "high": {"type": ["number", "null"]},
+            "display": {"type": "string"}
+          }
+        },
+        "math": {"type": "string", "description": "How the number was worked out (show on hover)"}
+      }
+    },
+    "badge": {
+      "type": "object",
+      "required": ["status", "label", "tone", "meaning"],
+      "properties": {
+        "status": {"enum": ["recommended", "not_chosen", "follow_on", "deferred", "on_hold", "blocked", "needs_input"]},
+        "label": {"type": "string"},
+        "tone": {"enum": ["positive", "info", "neutral", "warning", "negative", "attention"]},
+        "meaning": {"type": "string"}
+      }
+    },
+    "option": {
+      "type": "object",
+      "required": ["option_id", "number", "label", "name", "type", "type_label", "badge", "reason", "other_reasons",
+                   "how_it_solves", "vendors", "upfront_cost", "ongoing_cost_per_year", "year_one_cost",
+                   "hours_saved_per_week", "annual_savings", "payback", "implementation", "effort", "governance", "confidence"],
+      "properties": {
+        "option_id": {"type": "string"},
+        "number": {"type": "integer"},
+        "label": {"type": "string"},
+        "name": {"type": "string"},
+        "type": {"enum": ["ai_tool", "software", "process", "reskilling"]},
+        "type_label": {"type": "string"},
+        "badge": {"$ref": "#/$defs/badge"},
+        "reason": {"type": "string"},
+        "other_reasons": {"type": "array", "items": {"type": "string"}},
+        "how_it_solves": {"type": "string"},
+        "vendors": {"type": "array", "items": {"type": "string"}},
+        "upfront_cost": {"$ref": "#/$defs/metric"},
+        "ongoing_cost_per_year": {"$ref": "#/$defs/metric"},
+        "year_one_cost": {"$ref": "#/$defs/metric"},
+        "hours_saved_per_week": {"$ref": "#/$defs/metric"},
+        "annual_savings": {"$ref": "#/$defs/metric"},
+        "payback": {"$ref": "#/$defs/metric"},
+        "implementation": {"type": "string"},
+        "effort": {"type": "string"},
+        "governance": {
+          "type": "object",
+          "required": ["risk", "label", "is_ai", "go_live_gates"],
+          "properties": {
+            "risk": {"enum": ["none", "low", "medium", "high"]},
+            "label": {"type": "string"},
+            "is_ai": {"type": "boolean"},
+            "go_live_gates": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "confidence": {"type": "string"}
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "required": ["option_ids", "names", "type_summary", "summary", "hours_saved_per_week", "annual_savings",
+                   "year_one_cost", "payback", "sequence"],
+      "properties": {
+        "option_ids": {"type": "array", "items": {"type": "string"}},
+        "names": {"type": "array", "items": {"type": "string"}},
+        "type_summary": {"type": "string"},
+        "summary": {"type": "string"},
+        "hours_saved_per_week": {"$ref": "#/$defs/metric"},
+        "annual_savings": {"$ref": "#/$defs/metric"},
+        "year_one_cost": {"$ref": "#/$defs/metric"},
+        "payback": {"$ref": "#/$defs/metric"},
+        "sequence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "option_id", "name", "time_to_live"],
+            "properties": {
+              "step": {"type": "integer"},
+              "option_id": {"type": "string"},
+              "name": {"type": "string"},
+              "time_to_live": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "bottleneck": {
+      "type": "object",
+      "required": ["id", "rank", "title", "full_name", "category", "people_affected", "hours_lost_per_week",
+                   "annual_cost", "recommendation", "options", "notes"],
+      "properties": {
+        "id": {"type": "string"},
+        "rank": {"type": "integer"},
+        "title": {"type": "string"},
+        "full_name": {"type": "string"},
+        "category": {"type": ["string", "null"]},
+        "people_affected": {"type": "integer"},
+        "hours_lost_per_week": {"$ref": "#/$defs/metric"},
+        "annual_cost": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/metric"}]},
+        "recommendation": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/recommendation"}]},
+        "options": {"type": "array", "items": {"$ref": "#/$defs/option"}},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "properties": {
+    "view_version": {"type": "string", "pattern": "^phase4-manager-view/1\\.[0-9]+$"},
+    "client_name": {"type": "string"},
+    "scenario": {"enum": ["A", "B"]},
+    "generated_at": {"type": "string"},
+    "engine": {"type": "string"},
+    "headline": {
+      "type": "object",
+      "required": ["year_one_cost", "annual_savings", "net_benefit_year_one", "payback", "hours_won_back_per_week",
+                   "share_of_lost_time"],
+      "properties": {
+        "year_one_cost": {"$ref": "#/$defs/metric"},
+        "annual_savings": {"$ref": "#/$defs/metric"},
+        "net_benefit_year_one": {"$ref": "#/$defs/metric"},
+        "payback": {"$ref": "#/$defs/metric"},
+        "hours_won_back_per_week": {"$ref": "#/$defs/metric"},
+        "share_of_lost_time": {"$ref": "#/$defs/metric"}
+      }
+    },
+    "summary": {"type": "string"},
+    "bottlenecks": {"type": "array", "items": {"$ref": "#/$defs/bottleneck"}},
+    "not_in_scope": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "reason"],
+        "properties": {"id": {"type": "string"}, "title": {"type": "string"}, "reason": {"type": "string"}}
+      }
+    },
+    "governance_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["action", "for"],
+        "properties": {"action": {"type": "string"}, "for": {"type": "array", "items": {"type": "string"}}}
+      }
+    },
+    "upside_not_counted": {
+      "type": "object",
+      "required": ["total", "items"],
+      "properties": {
+        "total": {"$ref": "#/$defs/metric"},
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["label", "value", "display", "basis"],
+            "properties": {
+              "label": {"type": "string"},
+              "value": {"type": "number"},
+              "display": {"type": "string"},
+              "basis": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "badge_legend": {"type": "array", "items": {"$ref": "#/$defs/badge"}}
+  }
+}

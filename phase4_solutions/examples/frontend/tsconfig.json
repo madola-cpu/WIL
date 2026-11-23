@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "preserve",
+    "allowJs": true,
+    "checkJs": true,
+    "skipLibCheck": true,
+    "lib": ["es2022", "dom"],
+    "types": []
+  },
+  "files": [
+    "typecheck/jsx-shim.d.ts",
+    "../../contracts/phase4.d.ts",
+    "phase4-panel.js",
+    "Phase4Panel.tsx"
+  ]
+}

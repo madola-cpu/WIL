@@ -1,0 +1,220 @@
+{
+  "schema_version": "phase4-input/1.0",
+  "run": {
+    "run_id": "veloran-20261123",
+    "scenario": "A",
+    "client_name": "Veloran Consulting LLC",
+    "generated_at": "2026-11-23T17:44:29+00:00",
+    "source_steps": [
+      "step7",
+      "step8"
+    ],
+    "synthetic": true,
+    "notes": "Built from Phase 3 output by phase4.connectors.phase3"
+  },
+  "company": {
+    "employees_total": 50,
+    "billable_employees": 38,
+    "short_name": "Veloran",
+    "current_tools": [
+      "Harvest",
+      "Jira",
+      "Asana",
+      "Smartsheet",
+      "Google Sheets",
+      "Slack",
+      "Google Workspace",
+      "Salesforce"
+    ],
+    "capabilities": {
+      "ai_policy_in_place": false,
+      "call_recording_consent": false,
+      "clean_staffing_history_months": 0,
+      "work_tracker": "Jira",
+      "crm": "Salesforce"
+    },
+    "volumes": {
+      "certification_vouchers": 18,
+      "active_projects": 23
+    }
+  },
+  "assumptions": {
+    "loaded_hourly_rate": 90,
+    "working_weeks_per_year": 48,
+    "adoption_rate": {
+      "low": 0.5,
+      "base": 0.7,
+      "high": 0.85
+    },
+    "currency": "USD",
+    "max_payback_months": 12,
+    "realized_billing_rate": 158,
+    "sources": {
+      "loaded_hourly_rate": "Average salary $118,000 x 1.30 for benefits and payroll taxes, plus $19,400 overhead per person, divided by 1,920 working hours (Veloran finance, FY2025)",
+      "working_weeks_per_year": "52 weeks minus PTO and holidays (Veloran handbook)",
+      "adoption_rate": "Conservative planning assumption (70%), applied to every saving; 50% and 85% for the low and high cases"
+    }
+  },
+  "bottlenecks": [
+    {
+      "id": "staffing",
+      "rank": 1,
+      "name": "Staffing blind spots",
+      "employees_affected": 43,
+      "hours_lost_per_week": {
+        "low": 116,
+        "base": 129,
+        "high": 148
+      },
+      "category": "staffing_visibility",
+      "annual_cost": {
+        "low": 501120,
+        "base": 557280,
+        "high": 639360
+      },
+      "priority_score": 88,
+      "departments": [
+        "CRM Practice",
+        "Data & AI Practice",
+        "Delivery Office (PMO)",
+        "Growth",
+        "Leadership & Operations"
+      ],
+      "root_causes": [
+        "No forward view of capacity",
+        "Sales and delivery plan separately",
+        "Bench time has no default use"
+      ],
+      "evidence": [
+        {
+          "signal": "Unplanned bench hours a week",
+          "source": "Harvest, staffing sheet",
+          "value": "57"
+        },
+        {
+          "signal": "Working days of notice before a new assignment",
+          "source": "Staffing sheet history",
+          "value": "4"
+        }
+      ],
+      "feasibility": "medium",
+      "upside_not_counted": [
+        {
+          "key": "bench_to_billable",
+          "label": "Half of unplanned bench becomes billable",
+          "amount": 216144,
+          "basis": "28.5 hours a week x 48 weeks x $158 realized rate",
+          "unlocked_by": [
+            "psa_tool",
+            "capacity_council"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "status",
+      "rank": 2,
+      "name": "Status reporting repeated across four places",
+      "employees_affected": 40,
+      "hours_lost_per_week": {
+        "low": 101,
+        "base": 112,
+        "high": 129
+      },
+      "category": "status_duplication",
+      "annual_cost": 483840,
+      "priority_score": 87,
+      "departments": [
+        "CRM Practice",
+        "Data & AI Practice",
+        "Delivery Office (PMO)"
+      ],
+      "feasibility": "high",
+      "upside_not_counted": [
+        {
+          "key": "duplicate_licences",
+          "label": "Asana and Smartsheet licences retired",
+          "amount": 14400,
+          "basis": "Current licence invoices",
+          "unlocked_by": [
+            "system_of_record"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "timesheets",
+      "rank": 3,
+      "name": "Timesheets rebuilt from memory",
+      "employees_affected": 42,
+      "hours_lost_per_week": {
+        "low": 38,
+        "base": 42,
+        "high": 48
+      },
+      "category": "time_capture",
+      "annual_cost": 181440,
+      "priority_score": 61,
+      "departments": [
+        "CRM Practice",
+        "Data & AI Practice",
+        "Delivery Office (PMO)",
+        "Growth",
+        "Leadership & Operations"
+      ],
+      "feasibility": "high",
+      "upside_not_counted": [
+        {
+          "key": "unlogged_hours",
+          "label": "Unlogged billable hours captured",
+          "amount": 184627,
+          "basis": "70% of 1,669 unlogged hours x $158 realized rate",
+          "unlocked_by": [
+            "ai_timesheets",
+            "daily_time_rule"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "rank": 4,
+      "name": "Tool switching and notifications",
+      "employees_affected": 45,
+      "hours_lost_per_week": 27,
+      "annual_cost": 116640,
+      "priority_score": 57,
+      "feasibility": "high"
+    },
+    {
+      "id": "search",
+      "rank": 5,
+      "name": "Searching for past work",
+      "employees_affected": 34,
+      "hours_lost_per_week": 34,
+      "annual_cost": 146880,
+      "priority_score": 46,
+      "feasibility": "medium"
+    },
+    {
+      "id": "proposals",
+      "rank": 6,
+      "name": "Proposals rebuilt from scratch",
+      "employees_affected": 9,
+      "hours_lost_per_week": 54,
+      "annual_cost": 233280,
+      "priority_score": 38,
+      "feasibility": "medium"
+    },
+    {
+      "id": "migration",
+      "rank": 7,
+      "name": "Data-migration rework",
+      "employees_affected": 8,
+      "hours_lost_per_week": 44,
+      "annual_cost": 190080,
+      "priority_score": 28,
+      "feasibility": "low"
+    }
+  ]
+}

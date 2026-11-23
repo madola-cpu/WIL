@@ -1,0 +1,1711 @@
+{
+  "schema_version": "phase4-output/1.0",
+  "run": {
+    "run_id": "corlander-vale-reference",
+    "scenario": "A",
+    "client_name": "Corlander & Vale CPAs",
+    "generated_at": "2026-11-23T17:44:29+00:00",
+    "source_steps": [
+      "step7",
+      "step8"
+    ],
+    "synthetic": true,
+    "notes": "Second reference case, built from the Corlander & Vale report v1.0 (synthetic). Used to check that Phase 4 is not tuned to Veloran only.",
+    "engine": "phase4 0.2.0",
+    "catalogs": [
+      {
+        "catalog_id": "workplace",
+        "catalog_version": "2026.11.1"
+      }
+    ],
+    "input_schema_version": "phase4-input/1.0"
+  },
+  "assumptions_used": {
+    "currency": "USD",
+    "loaded_hourly_rate": {
+      "low": 80.0,
+      "base": 80.0,
+      "high": 80.0
+    },
+    "working_weeks_per_year": 48,
+    "adoption_rate": {
+      "low": 0.5,
+      "base": 0.7,
+      "high": 0.85
+    },
+    "max_payback_months": 12.0,
+    "max_fixes_per_bottleneck": 2,
+    "top_n": 3,
+    "min_group_size": 5,
+    "hours_rounding": 1,
+    "max_recoverable_share": 0.9,
+    "cost_contingency": {
+      "low": 0.15,
+      "base": 0.0,
+      "high": 0.0
+    },
+    "count_deal_margin": true,
+    "sources": {
+      "loaded_hourly_rate": "Average salary $100,000 x 1.30 plus $23,600 overhead per person, divided by 1,920 working hours (C&V finance, FY2026)",
+      "working_weeks_per_year": "52 weeks minus PTO and holidays (C&V handbook)"
+    },
+    "formulas": {
+      "hours_saved_per_week": "effect share x hours lost per week, rounded to whole hours",
+      "annual_time_savings": "hours saved x working weeks x loaded hourly rate x adoption",
+      "annual_deal_margin": "deals lost x recovery share x adoption x average deal value x contribution margin",
+      "year_one_cost": "upfront cost + first year of ongoing cost",
+      "payback_months": "year-one cost / (annual savings / 12)",
+      "mix_of_fixes": "largest saving + each other saving x (1 - overlap); never more than the cap share of hours lost",
+      "choice": "highest first-year net benefit among eligible mixes that pay back within the limit"
+    }
+  },
+  "bottlenecks": [
+    {
+      "id": "BN-1",
+      "rank": 1,
+      "name": "Client documents chased and re-requested by hand",
+      "category": "document_chasing",
+      "category_label": "Client documents chased by hand",
+      "category_match": {
+        "method": "category_id",
+        "matched_keywords": []
+      },
+      "departments": [
+        "Tax Services",
+        "Audit & Assurance",
+        "CAS",
+        "Firm Operations"
+      ],
+      "employees_affected": 86,
+      "hours_lost_per_week": {
+        "low": 240.8,
+        "base": 240.8,
+        "high": 240.8
+      },
+      "annual_cost": {
+        "low": 924672.0,
+        "base": 924672.0,
+        "high": 924672.0
+      },
+      "deal_impact": null,
+      "feasibility": "medium",
+      "priority_score": 82,
+      "root_causes": [
+        "Requests are emails, not lists",
+        "Every team chases on its own",
+        "No deadline with a consequence"
+      ],
+      "options": [
+        {
+          "option_id": "BN-1.O1",
+          "option_number": 1,
+          "label": "Option 1: AI follow-up assistant",
+          "fix_id": "ai_followup_assistant",
+          "name": "AI follow-up assistant",
+          "fix_type": "ai_tool",
+          "also": [],
+          "type_label": "AI tool",
+          "how_it_solves": "AI inside the email client drafts follow-up emails from each client thread and summarizes long threads; staff still send and track them",
+          "example_vendors": [
+            "Microsoft 365 Copilot Business (if the firm runs Microsoft 365)"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 2,
+            "weeks_max": 2,
+            "label": "2 weeks"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low"
+          },
+          "governance": {
+            "risk": "medium",
+            "note": "Medium: reads client email that holds confidential data; needs the AI policy and consent language first",
+            "is_ai": true,
+            "data_accessed": "Client email threads and attachments",
+            "go_live_gates": [
+              "Approve a one-page AI acceptable-use policy",
+              "Client consent language for AI processing"
+            ]
+          },
+          "risks_and_dependencies": [
+            "Drafts better emails but keeps no list, so nothing is tracked"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 1, Option 1",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate",
+            "list"
+          ],
+          "reskilling_focus": null,
+          "status": "not_chosen",
+          "status_label": "Not chosen",
+          "status_reason": "Largely duplicates Client portal with automatic reminders: The portal sends reminders without anyone writing them. The best mix that includes it (AI follow-up assistant + Intake desk and document deadline) nets $190,520 in year one, against $203,360 for the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 3450,
+            "base": 3000,
+            "high": 3000
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Set-up and prompt library",
+              "amount": 3000,
+              "calc": "$3,000",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 17388,
+            "base": 15120,
+            "high": 15120
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Seats",
+              "amount": 15120,
+              "calc": "60 seats x $21 a month x 12 = $15,120",
+              "price_status": "list"
+            }
+          ],
+          "year_one_cost": {
+            "low": 20838,
+            "base": 18120,
+            "high": 18120
+          },
+          "hours_saved_per_week": {
+            "low": 19,
+            "base": 25,
+            "high": 30
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 36480,
+            "base": 67200,
+            "high": 97920
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 36480,
+            "base": 67200,
+            "high": 97920
+          },
+          "payback_months": {
+            "low": 6.9,
+            "base": 3.2,
+            "high": 2.2
+          },
+          "net_benefit_year_one": {
+            "low": 15642,
+            "base": 49080,
+            "high": 79800
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.104 share x 240.8 h lost = 25.04 -> 25 h a week",
+            "annual_time_savings": "25 h x 48 weeks x $80 x 70% adoption = $67,200",
+            "year_one_cost": "$3,000 upfront + $15,120 first-year ongoing = $18,120",
+            "payback_months": "$18,120 / ($67,200 / 12) = 3.2 months"
+          }
+        },
+        {
+          "option_id": "BN-1.O2",
+          "option_number": 2,
+          "label": "Option 2: Client portal with automatic reminders",
+          "fix_id": "client_portal",
+          "name": "Client portal with automatic reminders",
+          "fix_type": "software",
+          "also": [],
+          "type_label": "Non-AI software",
+          "how_it_solves": "Every request becomes a tracked list in a portal; clients upload against each item; reminders go out automatically until the list is complete",
+          "example_vendors": [
+            "Karbon (Business plan)",
+            "TaxDome",
+            "Suralink for audit request lists"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 6,
+            "weeks_max": 8,
+            "label": "6 to 8 weeks"
+          },
+          "effort": {
+            "level": "medium",
+            "note": "Medium: 120 staff and their clients learn a new portal"
+          },
+          "governance": {
+            "risk": "low",
+            "note": "Low: standard security review",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Client adoption",
+            "Often the largest licence cost in the program"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 1, Option 2",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate",
+            "list"
+          ],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 44160,
+            "base": 38400,
+            "high": 38400
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Vendor onboarding",
+              "amount": 12000,
+              "calc": "$12,000",
+              "price_status": "estimate"
+            },
+            {
+              "item": "Configuration",
+              "amount": 12000,
+              "calc": "150 h x $80 = $12,000",
+              "price_status": "estimate"
+            },
+            {
+              "item": "Training",
+              "amount": 14400,
+              "calc": "120 portal seats x 1.5 h x $80 = $14,400",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 147384,
+            "base": 128160,
+            "high": 128160
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Licences (annual list price)",
+              "amount": 128160,
+              "calc": "120 seats x $89 a month x 12 = $128,160",
+              "price_status": "list"
+            }
+          ],
+          "year_one_cost": {
+            "low": 191544,
+            "base": 166560,
+            "high": 166560
+          },
+          "hours_saved_per_week": {
+            "low": 75,
+            "base": 100,
+            "high": 120
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 144000,
+            "base": 268800,
+            "high": 391680
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 144000,
+            "base": 268800,
+            "high": 391680
+          },
+          "payback_months": {
+            "low": 16.0,
+            "base": 7.4,
+            "high": 5.1
+          },
+          "net_benefit_year_one": {
+            "low": -47544,
+            "base": 102240,
+            "high": 225120
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.415 share x 240.8 h lost = 99.93 -> 100 h a week",
+            "annual_time_savings": "100 h x 48 weeks x $80 x 70% adoption = $268,800",
+            "year_one_cost": "$38,400 upfront + $128,160 first-year ongoing = $166,560",
+            "payback_months": "$166,560 / ($268,800 / 12) = 7.4 months"
+          }
+        },
+        {
+          "option_id": "BN-1.O3",
+          "option_number": 3,
+          "label": "Option 3: Intake desk and document deadline",
+          "fix_id": "intake_desk",
+          "name": "Intake desk and document deadline",
+          "fix_type": "process",
+          "also": [],
+          "type_label": "Process",
+          "how_it_solves": "One intake desk sends one combined request list per client, logs receipts and chases on a fixed schedule; anything incomplete on the deadline is extended by rule",
+          "example_vendors": [
+            "Internal",
+            "Engagement-letter clause",
+            "Standard request lists"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 3,
+            "weeks_max": 3,
+            "label": "3 weeks"
+          },
+          "effort": {
+            "level": "medium",
+            "note": "Medium: clients must hear the deadline in their engagement letters, and partners must hold it"
+          },
+          "governance": {
+            "risk": "none",
+            "note": "None",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Clients who miss the cut-off",
+            "Partners making exceptions"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 1, Option 3",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate"
+          ],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 7360,
+            "base": 6400,
+            "high": 6400
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Request-list templates, engagement-letter wording and desk training",
+              "amount": 6400,
+              "calc": "80 h x $80 = $6,400",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "ongoing_breakdown": [],
+          "year_one_cost": {
+            "low": 7360,
+            "base": 6400,
+            "high": 6400
+          },
+          "hours_saved_per_week": {
+            "low": 53,
+            "base": 70,
+            "high": 84
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 101760,
+            "base": 188160,
+            "high": 274176
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 101760,
+            "base": 188160,
+            "high": 274176
+          },
+          "payback_months": {
+            "low": 0.9,
+            "base": 0.4,
+            "high": 0.3
+          },
+          "net_benefit_year_one": {
+            "low": 94400,
+            "base": 181760,
+            "high": 267776
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.291 share x 240.8 h lost = 70.07 -> 70 h a week",
+            "annual_time_savings": "70 h x 48 weeks x $80 x 70% adoption = $188,160",
+            "year_one_cost": "$6,400 upfront + $0 first-year ongoing = $6,400",
+            "payback_months": "$6,400 / ($188,160 / 12) = 0.4 months"
+          }
+        }
+      ],
+      "recommendation": {
+        "fix_ids": [
+          "intake_desk",
+          "client_portal"
+        ],
+        "option_ids": [
+          "BN-1.O3",
+          "BN-1.O2"
+        ],
+        "option_numbers": [
+          3,
+          2
+        ],
+        "names": [
+          "Intake desk and document deadline",
+          "Client portal with automatic reminders"
+        ],
+        "type_summary": "Process; non-AI software",
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "BN-1.O3",
+            "name": "Intake desk and document deadline",
+            "time_to_live": "3 weeks"
+          },
+          {
+            "step": 2,
+            "option_id": "BN-1.O2",
+            "name": "Client portal with automatic reminders",
+            "time_to_live": "6 to 8 weeks"
+          }
+        ],
+        "hours_saved_per_week": {
+          "low": 105,
+          "base": 140,
+          "high": 168
+        },
+        "deals_recovered_per_year": null,
+        "upfront_cost": {
+          "low": 51520,
+          "base": 44800,
+          "high": 44800
+        },
+        "ongoing_cost_per_year": {
+          "low": 147384,
+          "base": 128160,
+          "high": 128160
+        },
+        "year_one_cost": {
+          "low": 198904,
+          "base": 172960,
+          "high": 172960
+        },
+        "annual_time_savings": {
+          "low": 201600,
+          "base": 376320,
+          "high": 548352
+        },
+        "annual_deal_margin": {
+          "low": 0,
+          "base": 0,
+          "high": 0
+        },
+        "annual_savings": {
+          "low": 201600,
+          "base": 376320,
+          "high": 548352
+        },
+        "payback_months": {
+          "low": 11.8,
+          "base": 5.5,
+          "high": 3.8
+        },
+        "net_benefit_year_one": {
+          "low": 2696,
+          "base": 203360,
+          "high": 375392
+        },
+        "overlaps_applied": [
+          {
+            "pair": [
+              "intake_desk",
+              "client_portal"
+            ],
+            "overlap": 0.4286,
+            "listed_in_catalog": true
+          }
+        ],
+        "together_note": "The intake desk owns the chase, and the portal does the remembering.",
+        "mixes_compared": 6,
+        "summary": "We recommend Option 3 (Intake desk and document deadline) and Option 2 (Client portal with automatic reminders) together. The intake desk owns the chase, and the portal does the remembering. Together they save an estimated 140 hours a week ($376,320 a year) for $172,960 in year one, a payback of 5.5 months.",
+        "summary_source": "template",
+        "trace": {
+          "hours_saved_per_week": "100 + 70 x (1 - 0.429 overlap) = 140 -> 140 h a week",
+          "annual_time_savings": "140 h x 48 weeks x $80 x 70% adoption = $376,320",
+          "year_one_cost": "Client portal with automatic reminders $166,560 + Intake desk and document deadline $6,400 = $172,960",
+          "payback_months": "$172,960 / ($376,320 / 12) = 5.5 months"
+        },
+        "summary_template": "We recommend Option 3 (Intake desk and document deadline) and Option 2 (Client portal with automatic reminders) together. The intake desk owns the chase, and the portal does the remembering. Together they save an estimated 140 hours a week ($376,320 a year) for $172,960 in year one, a payback of 5.5 months.",
+        "not_chosen": [
+          {
+            "option_id": "BN-1.O1",
+            "option_number": 1,
+            "name": "AI follow-up assistant",
+            "status": "not_chosen",
+            "status_label": "Not chosen",
+            "reason": "Largely duplicates Client portal with automatic reminders: The portal sends reminders without anyone writing them. The best mix that includes it (AI follow-up assistant + Intake desk and document deadline) nets $190,520 in year one, against $203,360 for the recommended mix."
+          }
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "BN-2",
+      "rank": 2,
+      "name": "Returns and workpapers waiting in review, with rework",
+      "category": "review_queue",
+      "category_label": "Work waiting in review, with rework",
+      "category_match": {
+        "method": "category_id",
+        "matched_keywords": []
+      },
+      "departments": [
+        "Tax Services",
+        "Audit & Assurance"
+      ],
+      "employees_affected": 80,
+      "hours_lost_per_week": {
+        "low": 180.3,
+        "base": 180.3,
+        "high": 180.3
+      },
+      "annual_cost": {
+        "low": 692352.0,
+        "base": 692352.0,
+        "high": 692352.0
+      },
+      "deal_impact": null,
+      "feasibility": "medium",
+      "priority_score": 68,
+      "root_causes": [
+        "Returns reach review before they are ready",
+        "Every return goes to a partner",
+        "The queue is invisible"
+      ],
+      "options": [
+        {
+          "option_id": "BN-2.O1",
+          "option_number": 1,
+          "label": "Option 1: AI pre-review agent",
+          "fix_id": "ai_pre_review",
+          "name": "AI pre-review agent",
+          "fix_type": "ai_tool",
+          "also": [],
+          "type_label": "AI tool",
+          "how_it_solves": "An agent reconciles each prepared return with its source documents and the prior year, and flags differences and risky items before a person reviews",
+          "example_vendors": [
+            "TaxGPT review agent",
+            "Thomson Reuters CoCounsel tools"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 8,
+            "weeks_max": 10,
+            "label": "8 to 10 weeks"
+          },
+          "effort": {
+            "level": "medium",
+            "note": "Medium: integration and client consent work"
+          },
+          "governance": {
+            "risk": "high",
+            "note": "High: full returns and source documents go to a third-party AI; needs signed client consent and a vendor review",
+            "is_ai": true,
+            "data_accessed": "Full returns and source documents",
+            "go_live_gates": [
+              "Signed client consent for AI processing",
+              "Vendor security review",
+              "Approve a one-page AI acceptable-use policy"
+            ]
+          },
+          "risks_and_dependencies": [
+            "The vendor may not support the firm's software version",
+            "A clean AI check can breed false comfort"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 2, Option 1",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate",
+            "indicative"
+          ],
+          "reskilling_focus": null,
+          "status": "on_hold",
+          "status_label": "Not recommended now",
+          "status_reason": "Not recommended now: full client files would go to a third-party AI, which needs signed client consent and a vendor review first.",
+          "other_reasons": [
+            "Deferred: an AI pre-review works best on work that arrives complete through a tracked queue (current: no). The recommended Client portal with automatic reminders creates this; revisit after one season on the portal."
+          ],
+          "upfront_cost": {
+            "low": 11500,
+            "base": 10000,
+            "high": 10000
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Pilot set-up and integration testing",
+              "amount": 10000,
+              "calc": "$10,000",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 41400,
+            "base": 36000,
+            "high": 36000
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Subscription",
+              "amount": 36000,
+              "calc": "$36,000",
+              "price_status": "indicative"
+            }
+          ],
+          "year_one_cost": {
+            "low": 52900,
+            "base": 46000,
+            "high": 46000
+          },
+          "hours_saved_per_week": {
+            "low": 34,
+            "base": 45,
+            "high": 54
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 65280,
+            "base": 120960,
+            "high": 176256
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 65280,
+            "base": 120960,
+            "high": 176256
+          },
+          "payback_months": {
+            "low": 9.7,
+            "base": 4.6,
+            "high": 3.1
+          },
+          "net_benefit_year_one": {
+            "low": 12380,
+            "base": 74960,
+            "high": 130256
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.25 share x 180.3 h lost = 45.08 -> 45 h a week",
+            "annual_time_savings": "45 h x 48 weeks x $80 x 70% adoption = $120,960",
+            "year_one_cost": "$10,000 upfront + $36,000 first-year ongoing = $46,000",
+            "payback_months": "$46,000 / ($120,960 / 12) = 4.6 months"
+          }
+        },
+        {
+          "option_id": "BN-2.O2",
+          "option_number": 2,
+          "label": "Option 2: Review queues in the portal",
+          "fix_id": "review_queues",
+          "name": "Review queues in the portal",
+          "fix_type": "software",
+          "also": [],
+          "type_label": "Non-AI software",
+          "how_it_solves": "Every item carries a status, a named reviewer and a due date; reviewers see their queue and its age; review notes are logged per item",
+          "example_vendors": [
+            "Same vendor as the client portal"
+          ],
+          "cost_note": "$0 extra once the client portal is approved",
+          "implementation": {
+            "weeks_min": 6,
+            "weeks_max": 8,
+            "label": "Arrives with the client portal"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low: same tool, new screens"
+          },
+          "governance": {
+            "risk": "low",
+            "note": "Low",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Depends on the client portal decision"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 2, Option 2",
+          "confidence": "reference_calibrated",
+          "price_statuses": [],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "upfront_breakdown": [],
+          "ongoing_cost_per_year": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "ongoing_breakdown": [],
+          "year_one_cost": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "hours_saved_per_week": {
+            "low": 30,
+            "base": 40,
+            "high": 48
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 57600,
+            "base": 107520,
+            "high": 156672
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 57600,
+            "base": 107520,
+            "high": 156672
+          },
+          "payback_months": {
+            "low": 0.0,
+            "base": 0.0,
+            "high": 0.0
+          },
+          "net_benefit_year_one": {
+            "low": 57600,
+            "base": 107520,
+            "high": 156672
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.222 share x 180.3 h lost = 40.03 -> 40 h a week",
+            "annual_time_savings": "40 h x 48 weeks x $80 x 70% adoption = $107,520",
+            "year_one_cost": "$0 upfront + $0 first-year ongoing = $0",
+            "payback_months": "No year-one cost: pays back immediately"
+          }
+        },
+        {
+          "option_id": "BN-2.O3",
+          "option_number": 3,
+          "label": "Option 3: Tiered review and review-ready checklist",
+          "fix_id": "tiered_review",
+          "name": "Tiered review and review-ready checklist",
+          "fix_type": "reskilling",
+          "also": [
+            "process"
+          ],
+          "type_label": "Reskilling and process",
+          "how_it_solves": "Preparers clear a one-page checklist before review; work is tiered by complexity so trained seniors sign off the simplest third and partners review only the complex third; a monthly debrief fixes the most repeated notes",
+          "example_vendors": [
+            "Internal checklist",
+            "Review-skills courses from professional bodies"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 6,
+            "weeks_max": 6,
+            "label": "6 weeks"
+          },
+          "effort": {
+            "level": "medium",
+            "note": "Medium: senior reviewers must let go of simple work"
+          },
+          "governance": {
+            "risk": "none",
+            "note": "None",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Partner habits",
+            "Quality must hold under peer review"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 2, Option 3",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate"
+          ],
+          "reskilling_focus": "review skills",
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 22540,
+            "base": 19600,
+            "high": 19600
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Checklist design",
+              "amount": 3200,
+              "calc": "40 h x $80 = $3,200",
+              "price_status": "estimate"
+            },
+            {
+              "item": "Reviewer training",
+              "amount": 10240,
+              "calc": "8 reviewers to train x 16 h x $80 = $10,240",
+              "price_status": "estimate"
+            },
+            {
+              "item": "Outside facilitator",
+              "amount": 6160,
+              "calc": "$6,160",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 23000,
+            "base": 20000,
+            "high": 20000
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Review stipend",
+              "amount": 20000,
+              "calc": "8 reviewers to train x $2,500 = $20,000",
+              "price_status": "estimate"
+            }
+          ],
+          "year_one_cost": {
+            "low": 45540,
+            "base": 39600,
+            "high": 39600
+          },
+          "hours_saved_per_week": {
+            "low": 56,
+            "base": 75,
+            "high": 90
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 107520,
+            "base": 201600,
+            "high": 293760
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 107520,
+            "base": 201600,
+            "high": 293760
+          },
+          "payback_months": {
+            "low": 5.1,
+            "base": 2.4,
+            "high": 1.6
+          },
+          "net_benefit_year_one": {
+            "low": 61980,
+            "base": 162000,
+            "high": 254160
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.416 share x 180.3 h lost = 75 -> 75 h a week",
+            "annual_time_savings": "75 h x 48 weeks x $80 x 70% adoption = $201,600",
+            "year_one_cost": "$19,600 upfront + $20,000 first-year ongoing = $39,600",
+            "payback_months": "$39,600 / ($201,600 / 12) = 2.4 months"
+          },
+          "reskilling_targets": [],
+          "reskilling_targets_note": "Skill signals from step 2 are not available yet."
+        }
+      ],
+      "recommendation": {
+        "fix_ids": [
+          "tiered_review",
+          "review_queues"
+        ],
+        "option_ids": [
+          "BN-2.O3",
+          "BN-2.O2"
+        ],
+        "option_numbers": [
+          3,
+          2
+        ],
+        "names": [
+          "Tiered review and review-ready checklist",
+          "Review queues in the portal"
+        ],
+        "type_summary": "Reskilling and process; non-AI software",
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "BN-2.O3",
+            "name": "Tiered review and review-ready checklist",
+            "time_to_live": "6 weeks"
+          },
+          {
+            "step": 2,
+            "option_id": "BN-2.O2",
+            "name": "Review queues in the portal",
+            "time_to_live": "Arrives with the client portal"
+          }
+        ],
+        "hours_saved_per_week": {
+          "low": 75,
+          "base": 100,
+          "high": 120
+        },
+        "deals_recovered_per_year": null,
+        "upfront_cost": {
+          "low": 22540,
+          "base": 19600,
+          "high": 19600
+        },
+        "ongoing_cost_per_year": {
+          "low": 23000,
+          "base": 20000,
+          "high": 20000
+        },
+        "year_one_cost": {
+          "low": 45540,
+          "base": 39600,
+          "high": 39600
+        },
+        "annual_time_savings": {
+          "low": 144000,
+          "base": 268800,
+          "high": 391680
+        },
+        "annual_deal_margin": {
+          "low": 0,
+          "base": 0,
+          "high": 0
+        },
+        "annual_savings": {
+          "low": 144000,
+          "base": 268800,
+          "high": 391680
+        },
+        "payback_months": {
+          "low": 3.8,
+          "base": 1.8,
+          "high": 1.2
+        },
+        "net_benefit_year_one": {
+          "low": 98460,
+          "base": 229200,
+          "high": 352080
+        },
+        "overlaps_applied": [
+          {
+            "pair": [
+              "tiered_review",
+              "review_queues"
+            ],
+            "overlap": 0.375,
+            "listed_in_catalog": true
+          }
+        ],
+        "together_note": "The checklist cuts second reviews at the source, tiering moves simple work off senior desks, and the queue shows everyone what is waiting.",
+        "mixes_compared": 3,
+        "summary": "We recommend Option 3 (Tiered review and review-ready checklist) and Option 2 (Review queues in the portal) together. The checklist cuts second reviews at the source, tiering moves simple work off senior desks, and the queue shows everyone what is waiting. Together they save an estimated 100 hours a week ($268,800 a year) for $39,600 in year one, a payback of 1.8 months.",
+        "summary_source": "template",
+        "trace": {
+          "hours_saved_per_week": "75 + 40 x (1 - 0.375 overlap) = 100 -> 100 h a week",
+          "annual_time_savings": "100 h x 48 weeks x $80 x 70% adoption = $268,800",
+          "year_one_cost": "Review queues in the portal $0 + Tiered review and review-ready checklist $39,600 = $39,600",
+          "payback_months": "$39,600 / ($268,800 / 12) = 1.8 months"
+        },
+        "summary_template": "We recommend Option 3 (Tiered review and review-ready checklist) and Option 2 (Review queues in the portal) together. The checklist cuts second reviews at the source, tiering moves simple work off senior desks, and the queue shows everyone what is waiting. Together they save an estimated 100 hours a week ($268,800 a year) for $39,600 in year one, a payback of 1.8 months.",
+        "not_chosen": [
+          {
+            "option_id": "BN-2.O1",
+            "option_number": 1,
+            "name": "AI pre-review agent",
+            "status": "on_hold",
+            "status_label": "Not recommended now",
+            "reason": "Not recommended now: full client files would go to a third-party AI, which needs signed client consent and a vendor review first."
+          }
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "BN-3",
+      "rank": 3,
+      "name": "Source documents keyed into tax software by hand",
+      "category": "manual_keying",
+      "category_label": "Source documents keyed in by hand",
+      "category_match": {
+        "method": "category_id",
+        "matched_keywords": []
+      },
+      "departments": [
+        "Tax Services"
+      ],
+      "employees_affected": 41,
+      "hours_lost_per_week": {
+        "low": 176.5,
+        "base": 176.5,
+        "high": 176.5
+      },
+      "annual_cost": {
+        "low": 677760.0,
+        "base": 677760.0,
+        "high": 677760.0
+      },
+      "deal_impact": null,
+      "feasibility": "high",
+      "priority_score": 66,
+      "root_causes": [
+        "Documents arrive as images, not data",
+        "The imports already licensed go unused",
+        "The same few people key all season"
+      ],
+      "options": [
+        {
+          "option_id": "BN-3.O1",
+          "option_number": 1,
+          "label": "Option 1: AI document extraction",
+          "fix_id": "ai_document_extraction",
+          "name": "AI document extraction",
+          "fix_type": "ai_tool",
+          "also": [],
+          "type_label": "AI tool",
+          "how_it_solves": "Software reads scanned documents, bookmarks them, extracts the data and fills the return; the preparer checks flagged fields instead of typing",
+          "example_vendors": [
+            "SurePrep 1040SCAN (Thomson Reuters)",
+            "Thomson Reuters Ready to Review",
+            "GruntWorx"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 6,
+            "weeks_max": 6,
+            "label": "6 weeks"
+          },
+          "effort": {
+            "level": "medium",
+            "note": "Medium: new scanning habits and a verification step"
+          },
+          "governance": {
+            "risk": "medium",
+            "note": "Medium: documents are processed by a vendor; confirm US-only processing, no training on client data and deletion terms",
+            "is_ai": true,
+            "data_accessed": "Scanned client documents and return data",
+            "go_live_gates": [
+              "Vendor security and contract review: US-only processing, no training on client data, deletion terms",
+              "Client consent for AI processing in engagement letters"
+            ]
+          },
+          "risks_and_dependencies": [
+            "Scan quality",
+            "Per-unit price creep",
+            "Staff over-trusting extracted figures"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 3, Option 1",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate",
+            "list price from 2023; quote needed"
+          ],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 13800,
+            "base": 12000,
+            "high": 12000
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Set-up, scanning standards and a pilot",
+              "amount": 12000,
+              "calc": "$12,000",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 94875,
+            "base": 82500,
+            "high": 82500
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Per-document fee",
+              "amount": 82500,
+              "calc": "2,200 complex returns per year x $37.50 = $82,500",
+              "price_status": "list price from 2023; quote needed"
+            }
+          ],
+          "year_one_cost": {
+            "low": 108675,
+            "base": 94500,
+            "high": 94500
+          },
+          "hours_saved_per_week": {
+            "low": 79,
+            "base": 105,
+            "high": 126
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 151680,
+            "base": 282240,
+            "high": 411264
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 151680,
+            "base": 282240,
+            "high": 411264
+          },
+          "payback_months": {
+            "low": 8.6,
+            "base": 4.0,
+            "high": 2.8
+          },
+          "net_benefit_year_one": {
+            "low": 43005,
+            "base": 187740,
+            "high": 316764
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.595 share x 176.5 h lost = 105.02 -> 105 h a week",
+            "annual_time_savings": "105 h x 48 weeks x $80 x 70% adoption = $282,240",
+            "year_one_cost": "$12,000 upfront + $82,500 first-year ongoing = $94,500",
+            "payback_months": "$94,500 / ($282,240 / 12) = 4.0 months"
+          }
+        },
+        {
+          "option_id": "BN-3.O2",
+          "option_number": 2,
+          "label": "Option 2: Import-first standard and training",
+          "fix_id": "import_first",
+          "name": "Import-first standard and training",
+          "fix_type": "reskilling",
+          "also": [],
+          "type_label": "Reskilling",
+          "how_it_solves": "Everything that can be imported is imported; staff get short training and a one-page import checklist",
+          "example_vendors": [
+            "Import features already licensed in the firm's software"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 3,
+            "weeks_max": 3,
+            "label": "3 weeks"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low"
+          },
+          "governance": {
+            "risk": "none",
+            "note": "None",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "The habit fades without spot checks"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 3, Option 2",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate"
+          ],
+          "reskilling_focus": "software imports",
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 14766,
+            "base": 12840,
+            "high": 12840
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Trainer",
+              "amount": 3000,
+              "calc": "$3,000",
+              "price_status": "estimate"
+            },
+            {
+              "item": "Staff training time",
+              "amount": 9840,
+              "calc": "41 employees affected x 3 h x $80 = $9,840",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "ongoing_breakdown": [],
+          "year_one_cost": {
+            "low": 14766,
+            "base": 12840,
+            "high": 12840
+          },
+          "hours_saved_per_week": {
+            "low": 26,
+            "base": 35,
+            "high": 42
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 49920,
+            "base": 94080,
+            "high": 137088
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 49920,
+            "base": 94080,
+            "high": 137088
+          },
+          "payback_months": {
+            "low": 3.5,
+            "base": 1.6,
+            "high": 1.1
+          },
+          "net_benefit_year_one": {
+            "low": 35154,
+            "base": 81240,
+            "high": 124248
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.198 share x 176.5 h lost = 34.95 -> 35 h a week",
+            "annual_time_savings": "35 h x 48 weeks x $80 x 70% adoption = $94,080",
+            "year_one_cost": "$12,840 upfront + $0 first-year ongoing = $12,840",
+            "payback_months": "$12,840 / ($94,080 / 12) = 1.6 months"
+          },
+          "reskilling_targets": [],
+          "reskilling_targets_note": "Skill signals from step 2 are not available yet."
+        },
+        {
+          "option_id": "BN-3.O3",
+          "option_number": 3,
+          "label": "Option 3: Offshore data-entry partner",
+          "fix_id": "offshore_data_entry",
+          "name": "Offshore data-entry partner",
+          "fix_type": "process",
+          "also": [],
+          "type_label": "Process (outsourcing)",
+          "how_it_solves": "Scanned documents go to an outsourced team that keys them overnight; staff check the result",
+          "example_vendors": [
+            "US-managed offshore preparation providers"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 8,
+            "weeks_max": 8,
+            "label": "8 weeks plus consent collection"
+          },
+          "effort": {
+            "level": "high",
+            "note": "High: signed consent from every client in scope; quality control across time zones"
+          },
+          "governance": {
+            "risk": "high",
+            "note": "High: sending client data outside the US needs each client's signed consent",
+            "is_ai": false,
+            "data_accessed": "Client source documents",
+            "go_live_gates": [
+              "Signed consent from every client in scope"
+            ]
+          },
+          "risks_and_dependencies": [
+            "Consent refusals",
+            "Client perception",
+            "Quality"
+          ],
+          "evidence": "Corlander & Vale reference report v1.0, Bottleneck 3, Option 3",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate",
+            "indicative"
+          ],
+          "reskilling_focus": null,
+          "status": "on_hold",
+          "status_label": "Not recommended now",
+          "status_reason": "Not recommended now: sending client information outside the US needs every client's signed consent first.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 9200,
+            "base": 8000,
+            "high": 8000
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Onboarding and a consent campaign",
+              "amount": 8000,
+              "calc": "$8,000",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 75900,
+            "base": 66000,
+            "high": 66000
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Per-document fee",
+              "amount": 66000,
+              "calc": "1,650 offshore returns per year x $40 = $66,000",
+              "price_status": "indicative"
+            }
+          ],
+          "year_one_cost": {
+            "low": 85100,
+            "base": 74000,
+            "high": 74000
+          },
+          "hours_saved_per_week": {
+            "low": 68,
+            "base": 90,
+            "high": 108
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 130560,
+            "base": 241920,
+            "high": 352512
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 130560,
+            "base": 241920,
+            "high": 352512
+          },
+          "payback_months": {
+            "low": 7.8,
+            "base": 3.7,
+            "high": 2.5
+          },
+          "net_benefit_year_one": {
+            "low": 45460,
+            "base": 167920,
+            "high": 278512
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.51 share x 176.5 h lost = 90.02 -> 90 h a week",
+            "annual_time_savings": "90 h x 48 weeks x $80 x 70% adoption = $241,920",
+            "year_one_cost": "$8,000 upfront + $66,000 first-year ongoing = $74,000",
+            "payback_months": "$74,000 / ($241,920 / 12) = 3.7 months"
+          }
+        }
+      ],
+      "recommendation": {
+        "fix_ids": [
+          "import_first",
+          "ai_document_extraction"
+        ],
+        "option_ids": [
+          "BN-3.O2",
+          "BN-3.O1"
+        ],
+        "option_numbers": [
+          2,
+          1
+        ],
+        "names": [
+          "Import-first standard and training",
+          "AI document extraction"
+        ],
+        "type_summary": "Reskilling; AI tool",
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "BN-3.O2",
+            "name": "Import-first standard and training",
+            "time_to_live": "3 weeks"
+          },
+          {
+            "step": 2,
+            "option_id": "BN-3.O1",
+            "name": "AI document extraction",
+            "time_to_live": "6 weeks"
+          }
+        ],
+        "hours_saved_per_week": {
+          "low": 94,
+          "base": 125,
+          "high": 150
+        },
+        "deals_recovered_per_year": null,
+        "upfront_cost": {
+          "low": 28566,
+          "base": 24840,
+          "high": 24840
+        },
+        "ongoing_cost_per_year": {
+          "low": 94875,
+          "base": 82500,
+          "high": 82500
+        },
+        "year_one_cost": {
+          "low": 123441,
+          "base": 107340,
+          "high": 107340
+        },
+        "annual_time_savings": {
+          "low": 180480,
+          "base": 336000,
+          "high": 489600
+        },
+        "annual_deal_margin": {
+          "low": 0,
+          "base": 0,
+          "high": 0
+        },
+        "annual_savings": {
+          "low": 180480,
+          "base": 336000,
+          "high": 489600
+        },
+        "payback_months": {
+          "low": 8.2,
+          "base": 3.8,
+          "high": 2.6
+        },
+        "net_benefit_year_one": {
+          "low": 57039,
+          "base": 228660,
+          "high": 382260
+        },
+        "overlaps_applied": [
+          {
+            "pair": [
+              "import_first",
+              "ai_document_extraction"
+            ],
+            "overlap": 0.4286,
+            "listed_in_catalog": true
+          }
+        ],
+        "together_note": "Extraction removes most typing on complex documents; the standard stops anyone typing what already exists as data.",
+        "mixes_compared": 3,
+        "summary": "We recommend Option 2 (Import-first standard and training) and Option 1 (AI document extraction) together. Extraction removes most typing on complex documents; the standard stops anyone typing what already exists as data. Together they save an estimated 125 hours a week ($336,000 a year) for $107,340 in year one, a payback of 3.8 months.",
+        "summary_source": "template",
+        "trace": {
+          "hours_saved_per_week": "105 + 35 x (1 - 0.429 overlap) = 125 -> 125 h a week",
+          "annual_time_savings": "125 h x 48 weeks x $80 x 70% adoption = $336,000",
+          "year_one_cost": "AI document extraction $94,500 + Import-first standard and training $12,840 = $107,340",
+          "payback_months": "$107,340 / ($336,000 / 12) = 3.8 months"
+        },
+        "summary_template": "We recommend Option 2 (Import-first standard and training) and Option 1 (AI document extraction) together. Extraction removes most typing on complex documents; the standard stops anyone typing what already exists as data. Together they save an estimated 125 hours a week ($336,000 a year) for $107,340 in year one, a payback of 3.8 months.",
+        "not_chosen": [
+          {
+            "option_id": "BN-3.O3",
+            "option_number": 3,
+            "name": "Offshore data-entry partner",
+            "status": "on_hold",
+            "status_label": "Not recommended now",
+            "reason": "Not recommended now: sending client information outside the US needs every client's signed consent first."
+          }
+        ]
+      },
+      "notes": []
+    }
+  ],
+  "bottlenecks_not_in_scope": [
+    {
+      "id": "BN-4",
+      "name": "Status questions answered by hand",
+      "rank": 4,
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "BN-5",
+      "name": "CAS transaction coding and reconciliations",
+      "rank": 5,
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "BN-6",
+      "name": "Audit tie-outs and confirmations by hand",
+      "rank": 6,
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "BN-7",
+      "name": "Bills drafted from WIP by hand",
+      "rank": 7,
+      "reason": "outside the top 3"
+    }
+  ],
+  "program": {
+    "recommendation_count": 3,
+    "bottlenecks_with_recommendation": [
+      "BN-1",
+      "BN-2",
+      "BN-3"
+    ],
+    "year_one_cost": {
+      "low": 367885,
+      "base": 319900,
+      "high": 319900
+    },
+    "ongoing_cost_per_year": {
+      "low": 265259,
+      "base": 230660,
+      "high": 230660
+    },
+    "gross_hours_saved_per_week": {
+      "low": 274,
+      "base": 365,
+      "high": 438
+    },
+    "effective_hours_saved_per_week": {
+      "low": 137.0,
+      "base": 255.5,
+      "high": 372.3
+    },
+    "adoption_rate_base": 0.7,
+    "hours_lost_in_scope_per_week": 597.6,
+    "share_of_lost_hours_recovered": 0.4275,
+    "annual_time_savings": {
+      "low": 526080,
+      "base": 981120,
+      "high": 1429632
+    },
+    "annual_deal_margin": {
+      "low": 0,
+      "base": 0,
+      "high": 0
+    },
+    "annual_savings": {
+      "low": 526080,
+      "base": 981120,
+      "high": 1429632
+    },
+    "net_benefit_year_one": {
+      "low": 158195,
+      "base": 661220,
+      "high": 1109732
+    },
+    "net_benefit_year_two_onward": {
+      "low": 260821,
+      "base": 750460,
+      "high": 1198972
+    },
+    "payback_months": {
+      "low": 8.4,
+      "base": 3.9,
+      "high": 2.7
+    },
+    "fix_type_counts": {
+      "process": 2,
+      "software": 2,
+      "reskilling": 2,
+      "ai_tool": 1
+    },
+    "governance_actions": [
+      {
+        "action": "Vendor security and contract review: US-only processing, no training on client data, deletion terms",
+        "for": [
+          "AI document extraction"
+        ]
+      },
+      {
+        "action": "Client consent for AI processing in engagement letters",
+        "for": [
+          "AI document extraction"
+        ]
+      }
+    ],
+    "upside_not_counted": [
+      {
+        "key": "write_downs",
+        "label": "Fewer review write-downs",
+        "amount": 205000,
+        "basis": "Half of the $410,000 of FY2026 write-downs coded to review rework",
+        "unlocked_by": [
+          "tiered_review",
+          "review_queues"
+        ]
+      },
+      {
+        "key": "overtime",
+        "label": "Less busy-season overtime",
+        "amount": 30500,
+        "basis": "Half of the $61,000 of overtime paid in the 2026 season",
+        "unlocked_by": [
+          "ai_document_extraction",
+          "import_first"
+        ]
+      },
+      {
+        "key": "turnover",
+        "label": "Lower professional turnover",
+        "amount": 160000,
+        "basis": "Four fewer departures a year (17.9% toward 13%) x $40,000 replacement cost"
+      }
+    ],
+    "upside_not_counted_total": 395500,
+    "summary": "The 3 recommendations cost $319,900 in year one and save an estimated $981,120 a year, a combined payback of 3.9 months. From year two, ongoing costs are $230,660 a year and the net benefit is about $750,460 a year. At 70% adoption, the 365 gross hours become about 256 effective hours a week: 43% of the 598 hours lost to the bottlenecks in scope."
+  },
+  "warnings": []
+}

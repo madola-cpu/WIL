@@ -1,0 +1,27 @@
+{
+  "client_name": "Acquisition sample: Acquirer Co. and Target Co. (synthetic)",
+  "scenario": "B",
+  "bottlenecks": [
+    {
+      "id": "BN-B1",
+      "name": "Stalled deals waiting on approvals",
+      "department": "Acquirer sales, Target sales, Deal desk",
+      "employees_affected": 34,
+      "hours_lost_per_week": {"low": 34, "base": 40.8, "high": 47},
+      "deals_lost_per_year": {"low": 10, "base": 14, "high": 18},
+      "avg_deal_value": 42000,
+      "contribution_margin": "38%",
+      "priority_score": 84
+    },
+    {
+      "id": "BN-B2",
+      "name": "Shared customers worked by both teams",
+      "department": "Acquirer sales, Target sales",
+      "employees_affected": 28,
+      "hours_lost_per_week": {"low": 25, "base": 30.8, "high": 36},
+      "deals_lost_per_year": {"low": 5, "base": 8, "high": 11},
+      "avg_deal_value": 42000,
+      "priority_score": 71
+    }
+  ]
+}

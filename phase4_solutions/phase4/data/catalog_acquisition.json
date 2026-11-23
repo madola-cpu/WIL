@@ -1,0 +1,463 @@
+{
+  "catalog_id": "acquisition",
+  "catalog_version": "2026.11.1-starter",
+  "applies_to_scenarios": [
+    "B"
+  ],
+  "description": "Starter fixes for scenario B, where two companies' sales teams collide after an acquisition (two Salesforce exports: deals, stage history, approvals). Vendor examples come from the analyst reports in the project (Gartner Magic Quadrant for CRM Sales Platforms 2026, ISG Buyers Guide CRM Sales 2026, Forrester Wave Revenue Marketing Platforms Q1 2026). Every price and effect size here is a placeholder to replace with quotes and evidence before a client report.",
+  "default_overlap": 0.3,
+  "categories": {
+    "stalled_deals": {
+      "label": "Stalled deals and slow approvals",
+      "anchors": [
+        "stalled deal",
+        "stalled",
+        "approval delay",
+        "slow approval",
+        "deal desk"
+      ],
+      "keywords": [
+        "stalled",
+        "stuck",
+        "approval",
+        "slipped",
+        "slipping",
+        "close date",
+        "deal desk",
+        "no activity",
+        "aging"
+      ],
+      "fixes": [
+        "ai_deal_risk_alerts",
+        "approval_workflow",
+        "stage_rules_review"
+      ]
+    },
+    "shared_customers": {
+      "label": "Shared customers worked by both teams",
+      "anchors": [
+        "shared customer",
+        "shared account",
+        "account overlap",
+        "channel conflict",
+        "duplicate account"
+      ],
+      "keywords": [
+        "shared customer",
+        "shared account",
+        "overlap",
+        "both teams",
+        "duplicate account",
+        "same account",
+        "collide",
+        "collision",
+        "conflict"
+      ],
+      "fixes": [
+        "ai_account_matching",
+        "unified_account_master",
+        "rules_of_engagement"
+      ]
+    }
+  },
+  "fixes": {
+    "ai_deal_risk_alerts": {
+      "name": "AI deal-risk alerts",
+      "fix_type": "ai_tool",
+      "how_it_solves": "Predictive scoring reads stage history and activity, flags deals that have gone quiet, slipped their close date or wait on an approval, and drafts the next step for the owner",
+      "example_vendors": [
+        "Agentforce Sales and Einstein pipeline insights (Salesforce)",
+        "Oracle Deal Advisor",
+        "Pega deal-risk scoring"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Set-up and field mapping",
+            "basis": "internal_hours",
+            "hours": 40
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Licences",
+            "basis": "per_seat_month",
+            "unit_cost": 50,
+            "qty": {
+              "var": "sales_reps",
+              "default": "employees_affected"
+            },
+            "price_status": "placeholder"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 4,
+        "weeks_max": 6,
+        "label": "4 to 6 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: needs clean stage history in one place"
+      },
+      "effect": {
+        "hours_share": 0.25,
+        "deal_recovery_share": 0.3
+      },
+      "governance": {
+        "risk": "medium",
+        "note": "Medium: reads opportunity and activity data; a person decides every action",
+        "data_accessed": "Opportunities, stage history, activities and approvals",
+        "go_live_gates": [
+          "Approve a one-page AI acceptable-use policy",
+          "Vendor review: no training on customer data"
+        ]
+      },
+      "requires": [
+        {
+          "capability": "stage_history_months",
+          "op": ">=",
+          "value": 6,
+          "if_unmet": "defer",
+          "why": "risk scores need at least 6 months of stage history in one place",
+          "unlocked_by": [
+            "unified_account_master"
+          ],
+          "revisit": "once both orgs' history sits in one place"
+        }
+      ],
+      "risks": [
+        "Alerts get ignored without a weekly review",
+        "Two orgs mean two data models until they are joined"
+      ],
+      "evidence": "Gartner Magic Quadrant for CRM Sales Platforms (2026): deal-risk detection and predictive scoring. Price and effect are placeholders.",
+      "confidence": "placeholder"
+    },
+    "approval_workflow": {
+      "name": "One approval workflow with response targets",
+      "fix_type": "software",
+      "how_it_solves": "One approval matrix for both companies; discount, pricing and legal approvals route automatically, can be approved from chat, and escalate after 24 hours",
+      "example_vendors": [
+        "Salesforce Advanced Approvals or Revenue Cloud",
+        "DealHub",
+        "Slack workflow approvals"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Approval matrix and configuration",
+            "basis": "internal_hours",
+            "hours": 80
+          },
+          {
+            "item": "Implementation partner",
+            "basis": "flat",
+            "amount": 8000,
+            "price_status": "placeholder"
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Licences",
+            "basis": "per_seat_month",
+            "unit_cost": 30,
+            "qty": {
+              "var": "approval_seats",
+              "default": "employees_affected"
+            },
+            "price_status": "placeholder"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 6,
+        "weeks_max": 8,
+        "label": "6 to 8 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: both companies must agree one approval matrix"
+      },
+      "effect": {
+        "hours_share": 0.4,
+        "deal_recovery_share": 0.35
+      },
+      "governance": {
+        "risk": "low",
+        "note": "Low: standard security review"
+      },
+      "risks": [
+        "Leaders must agree who approves what across both companies",
+        "Exceptions creep back into email"
+      ],
+      "evidence": "ISG Buyers Guide CRM Sales (2026): pricing coordination; Gartner MQ (2026): advanced CPQ. Price and effect are placeholders.",
+      "confidence": "placeholder"
+    },
+    "stage_rules_review": {
+      "name": "Stage exit rules and a weekly stalled-deal review",
+      "fix_type": "process",
+      "how_it_solves": "Clear exit criteria for every stage, a 14-day no-activity flag, a 24-hour approval target and a 30-minute weekly review of every stalled deal",
+      "example_vendors": [
+        "Internal",
+        "CRM list views and reports already licensed"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Rules design and manager briefing",
+            "basis": "internal_hours",
+            "hours": 24
+          }
+        ],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 2,
+        "weeks_max": 2,
+        "label": "2 weeks"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low: one meeting and a shared list"
+      },
+      "effect": {
+        "hours_share": 0.3,
+        "deal_recovery_share": 0.2
+      },
+      "governance": {
+        "risk": "none",
+        "note": "None"
+      },
+      "risks": [
+        "The review turns into a status read-out unless it ends in decisions"
+      ],
+      "evidence": "Team Tom starter estimate. Effect is a placeholder.",
+      "confidence": "starter_estimate"
+    },
+    "ai_account_matching": {
+      "name": "AI account matching across both CRMs",
+      "fix_type": "ai_tool",
+      "how_it_solves": "Matches the same customer across both companies' records despite different names and domains, flags collisions before anyone reaches out, and suggests one owner for a person to confirm",
+      "example_vendors": [
+        "Salesforce Data Cloud identity resolution",
+        "Leadspace account matching"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Data mapping and match-rule tuning",
+            "basis": "internal_hours",
+            "hours": 60
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Subscription",
+            "basis": "flat",
+            "amount": 18000,
+            "price_status": "placeholder"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 4,
+        "weeks_max": 6,
+        "label": "4 to 6 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: two customer databases to map"
+      },
+      "effect": {
+        "hours_share": 0.35,
+        "deal_recovery_share": 0.3
+      },
+      "governance": {
+        "risk": "medium",
+        "note": "Medium: reads customer records from both companies; merges need human approval",
+        "data_accessed": "Account and contact records from both CRMs",
+        "go_live_gates": [
+          "Approve a one-page AI acceptable-use policy",
+          "Legal clears customer-data sharing between the two companies",
+          "A person approves every merge and owner change"
+        ]
+      },
+      "requires": [
+        {
+          "capability": "customer_data_sharing_cleared",
+          "op": "==",
+          "value": true,
+          "if_unmet": "hold",
+          "why": "the two companies' customer data can only be combined once legal clears data sharing"
+        }
+      ],
+      "risks": [
+        "False matches",
+        "Matching alone does not settle who owns the account"
+      ],
+      "evidence": "Forrester Wave Revenue Marketing Platforms Q1 2026: identity resolution and account matching. Price and effect are placeholders.",
+      "confidence": "placeholder"
+    },
+    "unified_account_master": {
+      "name": "One account master and territory rules",
+      "fix_type": "software",
+      "how_it_solves": "Connect or merge the two CRM orgs so every customer has one account record, one owner and one territory, with both companies' open deals visible on it",
+      "example_vendors": [
+        "Salesforce Enterprise Territory Management",
+        "MuleSoft or Salesforce Connect for org-to-org sync",
+        "Org merge with a Salesforce partner"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Integration build and data migration",
+            "basis": "internal_hours",
+            "hours": 160
+          },
+          {
+            "item": "Implementation partner",
+            "basis": "flat",
+            "amount": 15000,
+            "price_status": "placeholder"
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Integration licence",
+            "basis": "flat",
+            "amount": 12000,
+            "price_status": "placeholder"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 10,
+        "weeks_max": 14,
+        "label": "10 to 14 weeks"
+      },
+      "effort": {
+        "level": "high",
+        "note": "High: two orgs, two data models and every rep's accounts"
+      },
+      "effect": {
+        "hours_share": 0.45,
+        "deal_recovery_share": 0.4
+      },
+      "governance": {
+        "risk": "low",
+        "note": "Low: standard security review"
+      },
+      "risks": [
+        "Long project; collisions continue until it is live",
+        "Ownership disputes surface during the merge"
+      ],
+      "evidence": "ISG Buyers Guide CRM Sales (2026): territory alignment. Price and effect are placeholders.",
+      "confidence": "placeholder"
+    },
+    "rules_of_engagement": {
+      "name": "Rules of engagement, a conflict desk and cross-sell training",
+      "fix_type": "process",
+      "also": [
+        "reskilling"
+      ],
+      "type_label": "Process and reskilling",
+      "how_it_solves": "Written rules say who owns a shared account, a referral split rewards both teams for cross-selling, a 30-minute weekly desk settles conflicts, and each team learns the other's offers",
+      "example_vendors": [
+        "Internal",
+        "Compensation plan update",
+        "Cross-training sessions"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Rules and referral-split design",
+            "basis": "internal_hours",
+            "hours": 24
+          },
+          {
+            "item": "Cross-sell training",
+            "basis": "internal_hours",
+            "hours": 2,
+            "qty": {
+              "var": "sales_reps",
+              "default": "employees_affected"
+            }
+          }
+        ],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 3,
+        "weeks_max": 3,
+        "label": "3 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: compensation rules must change"
+      },
+      "effect": {
+        "hours_share": 0.3,
+        "deal_recovery_share": 0.25
+      },
+      "governance": {
+        "risk": "none",
+        "note": "None"
+      },
+      "reskilling_focus": "cross-sell",
+      "risks": [
+        "Rules fail if leaders make exceptions for big accounts"
+      ],
+      "evidence": "Team Tom starter estimate. Effect is a placeholder.",
+      "confidence": "starter_estimate"
+    }
+  },
+  "pair_overlaps": [
+    {
+      "pair": [
+        "approval_workflow",
+        "stage_rules_review"
+      ],
+      "overlap": 0.3,
+      "together_note": "The workflow routes and times every approval; the weekly review deals with the stalls a workflow can't see."
+    },
+    {
+      "pair": [
+        "ai_deal_risk_alerts",
+        "stage_rules_review"
+      ],
+      "overlap": 0.5,
+      "overlap_note": "Both surface stalled deals; the weekly review does it without new software."
+    },
+    {
+      "pair": [
+        "ai_deal_risk_alerts",
+        "approval_workflow"
+      ],
+      "overlap": 0.3
+    },
+    {
+      "pair": [
+        "unified_account_master",
+        "rules_of_engagement"
+      ],
+      "overlap": 0.25,
+      "together_note": "The account master shows who owns what; the rules settle what a system can't."
+    },
+    {
+      "pair": [
+        "ai_account_matching",
+        "unified_account_master"
+      ],
+      "overlap": 0.6,
+      "overlap_note": "Both find the same customers; the account master also fixes ownership."
+    },
+    {
+      "pair": [
+        "ai_account_matching",
+        "rules_of_engagement"
+      ],
+      "overlap": 0.3,
+      "together_note": "Matching finds the collisions; the rules decide who keeps the account."
+    }
+  ]
+}

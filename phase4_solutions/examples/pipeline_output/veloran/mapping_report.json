@@ -1,0 +1,194 @@
+{
+  "found": {
+    "bottlenecks_at": "step7.bottlenecks",
+    "bottleneck_count": 7,
+    "roi_at": "step8.roi",
+    "roi_matched": 7
+  },
+  "client": {
+    "loaded_hourly_rate": "phase 3: assumptions.hourlyRate",
+    "working_weeks_per_year": "phase 3: assumptions.weeksPerYear",
+    "adoption_rate": "profile",
+    "currency": "phase 3: assumptions.currency",
+    "max_payback_months": "profile",
+    "realized_billing_rate": "profile",
+    "client_name": "phase 3: client",
+    "employees_total": "profile",
+    "billable_employees": "profile",
+    "short_name": "profile",
+    "current_tools": "profile",
+    "capabilities": "profile",
+    "volumes": "profile"
+  },
+  "bottlenecks": [
+    {
+      "id": "staffing",
+      "name": "Staffing blind spots",
+      "fields": {
+        "id": "step 7: bottleneckId",
+        "name": "step 7: title",
+        "departments": "step 7: teams",
+        "employees_affected": "step 7: peopleAffected",
+        "hours_lost_per_week": "step 8: hoursLostPerWeek",
+        "hours_per_employee_per_week": "step 7: hoursPerPersonPerWeek",
+        "annual_cost": "step 8: annualCost",
+        "feasibility": "step 7: feasibility",
+        "priority_score": "step 7: priorityScore",
+        "root_causes": "step 7: rootCauses",
+        "evidence": "step 7: evidence",
+        "rank": "ranked by priority score"
+      },
+      "category": {
+        "value": "staffing_visibility",
+        "from": "profile category_map",
+        "matched_keywords": []
+      },
+      "added_from_profile": [
+        "upside_not_counted"
+      ],
+      "ignored_fields": []
+    },
+    {
+      "id": "status",
+      "name": "Status reporting repeated across four places",
+      "fields": {
+        "id": "step 7: bottleneckId",
+        "name": "step 7: title",
+        "departments": "step 7: teams",
+        "employees_affected": "step 7: peopleAffected",
+        "hours_lost_per_week": "step 8: hoursLostPerWeek (+ hoursLostPerWeek_low, hoursLostPerWeek_high)",
+        "annual_cost": "step 8: annualCost",
+        "feasibility": "step 7: feasibility",
+        "priority_score": "step 7: priorityScore",
+        "rank": "ranked by priority score"
+      },
+      "category": {
+        "value": "status_duplication",
+        "from": "profile category_map",
+        "matched_keywords": []
+      },
+      "added_from_profile": [
+        "upside_not_counted"
+      ],
+      "ignored_fields": []
+    },
+    {
+      "id": "timesheets",
+      "name": "Timesheets rebuilt from memory",
+      "fields": {
+        "id": "step 7: bottleneckId",
+        "name": "step 7: title",
+        "departments": "step 7: teams",
+        "employees_affected": "step 7: peopleAffected",
+        "hours_lost_per_week": "step 8: hoursLostPerWeek",
+        "annual_cost": "step 8: annualCost",
+        "feasibility": "step 7: feasibility",
+        "priority_score": "step 7: priorityScore",
+        "rank": "ranked by priority score"
+      },
+      "category": {
+        "value": "time_capture",
+        "from": "profile category_map",
+        "matched_keywords": []
+      },
+      "added_from_profile": [
+        "upside_not_counted"
+      ],
+      "ignored_fields": []
+    },
+    {
+      "id": "tools",
+      "name": "Tool switching and notifications",
+      "fields": {
+        "id": "step 7: bottleneckId",
+        "name": "step 7: title",
+        "employees_affected": "step 7: peopleAffected",
+        "hours_lost_per_week": "step 8: hoursLostPerWeek",
+        "annual_cost": "step 8: annualCost",
+        "feasibility": "step 7: feasibility",
+        "priority_score": "step 7: priorityScore",
+        "rank": "ranked by priority score"
+      },
+      "category": {
+        "value": null,
+        "from": "no match",
+        "matched_keywords": []
+      },
+      "added_from_profile": [],
+      "ignored_fields": []
+    },
+    {
+      "id": "search",
+      "name": "Searching for past work",
+      "fields": {
+        "id": "step 7: bottleneckId",
+        "name": "step 7: title",
+        "employees_affected": "step 7: peopleAffected",
+        "hours_lost_per_week": "step 8: hoursLostPerWeek",
+        "annual_cost": "step 8: annualCost",
+        "feasibility": "step 7: feasibility",
+        "priority_score": "step 7: priorityScore",
+        "rank": "ranked by priority score"
+      },
+      "category": {
+        "value": null,
+        "from": "no match",
+        "matched_keywords": []
+      },
+      "added_from_profile": [],
+      "ignored_fields": []
+    },
+    {
+      "id": "proposals",
+      "name": "Proposals rebuilt from scratch",
+      "fields": {
+        "id": "step 7: bottleneckId",
+        "name": "step 7: title",
+        "employees_affected": "step 7: peopleAffected",
+        "hours_lost_per_week": "step 8: hoursLostPerWeek",
+        "annual_cost": "step 8: annualCost",
+        "feasibility": "step 7: feasibility",
+        "priority_score": "step 7: priorityScore",
+        "rank": "ranked by priority score"
+      },
+      "category": {
+        "value": null,
+        "from": "no match",
+        "matched_keywords": []
+      },
+      "added_from_profile": [],
+      "ignored_fields": []
+    },
+    {
+      "id": "migration",
+      "name": "Data-migration rework",
+      "fields": {
+        "id": "step 7: bottleneckId",
+        "name": "step 7: title",
+        "employees_affected": "step 7: peopleAffected",
+        "hours_lost_per_week": "step 8: hoursLostPerWeek",
+        "annual_cost": "step 8: annualCost",
+        "feasibility": "step 7: feasibility",
+        "priority_score": "step 7: priorityScore",
+        "rank": "ranked by priority score"
+      },
+      "category": {
+        "value": null,
+        "from": "no match",
+        "matched_keywords": []
+      },
+      "added_from_profile": [],
+      "ignored_fields": []
+    }
+  ],
+  "notes": [
+    "ranks were missing for 7 bottleneck(s), so they were ranked by priority score",
+    "bottleneck 'Tool switching and notifications' matches no fix category; add it to the profile's category_map, or add a category to the catalog",
+    "bottleneck 'Searching for past work' matches no fix category; add it to the profile's category_map, or add a category to the catalog",
+    "bottleneck 'Proposals rebuilt from scratch' matches no fix category; add it to the profile's category_map, or add a category to the catalog",
+    "bottleneck 'Data-migration rework' matches no fix category; add it to the profile's category_map, or add a category to the catalog"
+  ],
+  "errors": [],
+  "scenario": "A",
+  "engine_warnings": []
+}

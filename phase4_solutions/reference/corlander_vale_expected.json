@@ -1,0 +1,133 @@
+{
+  "reference": "Corlander & Vale CPAs Workflow Efficiency Report v1.0 (Nov 4, 2026): solution-option tables for Bottlenecks 1-3 and the Recommendations and ROI table",
+  "input": "samples/corlander_vale_input.json",
+  "status_mapping": "Report wording mapped to engine statuses: 'not recommended now' for a high-risk tool = on_hold; 'not recommended now' for a tool another fix makes redundant = not_chosen.",
+  "bottlenecks": {
+    "BN-1": {
+      "category": "document_chasing",
+      "options": {
+        "ai_followup_assistant": {
+          "upfront_cost": 3000,
+          "ongoing_cost_per_year": 15120,
+          "hours_saved_per_week": 25,
+          "annual_savings": 67200,
+          "payback_months": 3.2,
+          "status": "not_chosen"
+        },
+        "client_portal": {
+          "upfront_cost": 38400,
+          "ongoing_cost_per_year": 128160,
+          "hours_saved_per_week": 100,
+          "annual_savings": 268800,
+          "payback_months": 7.4
+        },
+        "intake_desk": {
+          "upfront_cost": 6400,
+          "ongoing_cost_per_year": 0,
+          "hours_saved_per_week": 70,
+          "annual_savings": 188160,
+          "payback_months": 0.4
+        }
+      },
+      "recommended": [
+        "intake_desk",
+        "client_portal"
+      ],
+      "recommendation": {
+        "hours_saved_per_week": 140,
+        "year_one_cost": 172960,
+        "ongoing_cost_per_year": 128160,
+        "annual_savings": 376320,
+        "payback_months": 5.5
+      }
+    },
+    "BN-2": {
+      "category": "review_queue",
+      "options": {
+        "ai_pre_review": {
+          "upfront_cost": 10000,
+          "ongoing_cost_per_year": 36000,
+          "hours_saved_per_week": 45,
+          "annual_savings": 120960,
+          "payback_months": 4.6,
+          "status": "on_hold"
+        },
+        "review_queues": {
+          "upfront_cost": 0,
+          "ongoing_cost_per_year": 0,
+          "hours_saved_per_week": 40,
+          "annual_savings": 107520,
+          "payback_months": 0
+        },
+        "tiered_review": {
+          "upfront_cost": 19600,
+          "ongoing_cost_per_year": 20000,
+          "hours_saved_per_week": 75,
+          "annual_savings": 201600,
+          "payback_months": 2.4
+        }
+      },
+      "recommended": [
+        "tiered_review",
+        "review_queues"
+      ],
+      "recommendation": {
+        "hours_saved_per_week": 100,
+        "year_one_cost": 39600,
+        "ongoing_cost_per_year": 20000,
+        "annual_savings": 268800,
+        "payback_months": 1.8
+      }
+    },
+    "BN-3": {
+      "category": "manual_keying",
+      "options": {
+        "ai_document_extraction": {
+          "upfront_cost": 12000,
+          "ongoing_cost_per_year": 82500,
+          "hours_saved_per_week": 105,
+          "annual_savings": 282240,
+          "payback_months": 4.0
+        },
+        "import_first": {
+          "upfront_cost": 12840,
+          "ongoing_cost_per_year": 0,
+          "hours_saved_per_week": 35,
+          "annual_savings": 94080,
+          "payback_months": 1.6
+        },
+        "offshore_data_entry": {
+          "upfront_cost": 8000,
+          "ongoing_cost_per_year": 66000,
+          "hours_saved_per_week": 90,
+          "annual_savings": 241920,
+          "payback_months": 3.7,
+          "status": "on_hold"
+        }
+      },
+      "recommended": [
+        "ai_document_extraction",
+        "import_first"
+      ],
+      "recommendation": {
+        "hours_saved_per_week": 125,
+        "year_one_cost": 107340,
+        "ongoing_cost_per_year": 82500,
+        "annual_savings": 336000,
+        "payback_months": 3.8
+      }
+    }
+  },
+  "program": {
+    "year_one_cost": 319900,
+    "ongoing_cost_per_year": 230660,
+    "gross_hours_saved_per_week": 365,
+    "effective_hours_saved_per_week": 255.5,
+    "annual_savings": 981120,
+    "net_benefit_year_one": 661220,
+    "net_benefit_year_two_onward": 750460,
+    "payback_months": 3.9,
+    "upside_not_counted_total": 395500
+  },
+  "matching": "Bottlenecks are matched by id first, then by fix category, so any Phase 3 ids work."
+}

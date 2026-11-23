@@ -1,0 +1,100 @@
+{
+  "profile_version": "1",
+  "client_name": "Veloran Consulting LLC",
+  "scenario": "A",
+  "synthetic": true,
+  "notes": "Client facts Phase 4 needs that steps 7 and 8 do not produce. Values come from the Veloran reference report v1.0 (a synthetic case). Edit this file, not the code, when the facts change.",
+  "company": {
+    "short_name": "Veloran",
+    "employees_total": 50,
+    "billable_employees": 38,
+    "current_tools": [
+      "Harvest",
+      "Jira",
+      "Asana",
+      "Smartsheet",
+      "Google Sheets",
+      "Slack",
+      "Google Workspace",
+      "Salesforce"
+    ],
+    "capabilities": {
+      "ai_policy_in_place": false,
+      "call_recording_consent": false,
+      "clean_staffing_history_months": 0,
+      "work_tracker": "Jira",
+      "crm": "Salesforce"
+    },
+    "volumes": {
+      "certification_vouchers": 18,
+      "active_projects": 23
+    }
+  },
+  "assumptions": {
+    "currency": "USD",
+    "loaded_hourly_rate": 90,
+    "working_weeks_per_year": 48,
+    "adoption_rate": {
+      "low": 0.5,
+      "base": 0.7,
+      "high": 0.85
+    },
+    "max_payback_months": 12,
+    "realized_billing_rate": 158,
+    "sources": {
+      "loaded_hourly_rate": "Average salary $118,000 x 1.30 for benefits and payroll taxes, plus $19,400 overhead per person, divided by 1,920 working hours (Veloran finance, FY2025)",
+      "working_weeks_per_year": "52 weeks minus PTO and holidays (Veloran handbook)",
+      "adoption_rate": "Conservative planning assumption (70%), applied to every saving; 50% and 85% for the low and high cases"
+    }
+  },
+  "category_map": {
+    "staffing": "staffing_visibility",
+    "bench": "staffing_visibility",
+    "status report": "status_duplication",
+    "timesheet": "time_capture"
+  },
+  "bottleneck_extras": {
+    "staffing_visibility": {
+      "upside_not_counted": [
+        {
+          "key": "bench_to_billable",
+          "label": "Half of unplanned bench becomes billable",
+          "amount": 216144,
+          "basis": "28.5 hours a week x 48 weeks x $158 realized rate",
+          "unlocked_by": [
+            "psa_tool",
+            "capacity_council"
+          ]
+        }
+      ]
+    },
+    "status_duplication": {
+      "upside_not_counted": [
+        {
+          "key": "duplicate_licences",
+          "label": "Asana and Smartsheet licences retired",
+          "amount": 14400,
+          "basis": "Current licence invoices",
+          "unlocked_by": [
+            "system_of_record"
+          ]
+        }
+      ]
+    },
+    "time_capture": {
+      "upside_not_counted": [
+        {
+          "key": "unlogged_hours",
+          "label": "Unlogged billable hours captured",
+          "amount": 184627,
+          "basis": "70% of 1,669 unlogged hours x $158 realized rate",
+          "unlocked_by": [
+            "ai_timesheets",
+            "daily_time_rule"
+          ]
+        }
+      ]
+    }
+  },
+  "field_mapping": {}
+}

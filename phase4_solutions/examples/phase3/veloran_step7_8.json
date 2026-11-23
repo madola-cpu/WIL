@@ -1,0 +1,63 @@
+{
+  "client": "Veloran Consulting LLC",
+  "runId": "veloran-week-2026-12-01",
+  "generatedAt": "2026-12-01T09:00:00Z",
+  "assumptions": {
+    "hourlyRate": 90,
+    "weeksPerYear": 48,
+    "currency": "USD"
+  },
+  "step7": {
+    "bottlenecks": [
+      {
+        "bottleneckId": "staffing",
+        "title": "Staffing blind spots",
+        "teams": ["CRM Practice", "Data & AI Practice", "Delivery Office (PMO)", "Growth", "Leadership & Operations"],
+        "peopleAffected": 43,
+        "hoursPerPersonPerWeek": 3.0,
+        "feasibility": "Medium",
+        "priorityScore": 88,
+        "rootCauses": [
+          "No forward view of capacity",
+          "Sales and delivery plan separately",
+          "Bench time has no default use"
+        ],
+        "evidence": [
+          {"metric": "Unplanned bench hours a week", "system": "Harvest, staffing sheet", "observed": "57"},
+          {"metric": "Working days of notice before a new assignment", "system": "Staffing sheet history", "observed": "4"}
+        ]
+      },
+      {
+        "bottleneckId": "status",
+        "title": "Status reporting repeated across four places",
+        "teams": "CRM Practice; Data & AI Practice; Delivery Office (PMO)",
+        "peopleAffected": 40,
+        "feasibility": "High",
+        "priorityScore": 87
+      },
+      {
+        "bottleneckId": "timesheets",
+        "title": "Timesheets rebuilt from memory",
+        "teams": ["CRM Practice", "Data & AI Practice", "Delivery Office (PMO)", "Growth", "Leadership & Operations"],
+        "peopleAffected": 42,
+        "feasibility": "High",
+        "priorityScore": 61
+      },
+      {"bottleneckId": "tools", "title": "Tool switching and notifications", "peopleAffected": 45, "feasibility": "High", "priorityScore": 57},
+      {"bottleneckId": "search", "title": "Searching for past work", "peopleAffected": 34, "feasibility": "Medium", "priorityScore": 46},
+      {"bottleneckId": "proposals", "title": "Proposals rebuilt from scratch", "peopleAffected": 9, "feasibility": "Medium", "priorityScore": 38},
+      {"bottleneckId": "migration", "title": "Data-migration rework", "peopleAffected": 8, "feasibility": "Low", "priorityScore": 28}
+    ]
+  },
+  "step8": {
+    "roi": [
+      {"bottleneckId": "staffing", "hoursLostPerWeek": {"min": 116, "expected": 129, "max": 148}, "annualCost": {"min": 501120, "expected": 557280, "max": 639360}},
+      {"bottleneckId": "status", "hoursLostPerWeek": 112, "hoursLostPerWeek_low": 101, "hoursLostPerWeek_high": 129, "annualCost": 483840},
+      {"bottleneckId": "timesheets", "hoursLostPerWeek": [38, 42, 48], "annualCost": "$181,440"},
+      {"bottleneckId": "tools", "hoursLostPerWeek": 27, "annualCost": 116640},
+      {"bottleneckId": "search", "hoursLostPerWeek": 34, "annualCost": 146880},
+      {"bottleneckId": "proposals", "hoursLostPerWeek": 54, "annualCost": 233280},
+      {"bottleneckId": "migration", "hoursLostPerWeek": 44, "annualCost": 190080}
+    ]
+  }
+}

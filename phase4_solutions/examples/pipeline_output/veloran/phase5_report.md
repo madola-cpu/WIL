@@ -1,0 +1,211 @@
+## Solutions and ROI (Phase 4)
+
+Veloran Consulting LLC · scenario A · phase4 0.2.0 · generated 2026-11-23T17:44:29+00:00
+
+### Recommended actions
+
+1. **Staffing blind spots: Capacity council and bench-to-certification + PSA tool.** Year-one cost $58,600; saves $257,040 a year; payback 2.7 months.
+2. **Status reporting repeated across four places: Meeting and status reset + One system of record.** Year-one cost $9,800; saves $226,800 a year; payback 0.5 months.
+3. **Timesheets rebuilt from memory: Daily time rule + AI-drafted timesheets.** Year-one cost $11,120; saves $105,840 a year; payback 1.3 months.
+
+Together: $79,520 in year one against $589,680 in annual savings, or $510,160 net in the first year.
+
+### Staffing blind spots: solution options
+
+129 hours lost a week · 43 people · $557,280 a year
+
+|  | Option 1: AI forecasting agent | Option 2: PSA tool | Option 3: Capacity council and bench-to-certification |
+| --- | --- | --- | --- |
+| Type | AI tool | Non-AI software | Process and reskilling |
+| How it solves | An agent in the firm's own CRM predicts roll-offs and demand from pipeline and booking history, then proposes staffing moves for a person to approve | One system holds bookings, roll-offs, skills and pipeline demand on a single timeline, eight weeks out | A 30-minute weekly meeting books the next eight weeks; any unbooked day defaults to a certification plan or a reusable asset |
+| Example vendors | Agentforce in the firm's own Salesforce org; AI features in PSA suites | Kantata; Rocketlane; BigTime; Certinia | Internal; Salesforce Trailhead and certification exams |
+| Upfront cost | $40,000 (internal build and data clean-up) | $26,200 (vendor onboarding $10,000; configuration $12,600; training $3,600) | $3,600 (certification vouchers: 18 certification vouchers x $200 = $3,600) |
+| Ongoing cost ($/yr) | $24,000 (run, monitor and retrain) | $28,800 (licences: 50 seats x $48 a month x 12 = $28,800) | $0 |
+| Implementation time | 4 to 6 months | 6 to 8 weeks | 2 weeks |
+| Effort and disruption | High: needs 12+ months of clean staffing data | Medium: data migration and new habits for 50 people | Low: one meeting and one rule |
+| Est. hours saved per week | 45 | 60 | 30 |
+| Est. annual savings | $136,080 | $181,440 | $90,720 |
+| Payback (months) | 5.6 | 3.6 | 0.5 |
+| Data and AI governance risk | Medium: reads pipeline and staff data; every move needs human sign-off | Low: standard SaaS security review | None |
+| Key risks and dependencies | Forecasts are only as good as the staffing history behind them | Adoption; Must sync with the CRM and replace the current time tool | Discipline; savings stall if leaders skip the meeting |
+| Status | Deferred | Recommended | Recommended |
+
+**Recommendation.** We recommend Option 3 (Capacity council and bench-to-certification) and Option 2 (PSA tool) together. The PSA makes capacity visible, the council turns it into decisions, and the certification rule gives every unplanned free day a use. Together they save an estimated 85 hours a week ($257,040 a year) for $58,600 in year one, a payback of 2.7 months.
+
+**Option 1: AI forecasting agent.** Deferred: an AI forecast needs at least 12 months of clean booking data (current: 0). The recommended PSA tool creates this; revisit once the PSA holds 12 months of bookings.
+
+### Status reporting repeated across four places: solution options
+
+112 hours lost a week · 40 people · $483,840 a year
+
+|  | Option 1: AI meeting notes and status drafts | Option 2: One system of record | Option 3: Meeting and status reset |
+| --- | --- | --- | --- |
+| Type | AI tool | Non-AI software | Process |
+| How it solves | AI joins calls, writes notes and drafts weekly status from transcripts and the work tracker | All delivery work moves into the one tracker the firm already licenses; client reports generate from it; the duplicate tools retire | Recurring internal status meetings end; a five-line written update per project every Friday and one 30-minute weekly risk review replace them |
+| Example vendors | Zoom AI Companion; Gemini in Google Meet; Otter; Fireflies | Jira dashboards and a client report template (Jira is already licensed) | Internal; Written-update template |
+| Upfront cost | $2,000 (set-up and recording policy) | $7,200 (migration and template build: 80 h x $90 = $7,200) | $2,600 (facilitation and templates) |
+| Ongoing cost ($/yr) | $9,000 (seats: 30 seats x $25 a month x 12 = $9,000) | $0 | $0 |
+| Implementation time | 2 weeks | 4 to 6 weeks | 1 week |
+| Effort and disruption | Low | Medium: 23 active projects to migrate | Low, if leaders model it |
+| Est. hours saved per week | 40 | 35 | 50 |
+| Est. annual savings | $120,960 | $105,840 | $151,200 |
+| Payback (months) | 1.1 | 0.8 | 0.2 |
+| Data and AI governance risk | High: records client calls that carry client data; some states require every party's consent to record | Low | None |
+| Key risks and dependencies | Client contracts may bar recording; Notes still need human review; The duplicate tools remain | Clients used to other report formats need a new one | Meetings creep back without a named owner |
+| Status | Not recommended now | Recommended | Recommended |
+
+**Recommendation.** We recommend Option 3 (Meeting and status reset) and Option 2 (One system of record) together. The reset frees most of the time at once, and one system of record stops the copying behind the remaining updates. Together they save an estimated 75 hours a week ($226,800 a year) for $9,800 in year one, a payback of 0.5 months.
+
+**Option 1: AI meeting notes and status drafts.** Not recommended now: recording client calls needs every party's consent and an approved AI policy first. Conflicts with Meeting and status reset: it would summarize meetings the reset cancels.
+
+### Timesheets rebuilt from memory: solution options
+
+42 hours lost a week · 42 people · $181,440 a year
+
+|  | Option 1: AI-drafted timesheets | Option 2: PSA time module | Option 3: Daily time rule |
+| --- | --- | --- | --- |
+| Type | AI tool | Non-AI software | Process |
+| How it solves | An app drafts each person's day from calendar, tracker and document activity; the person edits and submits. Drafts are visible only to the employee. | Time entry moves into the PSA chosen for staffing, next to bookings, with approvals in one place | Log time before leaving each day: a 4:30 p.m. chat nudge, a 15-minute end-of-day calendar block, and on-time rates shared by team, never by name |
+| Example vendors | Timely; Memtime; Clockify | Same vendor as the PSA tool | Internal; Slack or Teams reminders |
+| Upfront cost | $2,000 (set-up and pilot) | $0 ($0 extra once the PSA tool is approved) | $0 |
+| Ongoing cost ($/yr) | $9,120 (licences: 38 seats x $20 a month x 12 = $9,120) | $0 ($0 extra once the PSA tool is approved) | $0 |
+| Implementation time | 3 weeks | Arrives with the PSA, weeks 6 to 8 | 1 week |
+| Effort and disruption | Low: install plus a privacy briefing | Low: new screen, same habit | Low |
+| Est. hours saved per week | 25 | 12 | 15 |
+| Est. annual savings | $75,600 | $36,288 | $45,360 |
+| Payback (months) | 1.8 | Immediate (no cost) | Immediate (no cost) |
+| Data and AI governance risk | Medium: reads calendar and app activity. Mitigated by on-device processing, employee-only drafts and no manager access to raw activity | Low | None |
+| Key risks and dependencies | Staff may fear surveillance; Must export to the PSA if one is chosen | Depends on the PSA decision; Moves the same manual entry to a new screen | The habit fades without the nudge and team-level feedback |
+| Status | Recommended | Follow-on, no extra savings | Recommended |
+
+**Recommendation.** We recommend Option 3 (Daily time rule) and Option 1 (AI-drafted timesheets) together. The rule fixes when time is logged; the drafts fix the effort and the forgetting. Together they save an estimated 35 hours a week ($105,840 a year) for $11,120 in year one, a payback of 1.3 months.
+
+**Option 2: PSA time module.** Follow-on to AI-drafted timesheets: Once the PSA is live, drafts flow into it instead of the old time tool; no extra savings are counted, to avoid double counting. It arrives with the PSA tool chosen for staffing (Staffing blind spots).
+
+### Recommendations and ROI
+
+The 3 recommendations cost $79,520 in year one and save an estimated $589,680 a year, a combined payback of 1.6 months. From year two, ongoing costs are $37,920 a year and the net benefit is about $551,760 a year. At 70% adoption, the 195 gross hours become about 137 effective hours a week: 48% of the 283 hours lost to the bottlenecks in scope.
+
+| Bottleneck | Recommended solution | Type | Year-one cost | Ongoing cost (per year) | Hours saved per week (gross) | Annual savings | Payback (months) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1. Staffing blind spots | Capacity council and bench-to-certification + PSA tool | Process and reskilling; non-AI software | $58,600 | $28,800 | 85 | $257,040 | 2.7 |
+| 2. Status reporting repeated across four places | Meeting and status reset + One system of record | Process; non-AI software | $9,800 | $0 | 75 | $226,800 | 0.5 |
+| 3. Timesheets rebuilt from memory | Daily time rule + AI-drafted timesheets | Process; AI tool | $11,120 | $9,120 | 35 | $105,840 | 1.3 |
+| **Total** |  |  | **$79,520** | **$37,920** | **195** | **$589,680** | **1.6** |
+
+Range across the low and high cases: $589,680 ($285,120 to $965,736) a year in savings; payback 1.0 to 3.8 months.
+
+#### Upside not counted
+
+| Source | Estimate (per year) | Basis |
+| --- | --- | --- |
+| Half of unplanned bench becomes billable | $216,144 | 28.5 hours a week x 48 weeks x $158 realized rate |
+| Asana and Smartsheet licences retired | $14,400 | Current licence invoices |
+| Unlogged billable hours captured | $184,627 | 70% of 1,669 unlogged hours x $158 realized rate |
+| **Total** | **$415,171** |  |
+
+These are revenue and licence effects that depend on clients and pricing, so they are left out of the savings and the case stands on time saved alone.
+
+#### Formulas used
+
+- **Hours saved per week** = effect share x hours lost per week, rounded to whole hours
+- **Annual savings** = hours saved x working weeks x loaded hourly rate x adoption
+- **Deal margin won back (scenario B)** = deals lost x recovery share x adoption x average deal value x contribution margin
+- **Year-one cost** = upfront cost + first year of ongoing cost
+- **Payback (months)** = year-one cost / (annual savings / 12)
+- **Two fixes together** = largest saving + each other saving x (1 - overlap); never more than the cap share of hours lost
+- **Which mix is recommended** = highest first-year net benefit among eligible mixes that pay back within the limit
+
+### Governance review of AI tools
+
+| AI tool | Bottleneck | Status | Data it will access | Governance risk | Before it goes live |
+| --- | --- | --- | --- | --- | --- |
+| AI forecasting agent | Staffing blind spots | Deferred | Pipeline, bookings and skills (internal; personnel data) | Medium: reads pipeline and staff data; every move needs human sign-off | Approve a one-page AI acceptable-use policy; A named person signs off every staffing move the agent proposes |
+| AI meeting notes and status drafts | Status reporting repeated across four places | Not recommended now | Call audio and transcripts, including client data | High: records client calls that carry client data; some states require every party's consent to record | Consent from every party before any call is recorded; Approve a one-page AI acceptable-use policy; Vendor review: no training on client data |
+| AI-drafted timesheets | Timesheets rebuilt from memory | Recommended | Calendar titles, tracker activity, app and document names on the employee's laptop | Medium: reads calendar and app activity. Mitigated by on-device processing, employee-only drafts and no manager access to raw activity | Approve a one-page AI acceptable-use policy; Security and contract review of the timesheet tool, including no-training terms; Drafts stay employee-only; managers never see raw activity |
+
+#### Governance actions
+
+- [ ] Approve a one-page AI acceptable-use policy (for AI-drafted timesheets)
+- [ ] Security and contract review of the timesheet tool, including no-training terms (for AI-drafted timesheets)
+- [ ] Drafts stay employee-only; managers never see raw activity (for AI-drafted timesheets)
+
+### Calculation workbook (Phase 4)
+
+| Calculation | Working | Result |
+| --- | --- | --- |
+| Staffing blind spots hours saved | 60 + 30 x (1 - 0.167 overlap) | 84.99 -> 85 h a week |
+| Staffing blind spots savings | 85 h x 48 weeks x $90 x 70% adoption | $257,040 |
+| Staffing blind spots year-one cost | PSA tool $55,000 + Capacity council and bench-to-certification $3,600 | $58,600 |
+| Staffing blind spots payback | $58,600 / ($257,040 / 12) | 2.7 months |
+| Status reporting repeated across four places hours saved | 50 + 35 x (1 - 0.286 overlap) | 74.99 -> 75 h a week |
+| Status reporting repeated across four places savings | 75 h x 48 weeks x $90 x 70% adoption | $226,800 |
+| Status reporting repeated across four places year-one cost | One system of record $7,200 + Meeting and status reset $2,600 | $9,800 |
+| Status reporting repeated across four places payback | $9,800 / ($226,800 / 12) | 0.5 months |
+| Timesheets rebuilt from memory hours saved | 25 + 15 x (1 - 0.333 overlap) | 35.01 -> 35 h a week |
+| Timesheets rebuilt from memory savings | 35 h x 48 weeks x $90 x 70% adoption | $105,840 |
+| Timesheets rebuilt from memory year-one cost | AI-drafted timesheets $11,120 + Daily time rule $0 | $11,120 |
+| Timesheets rebuilt from memory payback | $11,120 / ($105,840 / 12) | 1.3 months |
+| Program year-one cost | $58,600 + $9,800 + $11,120 | $79,520 |
+| Program annual savings | $257,040 + $226,800 + $105,840 | $589,680 |
+| Program payback | $79,520 / ($589,680 / 12) | 1.6 months |
+| Effective hours won back | 195 gross hours x 70% adoption | 136.5 hours a week |
+| Net benefit, year one | $589,680 - $79,520 | $510,160 |
+
+### Evidence behind every Phase 4 number
+
+| Number | What it is | Where | How it was worked out |
+| --- | --- | --- | --- |
+| 45 h | hours saved a week | staffing · Option 1: AI forecasting agent | 0.349 share x 129 h lost = 45.02 -> 45 h a week |
+| $136,080 | time savings a year | staffing · Option 1: AI forecasting agent | 45 h x 48 weeks x $90 x 70% adoption = $136,080 |
+| $64,000 | year-one cost | staffing · Option 1: AI forecasting agent | $40,000 upfront + $24,000 first-year ongoing = $64,000 |
+| 5.6 months | payback | staffing · Option 1: AI forecasting agent | $64,000 / ($136,080 / 12) = 5.6 months |
+| 60 h | hours saved a week | staffing · Option 2: PSA tool | 0.465 share x 129 h lost = 59.99 -> 60 h a week |
+| $181,440 | time savings a year | staffing · Option 2: PSA tool | 60 h x 48 weeks x $90 x 70% adoption = $181,440 |
+| $55,000 | year-one cost | staffing · Option 2: PSA tool | $26,200 upfront + $28,800 first-year ongoing = $55,000 |
+| 3.6 months | payback | staffing · Option 2: PSA tool | $55,000 / ($181,440 / 12) = 3.6 months |
+| 30 h | hours saved a week | staffing · Option 3: Capacity council and bench-to-certification | 0.233 share x 129 h lost = 30.06 -> 30 h a week |
+| $90,720 | time savings a year | staffing · Option 3: Capacity council and bench-to-certification | 30 h x 48 weeks x $90 x 70% adoption = $90,720 |
+| $3,600 | year-one cost | staffing · Option 3: Capacity council and bench-to-certification | $3,600 upfront + $0 first-year ongoing = $3,600 |
+| 0.5 months | payback | staffing · Option 3: Capacity council and bench-to-certification | $3,600 / ($90,720 / 12) = 0.5 months |
+| 85 h | hours saved a week | staffing · recommended mix | 60 + 30 x (1 - 0.167 overlap) = 84.99 -> 85 h a week |
+| $257,040 | time savings a year | staffing · recommended mix | 85 h x 48 weeks x $90 x 70% adoption = $257,040 |
+| $58,600 | year-one cost | staffing · recommended mix | PSA tool $55,000 + Capacity council and bench-to-certification $3,600 = $58,600 |
+| 2.7 months | payback | staffing · recommended mix | $58,600 / ($257,040 / 12) = 2.7 months |
+| 40 h | hours saved a week | status · Option 1: AI meeting notes and status drafts | 0.357 share x 112 h lost = 39.98 -> 40 h a week |
+| $120,960 | time savings a year | status · Option 1: AI meeting notes and status drafts | 40 h x 48 weeks x $90 x 70% adoption = $120,960 |
+| $11,000 | year-one cost | status · Option 1: AI meeting notes and status drafts | $2,000 upfront + $9,000 first-year ongoing = $11,000 |
+| 1.1 months | payback | status · Option 1: AI meeting notes and status drafts | $11,000 / ($120,960 / 12) = 1.1 months |
+| 35 h | hours saved a week | status · Option 2: One system of record | 0.313 share x 112 h lost = 35.06 -> 35 h a week |
+| $105,840 | time savings a year | status · Option 2: One system of record | 35 h x 48 weeks x $90 x 70% adoption = $105,840 |
+| $7,200 | year-one cost | status · Option 2: One system of record | $7,200 upfront + $0 first-year ongoing = $7,200 |
+| 0.8 months | payback | status · Option 2: One system of record | $7,200 / ($105,840 / 12) = 0.8 months |
+| 50 h | hours saved a week | status · Option 3: Meeting and status reset | 0.446 share x 112 h lost = 49.95 -> 50 h a week |
+| $151,200 | time savings a year | status · Option 3: Meeting and status reset | 50 h x 48 weeks x $90 x 70% adoption = $151,200 |
+| $2,600 | year-one cost | status · Option 3: Meeting and status reset | $2,600 upfront + $0 first-year ongoing = $2,600 |
+| 0.2 months | payback | status · Option 3: Meeting and status reset | $2,600 / ($151,200 / 12) = 0.2 months |
+| 75 h | hours saved a week | status · recommended mix | 50 + 35 x (1 - 0.286 overlap) = 74.99 -> 75 h a week |
+| $226,800 | time savings a year | status · recommended mix | 75 h x 48 weeks x $90 x 70% adoption = $226,800 |
+| $9,800 | year-one cost | status · recommended mix | One system of record $7,200 + Meeting and status reset $2,600 = $9,800 |
+| 0.5 months | payback | status · recommended mix | $9,800 / ($226,800 / 12) = 0.5 months |
+| 25 h | hours saved a week | timesheets · Option 1: AI-drafted timesheets | 0.595 share x 42 h lost = 24.99 -> 25 h a week |
+| $75,600 | time savings a year | timesheets · Option 1: AI-drafted timesheets | 25 h x 48 weeks x $90 x 70% adoption = $75,600 |
+| $11,120 | year-one cost | timesheets · Option 1: AI-drafted timesheets | $2,000 upfront + $9,120 first-year ongoing = $11,120 |
+| 1.8 months | payback | timesheets · Option 1: AI-drafted timesheets | $11,120 / ($75,600 / 12) = 1.8 months |
+| 12 h | hours saved a week | timesheets · Option 2: PSA time module | 0.286 share x 42 h lost = 12.01 -> 12 h a week |
+| $36,288 | time savings a year | timesheets · Option 2: PSA time module | 12 h x 48 weeks x $90 x 70% adoption = $36,288 |
+| $0 | year-one cost | timesheets · Option 2: PSA time module | $0 upfront + $0 first-year ongoing = $0 |
+| Immediate (no cost) | payback | timesheets · Option 2: PSA time module | No year-one cost: pays back immediately |
+| 15 h | hours saved a week | timesheets · Option 3: Daily time rule | 0.357 share x 42 h lost = 14.99 -> 15 h a week |
+| $45,360 | time savings a year | timesheets · Option 3: Daily time rule | 15 h x 48 weeks x $90 x 70% adoption = $45,360 |
+| $0 | year-one cost | timesheets · Option 3: Daily time rule | $0 upfront + $0 first-year ongoing = $0 |
+| Immediate (no cost) | payback | timesheets · Option 3: Daily time rule | No year-one cost: pays back immediately |
+| 35 h | hours saved a week | timesheets · recommended mix | 25 + 15 x (1 - 0.333 overlap) = 35.01 -> 35 h a week |
+| $105,840 | time savings a year | timesheets · recommended mix | 35 h x 48 weeks x $90 x 70% adoption = $105,840 |
+| $11,120 | year-one cost | timesheets · recommended mix | AI-drafted timesheets $11,120 + Daily time rule $0 = $11,120 |
+| 1.3 months | payback | timesheets · recommended mix | $11,120 / ($105,840 / 12) = 1.3 months |
+| $79,520 | program year-one cost | program | $58,600 + $9,800 + $11,120 = $79,520 |
+| $589,680 | program annual savings | program | $257,040 + $226,800 + $105,840 = $589,680 |
+| 1.6 months | program payback | program | $79,520 / ($589,680 / 12) = 1.6 months |
+| 136.5 hours a week | effective hours won back | program | 195 gross hours x 70% adoption = 136.5 hours a week |
+| $510,160 | net benefit, year one | program | $589,680 - $79,520 = $510,160 |

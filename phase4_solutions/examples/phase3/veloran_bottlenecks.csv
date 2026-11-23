@@ -1,0 +1,8 @@
+Bottleneck,People affected,Hours lost per week,Hours lost per week low,Hours lost per week high,Annual cost,Feasibility,Priority score,Teams
+Staffing blind spots: unplanned bench time,43,129,116,148,"$557,280",Medium,88,CRM Practice; Data & AI Practice; Delivery Office (PMO); Growth; Leadership & Operations
+Status reporting repeated across four places,40,112,101,129,"$483,840",High,87,CRM Practice; Data & AI Practice; Delivery Office (PMO)
+Timesheets rebuilt from memory,42,42,38,48,"$181,440",High,61,CRM Practice; Data & AI Practice; Delivery Office (PMO); Growth; Leadership & Operations
+Tool switching and notifications,45,27,,,"$116,640",High,57,All five
+Searching for past work,34,34,,,"$146,880",Medium,46,CRM Practice; Data & AI Practice; Delivery Office (PMO)
+Proposals rebuilt from scratch,9,54,,,"$233,280",Medium,38,Growth; CRM Practice; Data & AI Practice; Delivery Office (PMO)
+Data-migration rework,8,44,,,"$190,080",Low,28,Data & AI Practice

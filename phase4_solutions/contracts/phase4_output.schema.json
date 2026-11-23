@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://whitman-innovation-lab/team-tom/phase4_output.schema.json",
+  "title": "Phase 4 output (what step 9 hands to the frontend and step 10)",
+  "description": "Fix options per bottleneck with cost, savings and payback in low/base/high cases, the recommended mix and why, program totals, governance gates and an evidence trail for every number. Money is whole currency units per year unless the field says otherwise. Use 'base' for headline numbers; 'low' and 'high' are the range.",
+  "type": "object",
+  "required": ["schema_version", "run", "assumptions_used", "bottlenecks", "bottlenecks_not_in_scope", "program", "warnings"],
+  "$defs": {
+    "num_range": {
+      "type": "object",
+      "required": ["low", "base", "high"],
+      "properties": {
+        "low": {"type": "number"},
+        "base": {"type": "number"},
+        "high": {"type": "number"}
+      }
+    },
+    "money_range": {
+      "type": "object",
+      "required": ["low", "base", "high"],
+      "properties": {
+        "low": {"type": "integer"},
+        "base": {"type": "integer"},
+        "high": {"type": "integer"}
+      }
+    },
+    "payback_range": {
+      "description": "Months, 1 decimal. 0 = immediate (no cost). null = never pays back.",
+      "type": "object",
+      "required": ["low", "base", "high"],
+      "properties": {
+        "low": {"type": ["number", "null"]},
+        "base": {"type": ["number", "null"]},
+        "high": {"type": ["number", "null"]}
+      }
+    },
+    "cost_item": {
+      "type": "object",
+      "required": ["item", "amount", "calc", "price_status"],
+      "properties": {
+        "item": {"type": "string"},
+        "amount": {"type": "integer"},
+        "calc": {"type": "string", "description": "How the amount was worked out, for the evidence trail"},
+        "price_status": {"type": "string", "description": "estimate, indicative, list, placeholder, or a note such as 'quote needed'"}
+      }
+    },
+    "trace": {
+      "description": "One plain-language calculation per headline number (base case).",
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    },
+    "option": {
+      "type": "object",
+      "required": ["option_id", "option_number", "label", "fix_id", "name", "fix_type", "type_label", "how_it_solves",
+                   "example_vendors", "upfront_cost", "upfront_breakdown", "ongoing_cost_per_year", "ongoing_breakdown",
+                   "year_one_cost", "implementation", "effort", "hours_saved_per_week", "annual_savings",
+                   "payback_months", "net_benefit_year_one", "governance", "risks_and_dependencies", "status",
+                   "status_label", "status_reason", "other_reasons", "evidence", "confidence", "trace"],
+      "properties": {
+        "option_id": {"type": "string", "description": "Bottleneck id + option number, e.g. BN-1.O2"},
+        "option_number": {"type": "integer", "minimum": 1},
+        "label": {"type": "string", "description": "e.g. 'Option 2: PSA tool'"},
+        "fix_id": {"type": "string", "description": "Stable id from the fix catalog"},
+        "name": {"type": "string"},
+        "fix_type": {"type": "string", "enum": ["ai_tool", "software", "process", "reskilling"]},
+        "also": {"type": "array", "items": {"type": "string", "enum": ["ai_tool", "software", "process", "reskilling"]}},
+        "type_label": {"type": "string", "description": "e.g. 'Process and reskilling'"},
+        "how_it_solves": {"type": "string"},
+        "example_vendors": {"type": "array", "items": {"type": "string"}},
+        "cost_note": {"type": ["string", "null"]},
+        "upfront_cost": {"$ref": "#/$defs/money_range"},
+        "upfront_breakdown": {"type": "array", "items": {"$ref": "#/$defs/cost_item"}},
+        "ongoing_cost_per_year": {"$ref": "#/$defs/money_range"},
+        "ongoing_breakdown": {"type": "array", "items": {"$ref": "#/$defs/cost_item"}},
+        "year_one_cost": {"$ref": "#/$defs/money_range"},
+        "implementation": {
+          "type": "object",
+          "properties": {
+            "weeks_min": {"type": "number"},
+            "weeks_max": {"type": "number"},
+            "label": {"type": "string"}
+          }
+        },
+        "effort": {
+          "type": "object",
+          "required": ["level", "note"],
+          "properties": {
+            "level": {"type": "string", "enum": ["low", "medium", "high"]},
+            "note": {"type": "string"}
+          }
+        },
+        "hours_saved_per_week": {"$ref": "#/$defs/num_range"},
+        "deals_recovered_per_year": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/num_range"}]},
+        "annual_time_savings": {"$ref": "#/$defs/money_range"},
+        "annual_deal_margin": {"$ref": "#/$defs/money_range"},
+        "annual_savings": {"$ref": "#/$defs/money_range", "description": "Time savings plus recovered deal margin"},
+        "payback_months": {"$ref": "#/$defs/payback_range"},
+        "net_benefit_year_one": {"$ref": "#/$defs/money_range"},
+        "governance": {
+          "type": "object",
+          "required": ["risk", "note", "is_ai", "go_live_gates"],
+          "properties": {
+            "risk": {"type": "string", "enum": ["none", "low", "medium", "high"]},
+            "note": {"type": "string"},
+            "is_ai": {"type": "boolean"},
+            "data_accessed": {"type": ["string", "null"]},
+            "go_live_gates": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "risks_and_dependencies": {"type": "array", "items": {"type": "string"}},
+        "status": {
+          "type": "string",
+          "enum": ["recommended", "not_chosen", "follow_on", "deferred", "on_hold", "blocked", "needs_input"],
+          "description": "recommended; not_chosen = eligible but a better mix exists; follow_on = adds no savings on top of a chosen fix; deferred = waits for a prerequisite; on_hold = governance risk too high for now; blocked = depends on or conflicts with another fix; needs_input = a planning number is missing"
+        },
+        "status_label": {"type": "string"},
+        "status_reason": {"type": "string"},
+        "other_reasons": {"type": "array", "items": {"type": "string"}},
+        "evidence": {"type": "string", "description": "Where the catalog's effect size and prices come from"},
+        "confidence": {"type": "string", "description": "reference_calibrated, estimate, starter_estimate or placeholder"},
+        "price_statuses": {"type": "array", "items": {"type": "string"}},
+        "missing_inputs": {"type": "array", "items": {"type": "string"}},
+        "cost_shared_with": {"type": ["string", "null"]},
+        "reskilling_focus": {"type": ["string", "null"]},
+        "reskilling_targets": {"type": "array"},
+        "trace": {"$ref": "#/$defs/trace"}
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "required": ["fix_ids", "option_ids", "option_numbers", "names", "type_summary", "sequence",
+                   "hours_saved_per_week", "upfront_cost", "ongoing_cost_per_year", "year_one_cost",
+                   "annual_savings", "payback_months", "net_benefit_year_one", "overlaps_applied",
+                   "summary", "summary_source", "not_chosen", "trace"],
+      "properties": {
+        "fix_ids": {"type": "array", "items": {"type": "string"}, "description": "In the order to start them"},
+        "option_ids": {"type": "array", "items": {"type": "string"}},
+        "option_numbers": {"type": "array", "items": {"type": "integer"}},
+        "names": {"type": "array", "items": {"type": "string"}},
+        "type_summary": {"type": "string"},
+        "sequence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "option_id", "name", "time_to_live"],
+            "properties": {
+              "step": {"type": "integer"},
+              "option_id": {"type": "string"},
+              "name": {"type": "string"},
+              "time_to_live": {"type": "string"}
+            }
+          }
+        },
+        "hours_saved_per_week": {"$ref": "#/$defs/num_range"},
+        "deals_recovered_per_year": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/num_range"}]},
+        "upfront_cost": {"$ref": "#/$defs/money_range"},
+        "ongoing_cost_per_year": {"$ref": "#/$defs/money_range"},
+        "year_one_cost": {"$ref": "#/$defs/money_range"},
+        "annual_time_savings": {"$ref": "#/$defs/money_range"},
+        "annual_deal_margin": {"$ref": "#/$defs/money_range"},
+        "annual_savings": {"$ref": "#/$defs/money_range"},
+        "payback_months": {"$ref": "#/$defs/payback_range"},
+        "net_benefit_year_one": {"$ref": "#/$defs/money_range"},
+        "overlaps_applied": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pair": {"type": "array", "items": {"type": "string"}},
+              "overlap": {"type": "number", "minimum": 0, "maximum": 1},
+              "listed_in_catalog": {"type": "boolean"}
+            }
+          }
+        },
+        "together_note": {"type": ["string", "null"]},
+        "mixes_compared": {"type": "integer"},
+        "summary": {"type": "string", "description": "Paragraph for the report and the manager view"},
+        "summary_source": {"type": "string", "description": "'template' or 'claude:<model id>'"},
+        "summary_template": {"type": "string"},
+        "not_chosen": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["option_id", "option_number", "name", "status", "status_label", "reason"],
+            "properties": {
+              "option_id": {"type": "string"},
+              "option_number": {"type": "integer"},
+              "name": {"type": "string"},
+              "status": {"type": "string"},
+              "status_label": {"type": "string"},
+              "reason": {"type": "string"}
+            }
+          }
+        },
+        "trace": {"$ref": "#/$defs/trace"}
+      }
+    },
+    "bottleneck": {
+      "type": "object",
+      "required": ["id", "rank", "name", "category", "employees_affected", "hours_lost_per_week", "options",
+                   "recommendation", "notes"],
+      "properties": {
+        "id": {"type": "string"},
+        "rank": {"type": "integer"},
+        "name": {"type": "string"},
+        "category": {"type": ["string", "null"]},
+        "category_label": {"type": ["string", "null"]},
+        "category_match": {"type": ["object", "null"]},
+        "departments": {"type": "array", "items": {"type": "string"}},
+        "employees_affected": {"type": "integer"},
+        "hours_lost_per_week": {"$ref": "#/$defs/num_range"},
+        "annual_cost": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/num_range"}]},
+        "deal_impact": {"type": ["object", "null"]},
+        "feasibility": {"type": ["string", "null"]},
+        "priority_score": {"type": ["number", "null"]},
+        "root_causes": {"type": "array", "items": {"type": "string"}},
+        "options": {"type": "array", "items": {"$ref": "#/$defs/option"}},
+        "recommendation": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/recommendation"}]},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^phase4-output/1\\.[0-9]+$"},
+    "run": {
+      "type": "object",
+      "required": ["scenario", "client_name", "engine", "catalogs", "generated_at"],
+      "properties": {
+        "scenario": {"type": "string", "enum": ["A", "B"]},
+        "client_name": {"type": "string"},
+        "engine": {"type": "string"},
+        "catalogs": {"type": "array"},
+        "input_schema_version": {"type": "string"},
+        "generated_at": {"type": "string"}
+      }
+    },
+    "assumptions_used": {"type": "object", "required": ["currency", "loaded_hourly_rate", "working_weeks_per_year", "adoption_rate", "max_payback_months", "formulas"]},
+    "bottlenecks": {"type": "array", "items": {"$ref": "#/$defs/bottleneck"}},
+    "bottlenecks_not_in_scope": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "rank", "reason"],
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "rank": {"type": "integer"},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "program": {
+      "type": "object",
+      "required": ["recommendation_count", "year_one_cost", "ongoing_cost_per_year", "gross_hours_saved_per_week",
+                   "effective_hours_saved_per_week", "share_of_lost_hours_recovered", "annual_savings",
+                   "net_benefit_year_one", "net_benefit_year_two_onward", "payback_months", "fix_type_counts",
+                   "governance_actions", "upside_not_counted", "upside_not_counted_total", "summary"],
+      "properties": {
+        "recommendation_count": {"type": "integer"},
+        "bottlenecks_with_recommendation": {"type": "array", "items": {"type": "string"}},
+        "year_one_cost": {"$ref": "#/$defs/money_range"},
+        "ongoing_cost_per_year": {"$ref": "#/$defs/money_range"},
+        "gross_hours_saved_per_week": {"$ref": "#/$defs/num_range"},
+        "effective_hours_saved_per_week": {"$ref": "#/$defs/num_range", "description": "Gross hours x adoption"},
+        "adoption_rate_base": {"type": "number"},
+        "hours_lost_in_scope_per_week": {"type": "number"},
+        "share_of_lost_hours_recovered": {"type": "number", "minimum": 0, "maximum": 1},
+        "annual_time_savings": {"$ref": "#/$defs/money_range"},
+        "annual_deal_margin": {"$ref": "#/$defs/money_range"},
+        "annual_savings": {"$ref": "#/$defs/money_range"},
+        "net_benefit_year_one": {"$ref": "#/$defs/money_range"},
+        "net_benefit_year_two_onward": {"$ref": "#/$defs/money_range"},
+        "payback_months": {"$ref": "#/$defs/payback_range"},
+        "fix_type_counts": {"type": "object", "additionalProperties": {"type": "integer"}},
+        "governance_actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["action", "for"],
+            "properties": {
+              "action": {"type": "string"},
+              "for": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        },
+        "upside_not_counted": {"type": "array"},
+        "upside_not_counted_total": {"type": "number"},
+        "summary": {"type": "string"}
+      }
+    },
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  }
+}

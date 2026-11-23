@@ -1,0 +1,1199 @@
+{
+  "view_version": "phase4-manager-view/1.0",
+  "client_name": "Veloran Consulting LLC",
+  "scenario": "A",
+  "generated_at": "2026-11-23T17:44:29+00:00",
+  "engine": "phase4 0.2.0",
+  "headline": {
+    "year_one_cost": {
+      "value": 79520,
+      "display": "$79,520",
+      "range": {
+        "low": 79520,
+        "high": 91448,
+        "display": "$79,520 to $91,448"
+      }
+    },
+    "annual_savings": {
+      "value": 589680,
+      "display": "$589,680",
+      "range": {
+        "low": 285120,
+        "high": 965736,
+        "display": "$285,120 to $965,736"
+      }
+    },
+    "net_benefit_year_one": {
+      "value": 510160,
+      "display": "$510,160",
+      "range": {
+        "low": 193672,
+        "high": 886216,
+        "display": "$193,672 to $886,216"
+      }
+    },
+    "payback": {
+      "value": 1.6,
+      "display": "1.6 months",
+      "range": {
+        "low": 1.0,
+        "high": 3.8,
+        "display": "1.0 to 3.8 months"
+      }
+    },
+    "hours_won_back_per_week": {
+      "value": 136.5,
+      "display": "137 hours",
+      "math": "195 gross hours x 70% adoption"
+    },
+    "share_of_lost_time": {
+      "value": 0.4823,
+      "display": "48%",
+      "math": "of the 283 hours lost a week to the bottlenecks in scope"
+    }
+  },
+  "summary": "The 3 recommendations cost $79,520 in year one and save an estimated $589,680 a year, a combined payback of 1.6 months. From year two, ongoing costs are $37,920 a year and the net benefit is about $551,760 a year. At 70% adoption, the 195 gross hours become about 137 effective hours a week: 48% of the 283 hours lost to the bottlenecks in scope.",
+  "bottlenecks": [
+    {
+      "id": "staffing",
+      "rank": 1,
+      "title": "Staffing blind spots",
+      "full_name": "Staffing blind spots",
+      "category": "staffing_visibility",
+      "people_affected": 43,
+      "hours_lost_per_week": {
+        "value": 129.0,
+        "display": "129 h a week",
+        "range": {
+          "low": 116.0,
+          "high": 148.0,
+          "display": "116 to 148 h a week"
+        }
+      },
+      "annual_cost": {
+        "value": 557280.0,
+        "display": "$557,280",
+        "range": {
+          "low": 501120.0,
+          "high": 639360.0,
+          "display": "$501,120 to $639,360"
+        }
+      },
+      "recommendation": {
+        "option_ids": [
+          "staffing.O3",
+          "staffing.O2"
+        ],
+        "names": [
+          "Capacity council and bench-to-certification",
+          "PSA tool"
+        ],
+        "type_summary": "Process and reskilling; non-AI software",
+        "summary": "We recommend Option 3 (Capacity council and bench-to-certification) and Option 2 (PSA tool) together. The PSA makes capacity visible, the council turns it into decisions, and the certification rule gives every unplanned free day a use. Together they save an estimated 85 hours a week ($257,040 a year) for $58,600 in year one, a payback of 2.7 months.",
+        "hours_saved_per_week": {
+          "value": 85,
+          "display": "85 h a week",
+          "range": {
+            "low": 57,
+            "high": 117,
+            "display": "57 to 117 h a week"
+          },
+          "math": "60 + 30 x (1 - 0.167 overlap) = 84.99 -> 85 h a week"
+        },
+        "annual_savings": {
+          "value": 257040,
+          "display": "$257,040",
+          "range": {
+            "low": 123120,
+            "high": 429624,
+            "display": "$123,120 to $429,624"
+          },
+          "math": "85 h x 48 weeks x $90 x 70% adoption = $257,040"
+        },
+        "year_one_cost": {
+          "value": 58600,
+          "display": "$58,600",
+          "range": {
+            "low": 58600,
+            "high": 67390,
+            "display": "$58,600 to $67,390"
+          },
+          "math": "PSA tool $55,000 + Capacity council and bench-to-certification $3,600 = $58,600"
+        },
+        "payback": {
+          "value": 2.7,
+          "display": "2.7 months",
+          "range": {
+            "low": 1.6,
+            "high": 6.6,
+            "display": "1.6 to 6.6 months"
+          },
+          "math": "$58,600 / ($257,040 / 12) = 2.7 months"
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "staffing.O3",
+            "name": "Capacity council and bench-to-certification",
+            "time_to_live": "2 weeks"
+          },
+          {
+            "step": 2,
+            "option_id": "staffing.O2",
+            "name": "PSA tool",
+            "time_to_live": "6 to 8 weeks"
+          }
+        ]
+      },
+      "options": [
+        {
+          "option_id": "staffing.O1",
+          "number": 1,
+          "label": "Option 1: AI forecasting agent",
+          "name": "AI forecasting agent",
+          "type": "ai_tool",
+          "type_label": "AI tool",
+          "badge": {
+            "status": "deferred",
+            "label": "Deferred",
+            "tone": "warning",
+            "meaning": "Waits for a prerequisite"
+          },
+          "reason": "Deferred: an AI forecast needs at least 12 months of clean booking data (current: 0). The recommended PSA tool creates this; revisit once the PSA holds 12 months of bookings.",
+          "other_reasons": [],
+          "how_it_solves": "An agent in the firm's own CRM predicts roll-offs and demand from pipeline and booking history, then proposes staffing moves for a person to approve",
+          "vendors": [
+            "Agentforce in the firm's own Salesforce org",
+            "AI features in PSA suites"
+          ],
+          "upfront_cost": {
+            "value": 40000,
+            "display": "$40,000",
+            "range": {
+              "low": 40000,
+              "high": 46000,
+              "display": "$40,000 to $46,000"
+            }
+          },
+          "ongoing_cost_per_year": {
+            "value": 24000,
+            "display": "$24,000",
+            "range": {
+              "low": 24000,
+              "high": 27600,
+              "display": "$24,000 to $27,600"
+            }
+          },
+          "year_one_cost": {
+            "value": 64000,
+            "display": "$64,000",
+            "range": {
+              "low": 64000,
+              "high": 73600,
+              "display": "$64,000 to $73,600"
+            },
+            "math": "$40,000 upfront + $24,000 first-year ongoing = $64,000"
+          },
+          "hours_saved_per_week": {
+            "value": 45,
+            "display": "45 h a week",
+            "range": {
+              "low": 30,
+              "high": 62,
+              "display": "30 to 62 h a week"
+            },
+            "math": "0.349 share x 129 h lost = 45.02 -> 45 h a week"
+          },
+          "annual_savings": {
+            "value": 136080,
+            "display": "$136,080",
+            "range": {
+              "low": 64800,
+              "high": 227664,
+              "display": "$64,800 to $227,664"
+            },
+            "math": "45 h x 48 weeks x $90 x 70% adoption = $136,080"
+          },
+          "payback": {
+            "value": 5.6,
+            "display": "5.6 months",
+            "range": {
+              "low": 3.4,
+              "high": 13.6,
+              "display": "3.4 to 13.6 months"
+            },
+            "math": "$64,000 / ($136,080 / 12) = 5.6 months"
+          },
+          "implementation": "4 to 6 months",
+          "effort": "High: needs 12+ months of clean staffing data",
+          "governance": {
+            "risk": "medium",
+            "label": "Medium: reads pipeline and staff data; every move needs human sign-off",
+            "is_ai": true,
+            "go_live_gates": [
+              "Approve a one-page AI acceptable-use policy",
+              "A named person signs off every staffing move the agent proposes"
+            ]
+          },
+          "confidence": "reference_calibrated"
+        },
+        {
+          "option_id": "staffing.O2",
+          "number": 2,
+          "label": "Option 2: PSA tool",
+          "name": "PSA tool",
+          "type": "software",
+          "type_label": "Non-AI software",
+          "badge": {
+            "status": "recommended",
+            "label": "Recommended",
+            "tone": "positive",
+            "meaning": "Part of the recommended mix"
+          },
+          "reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "how_it_solves": "One system holds bookings, roll-offs, skills and pipeline demand on a single timeline, eight weeks out",
+          "vendors": [
+            "Kantata",
+            "Rocketlane",
+            "BigTime",
+            "Certinia"
+          ],
+          "upfront_cost": {
+            "value": 26200,
+            "display": "$26,200",
+            "range": {
+              "low": 26200,
+              "high": 30130,
+              "display": "$26,200 to $30,130"
+            }
+          },
+          "ongoing_cost_per_year": {
+            "value": 28800,
+            "display": "$28,800",
+            "range": {
+              "low": 28800,
+              "high": 33120,
+              "display": "$28,800 to $33,120"
+            }
+          },
+          "year_one_cost": {
+            "value": 55000,
+            "display": "$55,000",
+            "range": {
+              "low": 55000,
+              "high": 63250,
+              "display": "$55,000 to $63,250"
+            },
+            "math": "$26,200 upfront + $28,800 first-year ongoing = $55,000"
+          },
+          "hours_saved_per_week": {
+            "value": 60,
+            "display": "60 h a week",
+            "range": {
+              "low": 40,
+              "high": 83,
+              "display": "40 to 83 h a week"
+            },
+            "math": "0.465 share x 129 h lost = 59.99 -> 60 h a week"
+          },
+          "annual_savings": {
+            "value": 181440,
+            "display": "$181,440",
+            "range": {
+              "low": 86400,
+              "high": 304776,
+              "display": "$86,400 to $304,776"
+            },
+            "math": "60 h x 48 weeks x $90 x 70% adoption = $181,440"
+          },
+          "payback": {
+            "value": 3.6,
+            "display": "3.6 months",
+            "range": {
+              "low": 2.2,
+              "high": 8.8,
+              "display": "2.2 to 8.8 months"
+            },
+            "math": "$55,000 / ($181,440 / 12) = 3.6 months"
+          },
+          "implementation": "6 to 8 weeks",
+          "effort": "Medium: data migration and new habits for 50 people",
+          "governance": {
+            "risk": "low",
+            "label": "Low: standard SaaS security review",
+            "is_ai": false,
+            "go_live_gates": []
+          },
+          "confidence": "reference_calibrated"
+        },
+        {
+          "option_id": "staffing.O3",
+          "number": 3,
+          "label": "Option 3: Capacity council and bench-to-certification",
+          "name": "Capacity council and bench-to-certification",
+          "type": "process",
+          "type_label": "Process and reskilling",
+          "badge": {
+            "status": "recommended",
+            "label": "Recommended",
+            "tone": "positive",
+            "meaning": "Part of the recommended mix"
+          },
+          "reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "how_it_solves": "A 30-minute weekly meeting books the next eight weeks; any unbooked day defaults to a certification plan or a reusable asset",
+          "vendors": [
+            "Internal",
+            "Salesforce Trailhead and certification exams"
+          ],
+          "upfront_cost": {
+            "value": 3600,
+            "display": "$3,600",
+            "range": {
+              "low": 3600,
+              "high": 4140,
+              "display": "$3,600 to $4,140"
+            }
+          },
+          "ongoing_cost_per_year": {
+            "value": 0,
+            "display": "$0"
+          },
+          "year_one_cost": {
+            "value": 3600,
+            "display": "$3,600",
+            "range": {
+              "low": 3600,
+              "high": 4140,
+              "display": "$3,600 to $4,140"
+            },
+            "math": "$3,600 upfront + $0 first-year ongoing = $3,600"
+          },
+          "hours_saved_per_week": {
+            "value": 30,
+            "display": "30 h a week",
+            "range": {
+              "low": 20,
+              "high": 41,
+              "display": "20 to 41 h a week"
+            },
+            "math": "0.233 share x 129 h lost = 30.06 -> 30 h a week"
+          },
+          "annual_savings": {
+            "value": 90720,
+            "display": "$90,720",
+            "range": {
+              "low": 43200,
+              "high": 150552,
+              "display": "$43,200 to $150,552"
+            },
+            "math": "30 h x 48 weeks x $90 x 70% adoption = $90,720"
+          },
+          "payback": {
+            "value": 0.5,
+            "display": "0.5 months",
+            "range": {
+              "low": 0.3,
+              "high": 1.2,
+              "display": "0.3 to 1.2 months"
+            },
+            "math": "$3,600 / ($90,720 / 12) = 0.5 months"
+          },
+          "implementation": "2 weeks",
+          "effort": "Low: one meeting and one rule",
+          "governance": {
+            "risk": "none",
+            "label": "None",
+            "is_ai": false,
+            "go_live_gates": []
+          },
+          "confidence": "reference_calibrated"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "status",
+      "rank": 2,
+      "title": "Status reporting repeated across four places",
+      "full_name": "Status reporting repeated across four places",
+      "category": "status_duplication",
+      "people_affected": 40,
+      "hours_lost_per_week": {
+        "value": 112.0,
+        "display": "112 h a week",
+        "range": {
+          "low": 101.0,
+          "high": 129.0,
+          "display": "101 to 129 h a week"
+        }
+      },
+      "annual_cost": {
+        "value": 483840.0,
+        "display": "$483,840"
+      },
+      "recommendation": {
+        "option_ids": [
+          "status.O3",
+          "status.O2"
+        ],
+        "names": [
+          "Meeting and status reset",
+          "One system of record"
+        ],
+        "type_summary": "Process; non-AI software",
+        "summary": "We recommend Option 3 (Meeting and status reset) and Option 2 (One system of record) together. The reset frees most of the time at once, and one system of record stops the copying behind the remaining updates. Together they save an estimated 75 hours a week ($226,800 a year) for $9,800 in year one, a payback of 0.5 months.",
+        "hours_saved_per_week": {
+          "value": 75,
+          "display": "75 h a week",
+          "range": {
+            "low": 51,
+            "high": 103,
+            "display": "51 to 103 h a week"
+          },
+          "math": "50 + 35 x (1 - 0.286 overlap) = 74.99 -> 75 h a week"
+        },
+        "annual_savings": {
+          "value": 226800,
+          "display": "$226,800",
+          "range": {
+            "low": 110160,
+            "high": 378216,
+            "display": "$110,160 to $378,216"
+          },
+          "math": "75 h x 48 weeks x $90 x 70% adoption = $226,800"
+        },
+        "year_one_cost": {
+          "value": 9800,
+          "display": "$9,800",
+          "range": {
+            "low": 9800,
+            "high": 11270,
+            "display": "$9,800 to $11,270"
+          },
+          "math": "One system of record $7,200 + Meeting and status reset $2,600 = $9,800"
+        },
+        "payback": {
+          "value": 0.5,
+          "display": "0.5 months",
+          "range": {
+            "low": 0.3,
+            "high": 1.2,
+            "display": "0.3 to 1.2 months"
+          },
+          "math": "$9,800 / ($226,800 / 12) = 0.5 months"
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "status.O3",
+            "name": "Meeting and status reset",
+            "time_to_live": "1 week"
+          },
+          {
+            "step": 2,
+            "option_id": "status.O2",
+            "name": "One system of record",
+            "time_to_live": "4 to 6 weeks"
+          }
+        ]
+      },
+      "options": [
+        {
+          "option_id": "status.O1",
+          "number": 1,
+          "label": "Option 1: AI meeting notes and status drafts",
+          "name": "AI meeting notes and status drafts",
+          "type": "ai_tool",
+          "type_label": "AI tool",
+          "badge": {
+            "status": "on_hold",
+            "label": "Not now",
+            "tone": "warning",
+            "meaning": "Governance risk too high until consent or policy exist"
+          },
+          "reason": "Not recommended now: recording client calls needs every party's consent and an approved AI policy first.",
+          "other_reasons": [
+            "Conflicts with Meeting and status reset: it would summarize meetings the reset cancels."
+          ],
+          "how_it_solves": "AI joins calls, writes notes and drafts weekly status from transcripts and the work tracker",
+          "vendors": [
+            "Zoom AI Companion",
+            "Gemini in Google Meet",
+            "Otter",
+            "Fireflies"
+          ],
+          "upfront_cost": {
+            "value": 2000,
+            "display": "$2,000",
+            "range": {
+              "low": 2000,
+              "high": 2300,
+              "display": "$2,000 to $2,300"
+            }
+          },
+          "ongoing_cost_per_year": {
+            "value": 9000,
+            "display": "$9,000",
+            "range": {
+              "low": 9000,
+              "high": 10350,
+              "display": "$9,000 to $10,350"
+            }
+          },
+          "year_one_cost": {
+            "value": 11000,
+            "display": "$11,000",
+            "range": {
+              "low": 11000,
+              "high": 12650,
+              "display": "$11,000 to $12,650"
+            },
+            "math": "$2,000 upfront + $9,000 first-year ongoing = $11,000"
+          },
+          "hours_saved_per_week": {
+            "value": 40,
+            "display": "40 h a week",
+            "range": {
+              "low": 27,
+              "high": 55,
+              "display": "27 to 55 h a week"
+            },
+            "math": "0.357 share x 112 h lost = 39.98 -> 40 h a week"
+          },
+          "annual_savings": {
+            "value": 120960,
+            "display": "$120,960",
+            "range": {
+              "low": 58320,
+              "high": 201960,
+              "display": "$58,320 to $201,960"
+            },
+            "math": "40 h x 48 weeks x $90 x 70% adoption = $120,960"
+          },
+          "payback": {
+            "value": 1.1,
+            "display": "1.1 months",
+            "range": {
+              "low": 0.7,
+              "high": 2.6,
+              "display": "0.7 to 2.6 months"
+            },
+            "math": "$11,000 / ($120,960 / 12) = 1.1 months"
+          },
+          "implementation": "2 weeks",
+          "effort": "Low",
+          "governance": {
+            "risk": "high",
+            "label": "High: records client calls that carry client data; some states require every party's consent to record",
+            "is_ai": true,
+            "go_live_gates": [
+              "Consent from every party before any call is recorded",
+              "Approve a one-page AI acceptable-use policy",
+              "Vendor review: no training on client data"
+            ]
+          },
+          "confidence": "reference_calibrated"
+        },
+        {
+          "option_id": "status.O2",
+          "number": 2,
+          "label": "Option 2: One system of record",
+          "name": "One system of record",
+          "type": "software",
+          "type_label": "Non-AI software",
+          "badge": {
+            "status": "recommended",
+            "label": "Recommended",
+            "tone": "positive",
+            "meaning": "Part of the recommended mix"
+          },
+          "reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "how_it_solves": "All delivery work moves into the one tracker the firm already licenses; client reports generate from it; the duplicate tools retire",
+          "vendors": [
+            "Jira dashboards and a client report template (Jira is already licensed)"
+          ],
+          "upfront_cost": {
+            "value": 7200,
+            "display": "$7,200",
+            "range": {
+              "low": 7200,
+              "high": 8280,
+              "display": "$7,200 to $8,280"
+            }
+          },
+          "ongoing_cost_per_year": {
+            "value": 0,
+            "display": "$0"
+          },
+          "year_one_cost": {
+            "value": 7200,
+            "display": "$7,200",
+            "range": {
+              "low": 7200,
+              "high": 8280,
+              "display": "$7,200 to $8,280"
+            },
+            "math": "$7,200 upfront + $0 first-year ongoing = $7,200"
+          },
+          "hours_saved_per_week": {
+            "value": 35,
+            "display": "35 h a week",
+            "range": {
+              "low": 24,
+              "high": 48,
+              "display": "24 to 48 h a week"
+            },
+            "math": "0.313 share x 112 h lost = 35.06 -> 35 h a week"
+          },
+          "annual_savings": {
+            "value": 105840,
+            "display": "$105,840",
+            "range": {
+              "low": 51840,
+              "high": 176256,
+              "display": "$51,840 to $176,256"
+            },
+            "math": "35 h x 48 weeks x $90 x 70% adoption = $105,840"
+          },
+          "payback": {
+            "value": 0.8,
+            "display": "0.8 months",
+            "range": {
+              "low": 0.5,
+              "high": 1.9,
+              "display": "0.5 to 1.9 months"
+            },
+            "math": "$7,200 / ($105,840 / 12) = 0.8 months"
+          },
+          "implementation": "4 to 6 weeks",
+          "effort": "Medium: 23 active projects to migrate",
+          "governance": {
+            "risk": "low",
+            "label": "Low",
+            "is_ai": false,
+            "go_live_gates": []
+          },
+          "confidence": "reference_calibrated"
+        },
+        {
+          "option_id": "status.O3",
+          "number": 3,
+          "label": "Option 3: Meeting and status reset",
+          "name": "Meeting and status reset",
+          "type": "process",
+          "type_label": "Process",
+          "badge": {
+            "status": "recommended",
+            "label": "Recommended",
+            "tone": "positive",
+            "meaning": "Part of the recommended mix"
+          },
+          "reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "how_it_solves": "Recurring internal status meetings end; a five-line written update per project every Friday and one 30-minute weekly risk review replace them",
+          "vendors": [
+            "Internal",
+            "Written-update template"
+          ],
+          "upfront_cost": {
+            "value": 2600,
+            "display": "$2,600",
+            "range": {
+              "low": 2600,
+              "high": 2990,
+              "display": "$2,600 to $2,990"
+            }
+          },
+          "ongoing_cost_per_year": {
+            "value": 0,
+            "display": "$0"
+          },
+          "year_one_cost": {
+            "value": 2600,
+            "display": "$2,600",
+            "range": {
+              "low": 2600,
+              "high": 2990,
+              "display": "$2,600 to $2,990"
+            },
+            "math": "$2,600 upfront + $0 first-year ongoing = $2,600"
+          },
+          "hours_saved_per_week": {
+            "value": 50,
+            "display": "50 h a week",
+            "range": {
+              "low": 34,
+              "high": 69,
+              "display": "34 to 69 h a week"
+            },
+            "math": "0.446 share x 112 h lost = 49.95 -> 50 h a week"
+          },
+          "annual_savings": {
+            "value": 151200,
+            "display": "$151,200",
+            "range": {
+              "low": 73440,
+              "high": 253368,
+              "display": "$73,440 to $253,368"
+            },
+            "math": "50 h x 48 weeks x $90 x 70% adoption = $151,200"
+          },
+          "payback": {
+            "value": 0.2,
+            "display": "0.2 months",
+            "range": {
+              "low": 0.1,
+              "high": 0.5,
+              "display": "0.1 to 0.5 months"
+            },
+            "math": "$2,600 / ($151,200 / 12) = 0.2 months"
+          },
+          "implementation": "1 week",
+          "effort": "Low, if leaders model it",
+          "governance": {
+            "risk": "none",
+            "label": "None",
+            "is_ai": false,
+            "go_live_gates": []
+          },
+          "confidence": "reference_calibrated"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "timesheets",
+      "rank": 3,
+      "title": "Timesheets rebuilt from memory",
+      "full_name": "Timesheets rebuilt from memory",
+      "category": "time_capture",
+      "people_affected": 42,
+      "hours_lost_per_week": {
+        "value": 42.0,
+        "display": "42 h a week",
+        "range": {
+          "low": 38.0,
+          "high": 48.0,
+          "display": "38 to 48 h a week"
+        }
+      },
+      "annual_cost": {
+        "value": 181440.0,
+        "display": "$181,440"
+      },
+      "recommendation": {
+        "option_ids": [
+          "timesheets.O3",
+          "timesheets.O1"
+        ],
+        "names": [
+          "Daily time rule",
+          "AI-drafted timesheets"
+        ],
+        "type_summary": "Process; AI tool",
+        "summary": "We recommend Option 3 (Daily time rule) and Option 1 (AI-drafted timesheets) together. The rule fixes when time is logged; the drafts fix the effort and the forgetting. Together they save an estimated 35 hours a week ($105,840 a year) for $11,120 in year one, a payback of 1.3 months.",
+        "hours_saved_per_week": {
+          "value": 35,
+          "display": "35 h a week",
+          "range": {
+            "low": 24,
+            "high": 43,
+            "display": "24 to 43 h a week"
+          },
+          "math": "25 + 15 x (1 - 0.333 overlap) = 35.01 -> 35 h a week"
+        },
+        "annual_savings": {
+          "value": 105840,
+          "display": "$105,840",
+          "range": {
+            "low": 51840,
+            "high": 157896,
+            "display": "$51,840 to $157,896"
+          },
+          "math": "35 h x 48 weeks x $90 x 70% adoption = $105,840"
+        },
+        "year_one_cost": {
+          "value": 11120,
+          "display": "$11,120",
+          "range": {
+            "low": 11120,
+            "high": 12788,
+            "display": "$11,120 to $12,788"
+          },
+          "math": "AI-drafted timesheets $11,120 + Daily time rule $0 = $11,120"
+        },
+        "payback": {
+          "value": 1.3,
+          "display": "1.3 months",
+          "range": {
+            "low": 0.8,
+            "high": 3.0,
+            "display": "0.8 to 3.0 months"
+          },
+          "math": "$11,120 / ($105,840 / 12) = 1.3 months"
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "timesheets.O3",
+            "name": "Daily time rule",
+            "time_to_live": "1 week"
+          },
+          {
+            "step": 2,
+            "option_id": "timesheets.O1",
+            "name": "AI-drafted timesheets",
+            "time_to_live": "3 weeks"
+          }
+        ]
+      },
+      "options": [
+        {
+          "option_id": "timesheets.O1",
+          "number": 1,
+          "label": "Option 1: AI-drafted timesheets",
+          "name": "AI-drafted timesheets",
+          "type": "ai_tool",
+          "type_label": "AI tool",
+          "badge": {
+            "status": "recommended",
+            "label": "Recommended",
+            "tone": "positive",
+            "meaning": "Part of the recommended mix"
+          },
+          "reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "how_it_solves": "An app drafts each person's day from calendar, tracker and document activity; the person edits and submits. Drafts are visible only to the employee.",
+          "vendors": [
+            "Timely",
+            "Memtime",
+            "Clockify"
+          ],
+          "upfront_cost": {
+            "value": 2000,
+            "display": "$2,000",
+            "range": {
+              "low": 2000,
+              "high": 2300,
+              "display": "$2,000 to $2,300"
+            }
+          },
+          "ongoing_cost_per_year": {
+            "value": 9120,
+            "display": "$9,120",
+            "range": {
+              "low": 9120,
+              "high": 10488,
+              "display": "$9,120 to $10,488"
+            }
+          },
+          "year_one_cost": {
+            "value": 11120,
+            "display": "$11,120",
+            "range": {
+              "low": 11120,
+              "high": 12788,
+              "display": "$11,120 to $12,788"
+            },
+            "math": "$2,000 upfront + $9,120 first-year ongoing = $11,120"
+          },
+          "hours_saved_per_week": {
+            "value": 25,
+            "display": "25 h a week",
+            "range": {
+              "low": 17,
+              "high": 34,
+              "display": "17 to 34 h a week"
+            },
+            "math": "0.595 share x 42 h lost = 24.99 -> 25 h a week"
+          },
+          "annual_savings": {
+            "value": 75600,
+            "display": "$75,600",
+            "range": {
+              "low": 36720,
+              "high": 124848,
+              "display": "$36,720 to $124,848"
+            },
+            "math": "25 h x 48 weeks x $90 x 70% adoption = $75,600"
+          },
+          "payback": {
+            "value": 1.8,
+            "display": "1.8 months",
+            "range": {
+              "low": 1.1,
+              "high": 4.2,
+              "display": "1.1 to 4.2 months"
+            },
+            "math": "$11,120 / ($75,600 / 12) = 1.8 months"
+          },
+          "implementation": "3 weeks",
+          "effort": "Low: install plus a privacy briefing",
+          "governance": {
+            "risk": "medium",
+            "label": "Medium: reads calendar and app activity. Mitigated by on-device processing, employee-only drafts and no manager access to raw activity",
+            "is_ai": true,
+            "go_live_gates": [
+              "Approve a one-page AI acceptable-use policy",
+              "Security and contract review of the timesheet tool, including no-training terms",
+              "Drafts stay employee-only; managers never see raw activity"
+            ]
+          },
+          "confidence": "reference_calibrated"
+        },
+        {
+          "option_id": "timesheets.O2",
+          "number": 2,
+          "label": "Option 2: PSA time module",
+          "name": "PSA time module",
+          "type": "software",
+          "type_label": "Non-AI software",
+          "badge": {
+            "status": "follow_on",
+            "label": "Follow-on",
+            "tone": "info",
+            "meaning": "Comes with a chosen fix; no extra savings counted"
+          },
+          "reason": "Follow-on to AI-drafted timesheets: Once the PSA is live, drafts flow into it instead of the old time tool; no extra savings are counted, to avoid double counting. It arrives with the PSA tool chosen for staffing (Staffing blind spots).",
+          "other_reasons": [],
+          "how_it_solves": "Time entry moves into the PSA chosen for staffing, next to bookings, with approvals in one place",
+          "vendors": [
+            "Same vendor as the PSA tool"
+          ],
+          "upfront_cost": {
+            "value": 0,
+            "display": "$0"
+          },
+          "ongoing_cost_per_year": {
+            "value": 0,
+            "display": "$0"
+          },
+          "year_one_cost": {
+            "value": 0,
+            "display": "$0",
+            "math": "$0 upfront + $0 first-year ongoing = $0"
+          },
+          "hours_saved_per_week": {
+            "value": 12,
+            "display": "12 h a week",
+            "range": {
+              "low": 8,
+              "high": 16,
+              "display": "8 to 16 h a week"
+            },
+            "math": "0.286 share x 42 h lost = 12.01 -> 12 h a week"
+          },
+          "annual_savings": {
+            "value": 36288,
+            "display": "$36,288",
+            "range": {
+              "low": 17280,
+              "high": 58752,
+              "display": "$17,280 to $58,752"
+            },
+            "math": "12 h x 48 weeks x $90 x 70% adoption = $36,288"
+          },
+          "payback": {
+            "value": 0.0,
+            "display": "Immediate (no cost)",
+            "math": "No year-one cost: pays back immediately"
+          },
+          "implementation": "Arrives with the PSA, weeks 6 to 8",
+          "effort": "Low: new screen, same habit",
+          "governance": {
+            "risk": "low",
+            "label": "Low",
+            "is_ai": false,
+            "go_live_gates": []
+          },
+          "confidence": "reference_calibrated"
+        },
+        {
+          "option_id": "timesheets.O3",
+          "number": 3,
+          "label": "Option 3: Daily time rule",
+          "name": "Daily time rule",
+          "type": "process",
+          "type_label": "Process",
+          "badge": {
+            "status": "recommended",
+            "label": "Recommended",
+            "tone": "positive",
+            "meaning": "Part of the recommended mix"
+          },
+          "reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "how_it_solves": "Log time before leaving each day: a 4:30 p.m. chat nudge, a 15-minute end-of-day calendar block, and on-time rates shared by team, never by name",
+          "vendors": [
+            "Internal",
+            "Slack or Teams reminders"
+          ],
+          "upfront_cost": {
+            "value": 0,
+            "display": "$0"
+          },
+          "ongoing_cost_per_year": {
+            "value": 0,
+            "display": "$0"
+          },
+          "year_one_cost": {
+            "value": 0,
+            "display": "$0",
+            "math": "$0 upfront + $0 first-year ongoing = $0"
+          },
+          "hours_saved_per_week": {
+            "value": 15,
+            "display": "15 h a week",
+            "range": {
+              "low": 10,
+              "high": 21,
+              "display": "10 to 21 h a week"
+            },
+            "math": "0.357 share x 42 h lost = 14.99 -> 15 h a week"
+          },
+          "annual_savings": {
+            "value": 45360,
+            "display": "$45,360",
+            "range": {
+              "low": 21600,
+              "high": 77112,
+              "display": "$21,600 to $77,112"
+            },
+            "math": "15 h x 48 weeks x $90 x 70% adoption = $45,360"
+          },
+          "payback": {
+            "value": 0.0,
+            "display": "Immediate (no cost)",
+            "math": "No year-one cost: pays back immediately"
+          },
+          "implementation": "1 week",
+          "effort": "Low",
+          "governance": {
+            "risk": "none",
+            "label": "None",
+            "is_ai": false,
+            "go_live_gates": []
+          },
+          "confidence": "reference_calibrated"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "not_in_scope": [
+    {
+      "id": "tools",
+      "title": "Tool switching and notifications",
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "search",
+      "title": "Searching for past work",
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "proposals",
+      "title": "Proposals rebuilt from scratch",
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "migration",
+      "title": "Data-migration rework",
+      "reason": "outside the top 3"
+    }
+  ],
+  "governance_actions": [
+    {
+      "action": "Approve a one-page AI acceptable-use policy",
+      "for": [
+        "AI-drafted timesheets"
+      ]
+    },
+    {
+      "action": "Security and contract review of the timesheet tool, including no-training terms",
+      "for": [
+        "AI-drafted timesheets"
+      ]
+    },
+    {
+      "action": "Drafts stay employee-only; managers never see raw activity",
+      "for": [
+        "AI-drafted timesheets"
+      ]
+    }
+  ],
+  "upside_not_counted": {
+    "total": {
+      "value": 415171,
+      "display": "$415,171"
+    },
+    "items": [
+      {
+        "label": "Half of unplanned bench becomes billable",
+        "value": 216144,
+        "display": "$216,144",
+        "basis": "28.5 hours a week x 48 weeks x $158 realized rate"
+      },
+      {
+        "label": "Asana and Smartsheet licences retired",
+        "value": 14400,
+        "display": "$14,400",
+        "basis": "Current licence invoices"
+      },
+      {
+        "label": "Unlogged billable hours captured",
+        "value": 184627,
+        "display": "$184,627",
+        "basis": "70% of 1,669 unlogged hours x $158 realized rate"
+      }
+    ]
+  },
+  "warnings": [],
+  "badge_legend": [
+    {
+      "status": "recommended",
+      "label": "Recommended",
+      "tone": "positive",
+      "meaning": "Part of the recommended mix"
+    },
+    {
+      "status": "follow_on",
+      "label": "Follow-on",
+      "tone": "info",
+      "meaning": "Comes with a chosen fix; no extra savings counted"
+    },
+    {
+      "status": "not_chosen",
+      "label": "Not chosen",
+      "tone": "neutral",
+      "meaning": "Eligible, but a better mix exists"
+    },
+    {
+      "status": "deferred",
+      "label": "Deferred",
+      "tone": "warning",
+      "meaning": "Waits for a prerequisite"
+    },
+    {
+      "status": "on_hold",
+      "label": "Not now",
+      "tone": "warning",
+      "meaning": "Governance risk too high until consent or policy exist"
+    },
+    {
+      "status": "blocked",
+      "label": "Blocked",
+      "tone": "negative",
+      "meaning": "Depends on, or conflicts with, another fix"
+    },
+    {
+      "status": "needs_input",
+      "label": "Needs input",
+      "tone": "attention",
+      "meaning": "A planning number is missing"
+    }
+  ]
+}

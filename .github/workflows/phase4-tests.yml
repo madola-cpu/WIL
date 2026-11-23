@@ -1,0 +1,37 @@
+# Runs the Phase 4 tests and the Veloran reference check whenever phase4_solutions/ changes.
+# Lives at the repo root: .github/workflows/phase4-tests.yml
+name: Phase 4 tests
+
+on:
+  push:
+    paths:
+      - "phase4_solutions/**"
+      - ".github/workflows/phase4-tests.yml"
+  pull_request:
+    paths:
+      - "phase4_solutions/**"
+      - ".github/workflows/phase4-tests.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: phase4_solutions   # change this if the folder moves
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install test tools
+        run: python -m pip install pytest jsonschema
+      - name: Run tests
+        run: python -m pytest -q
+      - name: Veloran reference check (must be 75 of 75)
+        run: python -m phase4 check samples/veloran_input.json --expected veloran
+      - name: Pipeline from example Phase 3 output
+        run: python -m phase4 pipeline examples/phase3/veloran_step7_8.json --profile veloran --expected veloran --out-dir /tmp/phase4_out

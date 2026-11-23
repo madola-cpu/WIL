@@ -1,0 +1,168 @@
+{
+  "schema_version": "phase4-input/1.0",
+  "run": {
+    "run_id": "veloran-dec9-demo",
+    "scenario": "A",
+    "client_name": "Veloran Consulting LLC",
+    "generated_at": "2026-11-22T00:00:00Z",
+    "source_steps": ["step7", "step8"],
+    "synthetic": true,
+    "notes": "Sample of what steps 7 and 8 hand to Phase 4, built from the Veloran reference report v1.0 (a synthetic case). Base hours and costs are the report's; the low and high hour ranges are illustrative until step 8 supplies real ones."
+  },
+  "company": {
+    "short_name": "Veloran",
+    "employees_total": 50,
+    "billable_employees": 38,
+    "current_tools": ["Harvest", "Jira", "Asana", "Smartsheet", "Google Sheets", "Slack", "Google Workspace", "Salesforce"],
+    "capabilities": {
+      "ai_policy_in_place": false,
+      "call_recording_consent": false,
+      "clean_staffing_history_months": 0,
+      "work_tracker": "Jira",
+      "crm": "Salesforce"
+    },
+    "volumes": {
+      "certification_vouchers": 18,
+      "active_projects": 23
+    }
+  },
+  "assumptions": {
+    "currency": "USD",
+    "loaded_hourly_rate": 90,
+    "working_weeks_per_year": 48,
+    "adoption_rate": {"low": 0.5, "base": 0.7, "high": 0.85},
+    "max_payback_months": 12,
+    "realized_billing_rate": 158,
+    "sources": {
+      "loaded_hourly_rate": "Average salary $118,000 x 1.30 for benefits and payroll taxes, plus $19,400 overhead per person, divided by 1,920 working hours (Veloran finance, FY2025)",
+      "working_weeks_per_year": "52 weeks minus PTO and holidays (Veloran handbook)",
+      "adoption_rate": "Conservative planning assumption (70%), applied to every saving; 50% and 85% for the low and high cases"
+    }
+  },
+  "bottlenecks": [
+    {
+      "id": "BN-1",
+      "rank": 1,
+      "name": "Staffing blind spots: unplanned bench time and last-minute assignments",
+      "category": "staffing_visibility",
+      "departments": ["CRM Practice", "Data & AI Practice", "Delivery Office (PMO)", "Growth", "Leadership & Operations"],
+      "employees_affected": 43,
+      "hours_lost_per_week": {"low": 116, "base": 129, "high": 148},
+      "annual_cost": {"low": 501120, "base": 557280, "high": 639360},
+      "feasibility": "medium",
+      "priority_score": 88,
+      "root_causes": [
+        "No forward view of capacity: the staffing sheet tracks current bookings only",
+        "Sales and delivery plan separately: start dates live in CRM opportunities the staffing sheet never reads",
+        "Bench time has no default use"
+      ],
+      "evidence": [
+        {"signal": "Billable time on bench or internal codes with no booking", "source": "Harvest, staffing sheet", "value": "57 unplanned bench hours a week"},
+        {"signal": "Date a booking appears against the project start", "source": "Staffing sheet history, calendar invites", "value": "4 working days' notice on average"},
+        {"signal": "Contract signature against first billable hour", "source": "Salesforce, Harvest", "value": "2 delayed starts in 6 weeks"}
+      ],
+      "upside_not_counted": [
+        {"key": "bench_to_billable", "label": "Half of unplanned bench becomes billable", "amount": 216144,
+         "basis": "28.5 hours a week x 48 weeks x $158 realized rate", "unlocked_by": ["psa_tool", "capacity_council"]}
+      ]
+    },
+    {
+      "id": "BN-2",
+      "rank": 2,
+      "name": "Status reporting repeated across four places and recurring meetings",
+      "category": "status_duplication",
+      "departments": ["CRM Practice", "Data & AI Practice", "Delivery Office (PMO)"],
+      "employees_affected": 40,
+      "hours_lost_per_week": {"low": 101, "base": 112, "high": 129},
+      "annual_cost": {"low": 436320, "base": 483840, "high": 557280},
+      "feasibility": "high",
+      "priority_score": 87,
+      "root_causes": [
+        "No single system of record: three tools grew up in different teams",
+        "Meetings collect status instead of making decisions",
+        "Client reporting is hand-built in a bespoke format per client"
+      ],
+      "evidence": [
+        {"signal": "Same project updated in several tools in one week", "source": "Jira, Asana, Smartsheet, Google Drive decks", "value": "4 places per project"},
+        {"signal": "Recurring internal events named stand-up, review or health", "source": "Google Calendar", "value": "3 recurring meetings; 70% of agenda time on read-outs"}
+      ],
+      "upside_not_counted": [
+        {"key": "duplicate_licences", "label": "Asana and Smartsheet licences retired", "amount": 14400,
+         "basis": "Current licence invoices", "unlocked_by": ["system_of_record"]}
+      ]
+    },
+    {
+      "id": "BN-3",
+      "rank": 3,
+      "name": "Timesheets rebuilt from memory at the end of the week",
+      "category": "time_capture",
+      "departments": ["CRM Practice", "Data & AI Practice", "Delivery Office (PMO)", "Growth", "Leadership & Operations"],
+      "employees_affected": 42,
+      "hours_lost_per_week": {"low": 38, "base": 42, "high": 48},
+      "annual_cost": {"low": 164160, "base": 181440, "high": 207360},
+      "feasibility": "high",
+      "priority_score": 61,
+      "root_causes": [
+        "Weekly deadline, daily work: nothing prompts entry while memory is fresh",
+        "Entry is fully manual: the time tool does not read calendars or the tracker",
+        "No visible link between timesheets and money"
+      ],
+      "evidence": [
+        {"signal": "Entry timestamp against work date", "source": "Harvest", "value": "55% entered Friday or later; 42% late"},
+        {"signal": "Calendar and tracker activity with no matching time entry", "source": "Google Calendar, Jira, Harvest", "value": "3.3% of billable hours never logged"}
+      ],
+      "upside_not_counted": [
+        {"key": "unlogged_hours", "label": "Unlogged billable hours captured", "amount": 184627,
+         "basis": "70% of 1,669 unlogged hours x $158 realized rate", "unlocked_by": ["ai_timesheets", "daily_time_rule"]}
+      ]
+    },
+    {
+      "id": "BN-4",
+      "rank": 4,
+      "name": "Tool switching and notifications",
+      "category": "tool_switching",
+      "departments": ["CRM Practice", "Data & AI Practice", "Delivery Office (PMO)", "Growth", "Leadership & Operations"],
+      "employees_affected": 45,
+      "hours_lost_per_week": 27,
+      "annual_cost": 116640,
+      "feasibility": "high",
+      "priority_score": 57
+    },
+    {
+      "id": "BN-5",
+      "rank": 5,
+      "name": "Searching for past work",
+      "category": "knowledge_search",
+      "departments": ["CRM Practice", "Data & AI Practice", "Delivery Office (PMO)"],
+      "employees_affected": 34,
+      "hours_lost_per_week": 34,
+      "annual_cost": 146880,
+      "feasibility": "medium",
+      "priority_score": 46
+    },
+    {
+      "id": "BN-6",
+      "rank": 6,
+      "name": "Proposals rebuilt from scratch",
+      "category": "proposal_reuse",
+      "departments": ["Growth", "CRM Practice", "Data & AI Practice", "Delivery Office (PMO)"],
+      "employees_affected": 9,
+      "hours_lost_per_week": 54,
+      "annual_cost": 233280,
+      "feasibility": "medium",
+      "priority_score": 38
+    },
+    {
+      "id": "BN-7",
+      "rank": 7,
+      "name": "Data-migration rework",
+      "category": "data_rework",
+      "departments": ["Data & AI Practice"],
+      "employees_affected": 8,
+      "hours_lost_per_week": 44,
+      "annual_cost": 190080,
+      "feasibility": "low",
+      "priority_score": 28
+    }
+  ]
+}

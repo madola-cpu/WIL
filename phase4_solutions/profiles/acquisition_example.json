@@ -1,0 +1,50 @@
+{
+  "profile_version": "1",
+  "client_name": "Acquisition sample: Acquirer Co. and Target Co. (synthetic)",
+  "scenario": "B",
+  "synthetic": true,
+  "notes": "Starter profile for option B (acquisition). Every number is a placeholder until the two Salesforce exports and finance figures exist.",
+  "company": {
+    "short_name": "the combined company",
+    "employees_total": 64,
+    "current_tools": [
+      "Salesforce (Acquirer org)",
+      "Salesforce (Target org)",
+      "Slack"
+    ],
+    "capabilities": {
+      "ai_policy_in_place": false,
+      "customer_data_sharing_cleared": true,
+      "stage_history_months": 12,
+      "crm_orgs": 2
+    },
+    "volumes": {
+      "sales_reps": 40,
+      "approval_seats": 48
+    }
+  },
+  "assumptions": {
+    "currency": "USD",
+    "loaded_hourly_rate": 85,
+    "working_weeks_per_year": 48,
+    "adoption_rate": {
+      "low": 0.5,
+      "base": 0.7,
+      "high": 0.85
+    },
+    "max_payback_months": 12,
+    "sources": {
+      "loaded_hourly_rate": "Placeholder until the combined company's finance figures are available"
+    }
+  },
+  "category_map": {
+    "stalled": "stalled_deals",
+    "approval": "stalled_deals",
+    "shared customer": "shared_customers",
+    "both teams": "shared_customers"
+  },
+  "defaults": {
+    "contribution_margin": 0.38
+  },
+  "field_mapping": {}
+}

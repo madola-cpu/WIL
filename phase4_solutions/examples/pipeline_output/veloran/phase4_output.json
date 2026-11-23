@@ -1,0 +1,1674 @@
+{
+  "schema_version": "phase4-output/1.0",
+  "run": {
+    "run_id": "veloran-20261123",
+    "scenario": "A",
+    "client_name": "Veloran Consulting LLC",
+    "generated_at": "2026-11-23T17:44:29+00:00",
+    "source_steps": [
+      "step7",
+      "step8"
+    ],
+    "synthetic": true,
+    "notes": "Built from Phase 3 output by phase4.connectors.phase3",
+    "engine": "phase4 0.2.0",
+    "catalogs": [
+      {
+        "catalog_id": "workplace",
+        "catalog_version": "2026.11.1"
+      }
+    ],
+    "input_schema_version": "phase4-input/1.0"
+  },
+  "assumptions_used": {
+    "currency": "USD",
+    "loaded_hourly_rate": {
+      "low": 90.0,
+      "base": 90.0,
+      "high": 90.0
+    },
+    "working_weeks_per_year": 48,
+    "adoption_rate": {
+      "low": 0.5,
+      "base": 0.7,
+      "high": 0.85
+    },
+    "max_payback_months": 12.0,
+    "max_fixes_per_bottleneck": 2,
+    "top_n": 3,
+    "min_group_size": 5,
+    "hours_rounding": 1,
+    "max_recoverable_share": 0.9,
+    "cost_contingency": {
+      "low": 0.15,
+      "base": 0.0,
+      "high": 0.0
+    },
+    "count_deal_margin": true,
+    "sources": {
+      "loaded_hourly_rate": "Average salary $118,000 x 1.30 for benefits and payroll taxes, plus $19,400 overhead per person, divided by 1,920 working hours (Veloran finance, FY2025)",
+      "working_weeks_per_year": "52 weeks minus PTO and holidays (Veloran handbook)",
+      "adoption_rate": "Conservative planning assumption (70%), applied to every saving; 50% and 85% for the low and high cases"
+    },
+    "formulas": {
+      "hours_saved_per_week": "effect share x hours lost per week, rounded to whole hours",
+      "annual_time_savings": "hours saved x working weeks x loaded hourly rate x adoption",
+      "annual_deal_margin": "deals lost x recovery share x adoption x average deal value x contribution margin",
+      "year_one_cost": "upfront cost + first year of ongoing cost",
+      "payback_months": "year-one cost / (annual savings / 12)",
+      "mix_of_fixes": "largest saving + each other saving x (1 - overlap); never more than the cap share of hours lost",
+      "choice": "highest first-year net benefit among eligible mixes that pay back within the limit"
+    }
+  },
+  "bottlenecks": [
+    {
+      "id": "staffing",
+      "rank": 1,
+      "name": "Staffing blind spots",
+      "category": "staffing_visibility",
+      "category_label": "Staffing and capacity blind spots",
+      "category_match": {
+        "method": "category_id",
+        "matched_keywords": []
+      },
+      "departments": [
+        "CRM Practice",
+        "Data & AI Practice",
+        "Delivery Office (PMO)",
+        "Growth",
+        "Leadership & Operations"
+      ],
+      "employees_affected": 43,
+      "hours_lost_per_week": {
+        "low": 116.0,
+        "base": 129.0,
+        "high": 148.0
+      },
+      "annual_cost": {
+        "low": 501120.0,
+        "base": 557280.0,
+        "high": 639360.0
+      },
+      "deal_impact": null,
+      "feasibility": "medium",
+      "priority_score": 88,
+      "root_causes": [
+        "No forward view of capacity",
+        "Sales and delivery plan separately",
+        "Bench time has no default use"
+      ],
+      "options": [
+        {
+          "option_id": "staffing.O1",
+          "option_number": 1,
+          "label": "Option 1: AI forecasting agent",
+          "fix_id": "ai_capacity_forecasting",
+          "name": "AI forecasting agent",
+          "fix_type": "ai_tool",
+          "also": [],
+          "type_label": "AI tool",
+          "how_it_solves": "An agent in the firm's own CRM predicts roll-offs and demand from pipeline and booking history, then proposes staffing moves for a person to approve",
+          "example_vendors": [
+            "Agentforce in the firm's own Salesforce org",
+            "AI features in PSA suites"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 17,
+            "weeks_max": 26,
+            "label": "4 to 6 months"
+          },
+          "effort": {
+            "level": "high",
+            "note": "High: needs 12+ months of clean staffing data"
+          },
+          "governance": {
+            "risk": "medium",
+            "note": "Medium: reads pipeline and staff data; every move needs human sign-off",
+            "is_ai": true,
+            "data_accessed": "Pipeline, bookings and skills (internal; personnel data)",
+            "go_live_gates": [
+              "Approve a one-page AI acceptable-use policy",
+              "A named person signs off every staffing move the agent proposes"
+            ]
+          },
+          "risks_and_dependencies": [
+            "Forecasts are only as good as the staffing history behind them"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 1, Option 1",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate"
+          ],
+          "reskilling_focus": null,
+          "status": "deferred",
+          "status_label": "Deferred",
+          "status_reason": "Deferred: an AI forecast needs at least 12 months of clean booking data (current: 0). The recommended PSA tool creates this; revisit once the PSA holds 12 months of bookings.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 46000,
+            "base": 40000,
+            "high": 40000
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Internal build and data clean-up",
+              "amount": 40000,
+              "calc": "$40,000",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 27600,
+            "base": 24000,
+            "high": 24000
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Run, monitor and retrain",
+              "amount": 24000,
+              "calc": "$24,000",
+              "price_status": "estimate"
+            }
+          ],
+          "year_one_cost": {
+            "low": 73600,
+            "base": 64000,
+            "high": 64000
+          },
+          "hours_saved_per_week": {
+            "low": 30,
+            "base": 45,
+            "high": 62
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 64800,
+            "base": 136080,
+            "high": 227664
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 64800,
+            "base": 136080,
+            "high": 227664
+          },
+          "payback_months": {
+            "low": 13.6,
+            "base": 5.6,
+            "high": 3.4
+          },
+          "net_benefit_year_one": {
+            "low": -8800,
+            "base": 72080,
+            "high": 163664
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.349 share x 129 h lost = 45.02 -> 45 h a week",
+            "annual_time_savings": "45 h x 48 weeks x $90 x 70% adoption = $136,080",
+            "year_one_cost": "$40,000 upfront + $24,000 first-year ongoing = $64,000",
+            "payback_months": "$64,000 / ($136,080 / 12) = 5.6 months"
+          }
+        },
+        {
+          "option_id": "staffing.O2",
+          "option_number": 2,
+          "label": "Option 2: PSA tool",
+          "fix_id": "psa_tool",
+          "name": "PSA tool",
+          "fix_type": "software",
+          "also": [],
+          "type_label": "Non-AI software",
+          "how_it_solves": "One system holds bookings, roll-offs, skills and pipeline demand on a single timeline, eight weeks out",
+          "example_vendors": [
+            "Kantata",
+            "Rocketlane",
+            "BigTime",
+            "Certinia"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 6,
+            "weeks_max": 8,
+            "label": "6 to 8 weeks"
+          },
+          "effort": {
+            "level": "medium",
+            "note": "Medium: data migration and new habits for 50 people"
+          },
+          "governance": {
+            "risk": "low",
+            "note": "Low: standard SaaS security review",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Adoption",
+            "Must sync with the CRM and replace the current time tool"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 1, Option 2",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate",
+            "indicative"
+          ],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 30130,
+            "base": 26200,
+            "high": 26200
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Vendor onboarding",
+              "amount": 10000,
+              "calc": "$10,000",
+              "price_status": "estimate"
+            },
+            {
+              "item": "Configuration",
+              "amount": 12600,
+              "calc": "140 h x $90 = $12,600",
+              "price_status": "estimate"
+            },
+            {
+              "item": "Training",
+              "amount": 3600,
+              "calc": "40 h x $90 = $3,600",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 33120,
+            "base": 28800,
+            "high": 28800
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Licences",
+              "amount": 28800,
+              "calc": "50 seats x $48 a month x 12 = $28,800",
+              "price_status": "indicative"
+            }
+          ],
+          "year_one_cost": {
+            "low": 63250,
+            "base": 55000,
+            "high": 55000
+          },
+          "hours_saved_per_week": {
+            "low": 40,
+            "base": 60,
+            "high": 83
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 86400,
+            "base": 181440,
+            "high": 304776
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 86400,
+            "base": 181440,
+            "high": 304776
+          },
+          "payback_months": {
+            "low": 8.8,
+            "base": 3.6,
+            "high": 2.2
+          },
+          "net_benefit_year_one": {
+            "low": 23150,
+            "base": 126440,
+            "high": 249776
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.465 share x 129 h lost = 59.99 -> 60 h a week",
+            "annual_time_savings": "60 h x 48 weeks x $90 x 70% adoption = $181,440",
+            "year_one_cost": "$26,200 upfront + $28,800 first-year ongoing = $55,000",
+            "payback_months": "$55,000 / ($181,440 / 12) = 3.6 months"
+          }
+        },
+        {
+          "option_id": "staffing.O3",
+          "option_number": 3,
+          "label": "Option 3: Capacity council and bench-to-certification",
+          "fix_id": "capacity_council",
+          "name": "Capacity council and bench-to-certification",
+          "fix_type": "process",
+          "also": [
+            "reskilling"
+          ],
+          "type_label": "Process and reskilling",
+          "how_it_solves": "A 30-minute weekly meeting books the next eight weeks; any unbooked day defaults to a certification plan or a reusable asset",
+          "example_vendors": [
+            "Internal",
+            "Salesforce Trailhead and certification exams"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 2,
+            "weeks_max": 2,
+            "label": "2 weeks"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low: one meeting and one rule"
+          },
+          "governance": {
+            "risk": "none",
+            "note": "None",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Discipline; savings stall if leaders skip the meeting"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 1, Option 3",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate"
+          ],
+          "reskilling_focus": "certifications",
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 4140,
+            "base": 3600,
+            "high": 3600
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Certification vouchers",
+              "amount": 3600,
+              "calc": "18 certification vouchers x $200 = $3,600",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "ongoing_breakdown": [],
+          "year_one_cost": {
+            "low": 4140,
+            "base": 3600,
+            "high": 3600
+          },
+          "hours_saved_per_week": {
+            "low": 20,
+            "base": 30,
+            "high": 41
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 43200,
+            "base": 90720,
+            "high": 150552
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 43200,
+            "base": 90720,
+            "high": 150552
+          },
+          "payback_months": {
+            "low": 1.2,
+            "base": 0.5,
+            "high": 0.3
+          },
+          "net_benefit_year_one": {
+            "low": 39060,
+            "base": 87120,
+            "high": 146952
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.233 share x 129 h lost = 30.06 -> 30 h a week",
+            "annual_time_savings": "30 h x 48 weeks x $90 x 70% adoption = $90,720",
+            "year_one_cost": "$3,600 upfront + $0 first-year ongoing = $3,600",
+            "payback_months": "$3,600 / ($90,720 / 12) = 0.5 months"
+          },
+          "reskilling_targets": [],
+          "reskilling_targets_note": "Skill signals from step 2 are not available yet."
+        }
+      ],
+      "recommendation": {
+        "fix_ids": [
+          "capacity_council",
+          "psa_tool"
+        ],
+        "option_ids": [
+          "staffing.O3",
+          "staffing.O2"
+        ],
+        "option_numbers": [
+          3,
+          2
+        ],
+        "names": [
+          "Capacity council and bench-to-certification",
+          "PSA tool"
+        ],
+        "type_summary": "Process and reskilling; non-AI software",
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "staffing.O3",
+            "name": "Capacity council and bench-to-certification",
+            "time_to_live": "2 weeks"
+          },
+          {
+            "step": 2,
+            "option_id": "staffing.O2",
+            "name": "PSA tool",
+            "time_to_live": "6 to 8 weeks"
+          }
+        ],
+        "hours_saved_per_week": {
+          "low": 57,
+          "base": 85,
+          "high": 117
+        },
+        "deals_recovered_per_year": null,
+        "upfront_cost": {
+          "low": 34270,
+          "base": 29800,
+          "high": 29800
+        },
+        "ongoing_cost_per_year": {
+          "low": 33120,
+          "base": 28800,
+          "high": 28800
+        },
+        "year_one_cost": {
+          "low": 67390,
+          "base": 58600,
+          "high": 58600
+        },
+        "annual_time_savings": {
+          "low": 123120,
+          "base": 257040,
+          "high": 429624
+        },
+        "annual_deal_margin": {
+          "low": 0,
+          "base": 0,
+          "high": 0
+        },
+        "annual_savings": {
+          "low": 123120,
+          "base": 257040,
+          "high": 429624
+        },
+        "payback_months": {
+          "low": 6.6,
+          "base": 2.7,
+          "high": 1.6
+        },
+        "net_benefit_year_one": {
+          "low": 55730,
+          "base": 198440,
+          "high": 371024
+        },
+        "overlaps_applied": [
+          {
+            "pair": [
+              "capacity_council",
+              "psa_tool"
+            ],
+            "overlap": 0.167,
+            "listed_in_catalog": true
+          }
+        ],
+        "together_note": "The PSA makes capacity visible, the council turns it into decisions, and the certification rule gives every unplanned free day a use.",
+        "mixes_compared": 3,
+        "summary": "We recommend Option 3 (Capacity council and bench-to-certification) and Option 2 (PSA tool) together. The PSA makes capacity visible, the council turns it into decisions, and the certification rule gives every unplanned free day a use. Together they save an estimated 85 hours a week ($257,040 a year) for $58,600 in year one, a payback of 2.7 months.",
+        "summary_source": "template",
+        "trace": {
+          "hours_saved_per_week": "60 + 30 x (1 - 0.167 overlap) = 84.99 -> 85 h a week",
+          "annual_time_savings": "85 h x 48 weeks x $90 x 70% adoption = $257,040",
+          "year_one_cost": "PSA tool $55,000 + Capacity council and bench-to-certification $3,600 = $58,600",
+          "payback_months": "$58,600 / ($257,040 / 12) = 2.7 months"
+        },
+        "summary_template": "We recommend Option 3 (Capacity council and bench-to-certification) and Option 2 (PSA tool) together. The PSA makes capacity visible, the council turns it into decisions, and the certification rule gives every unplanned free day a use. Together they save an estimated 85 hours a week ($257,040 a year) for $58,600 in year one, a payback of 2.7 months.",
+        "not_chosen": [
+          {
+            "option_id": "staffing.O1",
+            "option_number": 1,
+            "name": "AI forecasting agent",
+            "status": "deferred",
+            "status_label": "Deferred",
+            "reason": "Deferred: an AI forecast needs at least 12 months of clean booking data (current: 0). The recommended PSA tool creates this; revisit once the PSA holds 12 months of bookings."
+          }
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "status",
+      "rank": 2,
+      "name": "Status reporting repeated across four places",
+      "category": "status_duplication",
+      "category_label": "Status reporting repeated across tools and meetings",
+      "category_match": {
+        "method": "category_id",
+        "matched_keywords": []
+      },
+      "departments": [
+        "CRM Practice",
+        "Data & AI Practice",
+        "Delivery Office (PMO)"
+      ],
+      "employees_affected": 40,
+      "hours_lost_per_week": {
+        "low": 101.0,
+        "base": 112.0,
+        "high": 129.0
+      },
+      "annual_cost": {
+        "low": 483840.0,
+        "base": 483840.0,
+        "high": 483840.0
+      },
+      "deal_impact": null,
+      "feasibility": "high",
+      "priority_score": 87,
+      "root_causes": [],
+      "options": [
+        {
+          "option_id": "status.O1",
+          "option_number": 1,
+          "label": "Option 1: AI meeting notes and status drafts",
+          "fix_id": "ai_meeting_notes",
+          "name": "AI meeting notes and status drafts",
+          "fix_type": "ai_tool",
+          "also": [],
+          "type_label": "AI tool",
+          "how_it_solves": "AI joins calls, writes notes and drafts weekly status from transcripts and the work tracker",
+          "example_vendors": [
+            "Zoom AI Companion",
+            "Gemini in Google Meet",
+            "Otter",
+            "Fireflies"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 2,
+            "weeks_max": 2,
+            "label": "2 weeks"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low"
+          },
+          "governance": {
+            "risk": "high",
+            "note": "High: records client calls that carry client data; some states require every party's consent to record",
+            "is_ai": true,
+            "data_accessed": "Call audio and transcripts, including client data",
+            "go_live_gates": [
+              "Consent from every party before any call is recorded",
+              "Approve a one-page AI acceptable-use policy",
+              "Vendor review: no training on client data"
+            ]
+          },
+          "risks_and_dependencies": [
+            "Client contracts may bar recording",
+            "Notes still need human review",
+            "The duplicate tools remain"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 2, Option 1",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate",
+            "indicative"
+          ],
+          "reskilling_focus": null,
+          "status": "on_hold",
+          "status_label": "Not recommended now",
+          "status_reason": "Not recommended now: recording client calls needs every party's consent and an approved AI policy first.",
+          "other_reasons": [
+            "Conflicts with Meeting and status reset: it would summarize meetings the reset cancels."
+          ],
+          "upfront_cost": {
+            "low": 2300,
+            "base": 2000,
+            "high": 2000
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Set-up and recording policy",
+              "amount": 2000,
+              "calc": "$2,000",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 10350,
+            "base": 9000,
+            "high": 9000
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Seats",
+              "amount": 9000,
+              "calc": "30 seats x $25 a month x 12 = $9,000",
+              "price_status": "indicative"
+            }
+          ],
+          "year_one_cost": {
+            "low": 12650,
+            "base": 11000,
+            "high": 11000
+          },
+          "hours_saved_per_week": {
+            "low": 27,
+            "base": 40,
+            "high": 55
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 58320,
+            "base": 120960,
+            "high": 201960
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 58320,
+            "base": 120960,
+            "high": 201960
+          },
+          "payback_months": {
+            "low": 2.6,
+            "base": 1.1,
+            "high": 0.7
+          },
+          "net_benefit_year_one": {
+            "low": 45670,
+            "base": 109960,
+            "high": 190960
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.357 share x 112 h lost = 39.98 -> 40 h a week",
+            "annual_time_savings": "40 h x 48 weeks x $90 x 70% adoption = $120,960",
+            "year_one_cost": "$2,000 upfront + $9,000 first-year ongoing = $11,000",
+            "payback_months": "$11,000 / ($120,960 / 12) = 1.1 months"
+          }
+        },
+        {
+          "option_id": "status.O2",
+          "option_number": 2,
+          "label": "Option 2: One system of record",
+          "fix_id": "system_of_record",
+          "name": "One system of record",
+          "fix_type": "software",
+          "also": [],
+          "type_label": "Non-AI software",
+          "how_it_solves": "All delivery work moves into the one tracker the firm already licenses; client reports generate from it; the duplicate tools retire",
+          "example_vendors": [
+            "Jira dashboards and a client report template (Jira is already licensed)"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 4,
+            "weeks_max": 6,
+            "label": "4 to 6 weeks"
+          },
+          "effort": {
+            "level": "medium",
+            "note": "Medium: 23 active projects to migrate"
+          },
+          "governance": {
+            "risk": "low",
+            "note": "Low",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Clients used to other report formats need a new one"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 2, Option 2",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate"
+          ],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 8280,
+            "base": 7200,
+            "high": 7200
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Migration and template build",
+              "amount": 7200,
+              "calc": "80 h x $90 = $7,200",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "ongoing_breakdown": [],
+          "year_one_cost": {
+            "low": 8280,
+            "base": 7200,
+            "high": 7200
+          },
+          "hours_saved_per_week": {
+            "low": 24,
+            "base": 35,
+            "high": 48
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 51840,
+            "base": 105840,
+            "high": 176256
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 51840,
+            "base": 105840,
+            "high": 176256
+          },
+          "payback_months": {
+            "low": 1.9,
+            "base": 0.8,
+            "high": 0.5
+          },
+          "net_benefit_year_one": {
+            "low": 43560,
+            "base": 98640,
+            "high": 169056
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.313 share x 112 h lost = 35.06 -> 35 h a week",
+            "annual_time_savings": "35 h x 48 weeks x $90 x 70% adoption = $105,840",
+            "year_one_cost": "$7,200 upfront + $0 first-year ongoing = $7,200",
+            "payback_months": "$7,200 / ($105,840 / 12) = 0.8 months"
+          }
+        },
+        {
+          "option_id": "status.O3",
+          "option_number": 3,
+          "label": "Option 3: Meeting and status reset",
+          "fix_id": "meeting_reset",
+          "name": "Meeting and status reset",
+          "fix_type": "process",
+          "also": [],
+          "type_label": "Process",
+          "how_it_solves": "Recurring internal status meetings end; a five-line written update per project every Friday and one 30-minute weekly risk review replace them",
+          "example_vendors": [
+            "Internal",
+            "Written-update template"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 1,
+            "weeks_max": 1,
+            "label": "1 week"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low, if leaders model it"
+          },
+          "governance": {
+            "risk": "none",
+            "note": "None",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Meetings creep back without a named owner"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 2, Option 3",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate"
+          ],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 2990,
+            "base": 2600,
+            "high": 2600
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Facilitation and templates",
+              "amount": 2600,
+              "calc": "$2,600",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "ongoing_breakdown": [],
+          "year_one_cost": {
+            "low": 2990,
+            "base": 2600,
+            "high": 2600
+          },
+          "hours_saved_per_week": {
+            "low": 34,
+            "base": 50,
+            "high": 69
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 73440,
+            "base": 151200,
+            "high": 253368
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 73440,
+            "base": 151200,
+            "high": 253368
+          },
+          "payback_months": {
+            "low": 0.5,
+            "base": 0.2,
+            "high": 0.1
+          },
+          "net_benefit_year_one": {
+            "low": 70450,
+            "base": 148600,
+            "high": 250768
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.446 share x 112 h lost = 49.95 -> 50 h a week",
+            "annual_time_savings": "50 h x 48 weeks x $90 x 70% adoption = $151,200",
+            "year_one_cost": "$2,600 upfront + $0 first-year ongoing = $2,600",
+            "payback_months": "$2,600 / ($151,200 / 12) = 0.2 months"
+          }
+        }
+      ],
+      "recommendation": {
+        "fix_ids": [
+          "meeting_reset",
+          "system_of_record"
+        ],
+        "option_ids": [
+          "status.O3",
+          "status.O2"
+        ],
+        "option_numbers": [
+          3,
+          2
+        ],
+        "names": [
+          "Meeting and status reset",
+          "One system of record"
+        ],
+        "type_summary": "Process; non-AI software",
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "status.O3",
+            "name": "Meeting and status reset",
+            "time_to_live": "1 week"
+          },
+          {
+            "step": 2,
+            "option_id": "status.O2",
+            "name": "One system of record",
+            "time_to_live": "4 to 6 weeks"
+          }
+        ],
+        "hours_saved_per_week": {
+          "low": 51,
+          "base": 75,
+          "high": 103
+        },
+        "deals_recovered_per_year": null,
+        "upfront_cost": {
+          "low": 11270,
+          "base": 9800,
+          "high": 9800
+        },
+        "ongoing_cost_per_year": {
+          "low": 0,
+          "base": 0,
+          "high": 0
+        },
+        "year_one_cost": {
+          "low": 11270,
+          "base": 9800,
+          "high": 9800
+        },
+        "annual_time_savings": {
+          "low": 110160,
+          "base": 226800,
+          "high": 378216
+        },
+        "annual_deal_margin": {
+          "low": 0,
+          "base": 0,
+          "high": 0
+        },
+        "annual_savings": {
+          "low": 110160,
+          "base": 226800,
+          "high": 378216
+        },
+        "payback_months": {
+          "low": 1.2,
+          "base": 0.5,
+          "high": 0.3
+        },
+        "net_benefit_year_one": {
+          "low": 98890,
+          "base": 217000,
+          "high": 368416
+        },
+        "overlaps_applied": [
+          {
+            "pair": [
+              "meeting_reset",
+              "system_of_record"
+            ],
+            "overlap": 0.286,
+            "listed_in_catalog": true
+          }
+        ],
+        "together_note": "The reset frees most of the time at once, and one system of record stops the copying behind the remaining updates.",
+        "mixes_compared": 3,
+        "summary": "We recommend Option 3 (Meeting and status reset) and Option 2 (One system of record) together. The reset frees most of the time at once, and one system of record stops the copying behind the remaining updates. Together they save an estimated 75 hours a week ($226,800 a year) for $9,800 in year one, a payback of 0.5 months.",
+        "summary_source": "template",
+        "trace": {
+          "hours_saved_per_week": "50 + 35 x (1 - 0.286 overlap) = 74.99 -> 75 h a week",
+          "annual_time_savings": "75 h x 48 weeks x $90 x 70% adoption = $226,800",
+          "year_one_cost": "One system of record $7,200 + Meeting and status reset $2,600 = $9,800",
+          "payback_months": "$9,800 / ($226,800 / 12) = 0.5 months"
+        },
+        "summary_template": "We recommend Option 3 (Meeting and status reset) and Option 2 (One system of record) together. The reset frees most of the time at once, and one system of record stops the copying behind the remaining updates. Together they save an estimated 75 hours a week ($226,800 a year) for $9,800 in year one, a payback of 0.5 months.",
+        "not_chosen": [
+          {
+            "option_id": "status.O1",
+            "option_number": 1,
+            "name": "AI meeting notes and status drafts",
+            "status": "on_hold",
+            "status_label": "Not recommended now",
+            "reason": "Not recommended now: recording client calls needs every party's consent and an approved AI policy first."
+          }
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "timesheets",
+      "rank": 3,
+      "name": "Timesheets rebuilt from memory",
+      "category": "time_capture",
+      "category_label": "Timesheets rebuilt from memory",
+      "category_match": {
+        "method": "category_id",
+        "matched_keywords": []
+      },
+      "departments": [
+        "CRM Practice",
+        "Data & AI Practice",
+        "Delivery Office (PMO)",
+        "Growth",
+        "Leadership & Operations"
+      ],
+      "employees_affected": 42,
+      "hours_lost_per_week": {
+        "low": 38.0,
+        "base": 42.0,
+        "high": 48.0
+      },
+      "annual_cost": {
+        "low": 181440.0,
+        "base": 181440.0,
+        "high": 181440.0
+      },
+      "deal_impact": null,
+      "feasibility": "high",
+      "priority_score": 61,
+      "root_causes": [],
+      "options": [
+        {
+          "option_id": "timesheets.O1",
+          "option_number": 1,
+          "label": "Option 1: AI-drafted timesheets",
+          "fix_id": "ai_timesheets",
+          "name": "AI-drafted timesheets",
+          "fix_type": "ai_tool",
+          "also": [],
+          "type_label": "AI tool",
+          "how_it_solves": "An app drafts each person's day from calendar, tracker and document activity; the person edits and submits. Drafts are visible only to the employee.",
+          "example_vendors": [
+            "Timely",
+            "Memtime",
+            "Clockify"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 3,
+            "weeks_max": 3,
+            "label": "3 weeks"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low: install plus a privacy briefing"
+          },
+          "governance": {
+            "risk": "medium",
+            "note": "Medium: reads calendar and app activity. Mitigated by on-device processing, employee-only drafts and no manager access to raw activity",
+            "is_ai": true,
+            "data_accessed": "Calendar titles, tracker activity, app and document names on the employee's laptop",
+            "go_live_gates": [
+              "Approve a one-page AI acceptable-use policy",
+              "Security and contract review of the timesheet tool, including no-training terms",
+              "Drafts stay employee-only; managers never see raw activity"
+            ]
+          },
+          "risks_and_dependencies": [
+            "Staff may fear surveillance",
+            "Must export to the PSA if one is chosen"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 3, Option 1",
+          "confidence": "reference_calibrated",
+          "price_statuses": [
+            "estimate",
+            "indicative"
+          ],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 2300,
+            "base": 2000,
+            "high": 2000
+          },
+          "upfront_breakdown": [
+            {
+              "item": "Set-up and pilot",
+              "amount": 2000,
+              "calc": "$2,000",
+              "price_status": "estimate"
+            }
+          ],
+          "ongoing_cost_per_year": {
+            "low": 10488,
+            "base": 9120,
+            "high": 9120
+          },
+          "ongoing_breakdown": [
+            {
+              "item": "Licences",
+              "amount": 9120,
+              "calc": "38 seats x $20 a month x 12 = $9,120",
+              "price_status": "indicative"
+            }
+          ],
+          "year_one_cost": {
+            "low": 12788,
+            "base": 11120,
+            "high": 11120
+          },
+          "hours_saved_per_week": {
+            "low": 17,
+            "base": 25,
+            "high": 34
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 36720,
+            "base": 75600,
+            "high": 124848
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 36720,
+            "base": 75600,
+            "high": 124848
+          },
+          "payback_months": {
+            "low": 4.2,
+            "base": 1.8,
+            "high": 1.1
+          },
+          "net_benefit_year_one": {
+            "low": 23932,
+            "base": 64480,
+            "high": 113728
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.595 share x 42 h lost = 24.99 -> 25 h a week",
+            "annual_time_savings": "25 h x 48 weeks x $90 x 70% adoption = $75,600",
+            "year_one_cost": "$2,000 upfront + $9,120 first-year ongoing = $11,120",
+            "payback_months": "$11,120 / ($75,600 / 12) = 1.8 months"
+          }
+        },
+        {
+          "option_id": "timesheets.O2",
+          "option_number": 2,
+          "label": "Option 2: PSA time module",
+          "fix_id": "psa_time_module",
+          "name": "PSA time module",
+          "fix_type": "software",
+          "also": [],
+          "type_label": "Non-AI software",
+          "how_it_solves": "Time entry moves into the PSA chosen for staffing, next to bookings, with approvals in one place",
+          "example_vendors": [
+            "Same vendor as the PSA tool"
+          ],
+          "cost_note": "$0 extra once the PSA tool is approved",
+          "implementation": {
+            "weeks_min": 6,
+            "weeks_max": 8,
+            "label": "Arrives with the PSA, weeks 6 to 8"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low: new screen, same habit"
+          },
+          "governance": {
+            "risk": "low",
+            "note": "Low",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "Depends on the PSA decision",
+            "Moves the same manual entry to a new screen"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 3, Option 2",
+          "confidence": "reference_calibrated",
+          "price_statuses": [],
+          "reskilling_focus": null,
+          "status": "follow_on",
+          "status_label": "Follow-on, no extra savings",
+          "status_reason": "Follow-on to AI-drafted timesheets: Once the PSA is live, drafts flow into it instead of the old time tool; no extra savings are counted, to avoid double counting. It arrives with the PSA tool chosen for staffing (Staffing blind spots).",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "upfront_breakdown": [],
+          "ongoing_cost_per_year": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "ongoing_breakdown": [],
+          "year_one_cost": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "hours_saved_per_week": {
+            "low": 8,
+            "base": 12,
+            "high": 16
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 17280,
+            "base": 36288,
+            "high": 58752
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 17280,
+            "base": 36288,
+            "high": 58752
+          },
+          "payback_months": {
+            "low": 0.0,
+            "base": 0.0,
+            "high": 0.0
+          },
+          "net_benefit_year_one": {
+            "low": 17280,
+            "base": 36288,
+            "high": 58752
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.286 share x 42 h lost = 12.01 -> 12 h a week",
+            "annual_time_savings": "12 h x 48 weeks x $90 x 70% adoption = $36,288",
+            "year_one_cost": "$0 upfront + $0 first-year ongoing = $0",
+            "payback_months": "No year-one cost: pays back immediately"
+          }
+        },
+        {
+          "option_id": "timesheets.O3",
+          "option_number": 3,
+          "label": "Option 3: Daily time rule",
+          "fix_id": "daily_time_rule",
+          "name": "Daily time rule",
+          "fix_type": "process",
+          "also": [],
+          "type_label": "Process",
+          "how_it_solves": "Log time before leaving each day: a 4:30 p.m. chat nudge, a 15-minute end-of-day calendar block, and on-time rates shared by team, never by name",
+          "example_vendors": [
+            "Internal",
+            "Slack or Teams reminders"
+          ],
+          "cost_note": null,
+          "implementation": {
+            "weeks_min": 1,
+            "weeks_max": 1,
+            "label": "1 week"
+          },
+          "effort": {
+            "level": "low",
+            "note": "Low"
+          },
+          "governance": {
+            "risk": "none",
+            "note": "None",
+            "is_ai": false,
+            "data_accessed": null,
+            "go_live_gates": []
+          },
+          "risks_and_dependencies": [
+            "The habit fades without the nudge and team-level feedback"
+          ],
+          "evidence": "Veloran reference report v1.0, Bottleneck 3, Option 3",
+          "confidence": "reference_calibrated",
+          "price_statuses": [],
+          "reskilling_focus": null,
+          "status": "recommended",
+          "status_label": "Recommended",
+          "status_reason": "Part of the recommended mix.",
+          "other_reasons": [],
+          "upfront_cost": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "upfront_breakdown": [],
+          "ongoing_cost_per_year": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "ongoing_breakdown": [],
+          "year_one_cost": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "hours_saved_per_week": {
+            "low": 10,
+            "base": 15,
+            "high": 21
+          },
+          "deals_recovered_per_year": null,
+          "annual_time_savings": {
+            "low": 21600,
+            "base": 45360,
+            "high": 77112
+          },
+          "annual_deal_margin": {
+            "low": 0,
+            "base": 0,
+            "high": 0
+          },
+          "annual_savings": {
+            "low": 21600,
+            "base": 45360,
+            "high": 77112
+          },
+          "payback_months": {
+            "low": 0.0,
+            "base": 0.0,
+            "high": 0.0
+          },
+          "net_benefit_year_one": {
+            "low": 21600,
+            "base": 45360,
+            "high": 77112
+          },
+          "missing_inputs": [],
+          "cost_shared_with": null,
+          "trace": {
+            "hours_saved_per_week": "0.357 share x 42 h lost = 14.99 -> 15 h a week",
+            "annual_time_savings": "15 h x 48 weeks x $90 x 70% adoption = $45,360",
+            "year_one_cost": "$0 upfront + $0 first-year ongoing = $0",
+            "payback_months": "No year-one cost: pays back immediately"
+          }
+        }
+      ],
+      "recommendation": {
+        "fix_ids": [
+          "daily_time_rule",
+          "ai_timesheets"
+        ],
+        "option_ids": [
+          "timesheets.O3",
+          "timesheets.O1"
+        ],
+        "option_numbers": [
+          3,
+          1
+        ],
+        "names": [
+          "Daily time rule",
+          "AI-drafted timesheets"
+        ],
+        "type_summary": "Process; AI tool",
+        "sequence": [
+          {
+            "step": 1,
+            "option_id": "timesheets.O3",
+            "name": "Daily time rule",
+            "time_to_live": "1 week"
+          },
+          {
+            "step": 2,
+            "option_id": "timesheets.O1",
+            "name": "AI-drafted timesheets",
+            "time_to_live": "3 weeks"
+          }
+        ],
+        "hours_saved_per_week": {
+          "low": 24,
+          "base": 35,
+          "high": 43
+        },
+        "deals_recovered_per_year": null,
+        "upfront_cost": {
+          "low": 2300,
+          "base": 2000,
+          "high": 2000
+        },
+        "ongoing_cost_per_year": {
+          "low": 10488,
+          "base": 9120,
+          "high": 9120
+        },
+        "year_one_cost": {
+          "low": 12788,
+          "base": 11120,
+          "high": 11120
+        },
+        "annual_time_savings": {
+          "low": 51840,
+          "base": 105840,
+          "high": 157896
+        },
+        "annual_deal_margin": {
+          "low": 0,
+          "base": 0,
+          "high": 0
+        },
+        "annual_savings": {
+          "low": 51840,
+          "base": 105840,
+          "high": 157896
+        },
+        "payback_months": {
+          "low": 3.0,
+          "base": 1.3,
+          "high": 0.8
+        },
+        "net_benefit_year_one": {
+          "low": 39052,
+          "base": 94720,
+          "high": 146776
+        },
+        "overlaps_applied": [
+          {
+            "pair": [
+              "daily_time_rule",
+              "ai_timesheets"
+            ],
+            "overlap": 0.333,
+            "listed_in_catalog": true
+          }
+        ],
+        "together_note": "The rule fixes when time is logged; the drafts fix the effort and the forgetting.",
+        "mixes_compared": 6,
+        "summary": "We recommend Option 3 (Daily time rule) and Option 1 (AI-drafted timesheets) together. The rule fixes when time is logged; the drafts fix the effort and the forgetting. Together they save an estimated 35 hours a week ($105,840 a year) for $11,120 in year one, a payback of 1.3 months.",
+        "summary_source": "template",
+        "trace": {
+          "hours_saved_per_week": "25 + 15 x (1 - 0.333 overlap) = 35.01 -> 35 h a week",
+          "annual_time_savings": "35 h x 48 weeks x $90 x 70% adoption = $105,840",
+          "year_one_cost": "AI-drafted timesheets $11,120 + Daily time rule $0 = $11,120",
+          "payback_months": "$11,120 / ($105,840 / 12) = 1.3 months"
+        },
+        "summary_template": "We recommend Option 3 (Daily time rule) and Option 1 (AI-drafted timesheets) together. The rule fixes when time is logged; the drafts fix the effort and the forgetting. Together they save an estimated 35 hours a week ($105,840 a year) for $11,120 in year one, a payback of 1.3 months.",
+        "not_chosen": [
+          {
+            "option_id": "timesheets.O2",
+            "option_number": 2,
+            "name": "PSA time module",
+            "status": "follow_on",
+            "status_label": "Follow-on, no extra savings",
+            "reason": "Follow-on to AI-drafted timesheets: Once the PSA is live, drafts flow into it instead of the old time tool; no extra savings are counted, to avoid double counting. It arrives with the PSA tool chosen for staffing (Staffing blind spots)."
+          }
+        ]
+      },
+      "notes": []
+    }
+  ],
+  "bottlenecks_not_in_scope": [
+    {
+      "id": "tools",
+      "name": "Tool switching and notifications",
+      "rank": 4,
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "search",
+      "name": "Searching for past work",
+      "rank": 5,
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "proposals",
+      "name": "Proposals rebuilt from scratch",
+      "rank": 6,
+      "reason": "outside the top 3"
+    },
+    {
+      "id": "migration",
+      "name": "Data-migration rework",
+      "rank": 7,
+      "reason": "outside the top 3"
+    }
+  ],
+  "program": {
+    "recommendation_count": 3,
+    "bottlenecks_with_recommendation": [
+      "staffing",
+      "status",
+      "timesheets"
+    ],
+    "year_one_cost": {
+      "low": 91448,
+      "base": 79520,
+      "high": 79520
+    },
+    "ongoing_cost_per_year": {
+      "low": 43608,
+      "base": 37920,
+      "high": 37920
+    },
+    "gross_hours_saved_per_week": {
+      "low": 132,
+      "base": 195,
+      "high": 263
+    },
+    "effective_hours_saved_per_week": {
+      "low": 66.0,
+      "base": 136.5,
+      "high": 223.6
+    },
+    "adoption_rate_base": 0.7,
+    "hours_lost_in_scope_per_week": 283,
+    "share_of_lost_hours_recovered": 0.4823,
+    "annual_time_savings": {
+      "low": 285120,
+      "base": 589680,
+      "high": 965736
+    },
+    "annual_deal_margin": {
+      "low": 0,
+      "base": 0,
+      "high": 0
+    },
+    "annual_savings": {
+      "low": 285120,
+      "base": 589680,
+      "high": 965736
+    },
+    "net_benefit_year_one": {
+      "low": 193672,
+      "base": 510160,
+      "high": 886216
+    },
+    "net_benefit_year_two_onward": {
+      "low": 241512,
+      "base": 551760,
+      "high": 927816
+    },
+    "payback_months": {
+      "low": 3.8,
+      "base": 1.6,
+      "high": 1.0
+    },
+    "fix_type_counts": {
+      "process": 3,
+      "reskilling": 1,
+      "software": 2,
+      "ai_tool": 1
+    },
+    "governance_actions": [
+      {
+        "action": "Approve a one-page AI acceptable-use policy",
+        "for": [
+          "AI-drafted timesheets"
+        ]
+      },
+      {
+        "action": "Security and contract review of the timesheet tool, including no-training terms",
+        "for": [
+          "AI-drafted timesheets"
+        ]
+      },
+      {
+        "action": "Drafts stay employee-only; managers never see raw activity",
+        "for": [
+          "AI-drafted timesheets"
+        ]
+      }
+    ],
+    "upside_not_counted": [
+      {
+        "key": "bench_to_billable",
+        "label": "Half of unplanned bench becomes billable",
+        "amount": 216144,
+        "basis": "28.5 hours a week x 48 weeks x $158 realized rate",
+        "unlocked_by": [
+          "psa_tool",
+          "capacity_council"
+        ]
+      },
+      {
+        "key": "duplicate_licences",
+        "label": "Asana and Smartsheet licences retired",
+        "amount": 14400,
+        "basis": "Current licence invoices",
+        "unlocked_by": [
+          "system_of_record"
+        ]
+      },
+      {
+        "key": "unlogged_hours",
+        "label": "Unlogged billable hours captured",
+        "amount": 184627,
+        "basis": "70% of 1,669 unlogged hours x $158 realized rate",
+        "unlocked_by": [
+          "ai_timesheets",
+          "daily_time_rule"
+        ]
+      }
+    ],
+    "upside_not_counted_total": 415171,
+    "summary": "The 3 recommendations cost $79,520 in year one and save an estimated $589,680 a year, a combined payback of 1.6 months. From year two, ongoing costs are $37,920 a year and the net benefit is about $551,760 a year. At 70% adoption, the 195 gross hours become about 137 effective hours a week: 48% of the 283 hours lost to the bottlenecks in scope."
+  },
+  "warnings": []
+}

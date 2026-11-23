@@ -1,0 +1,95 @@
+{
+  "profile_version": "1",
+  "client_name": "Corlander & Vale CPAs",
+  "scenario": "A",
+  "synthetic": true,
+  "notes": "Client facts Phase 4 needs that steps 7 and 8 do not produce. Values come from the Corlander & Vale reference report v1.0 (a synthetic case).",
+  "company": {
+    "short_name": "C&V",
+    "employees_total": 130,
+    "billable_employees": 110,
+    "current_tools": [
+      "UltraTax CS",
+      "Practice CS",
+      "Caseware Working Papers",
+      "QuickBooks Online Accountant",
+      "ShareFile",
+      "Microsoft 365",
+      "Excel due-date tracker"
+    ],
+    "capabilities": {
+      "ai_policy_in_place": false,
+      "client_ai_consent": false,
+      "client_offshore_consent": false,
+      "document_intake_tracked": false
+    },
+    "volumes": {
+      "portal_seats": 120,
+      "reviewers_to_train": 8,
+      "complex_returns_per_year": 2200,
+      "offshore_returns_per_year": 1650,
+      "email_ai_seats": 60
+    }
+  },
+  "assumptions": {
+    "currency": "USD",
+    "loaded_hourly_rate": 80,
+    "working_weeks_per_year": 48,
+    "adoption_rate": {
+      "low": 0.5,
+      "base": 0.7,
+      "high": 0.85
+    },
+    "max_payback_months": 12,
+    "realized_billing_rate": 149,
+    "sources": {
+      "loaded_hourly_rate": "Average salary $100,000 x 1.30 plus $23,600 overhead per person, divided by 1,920 working hours (C&V finance, FY2026)",
+      "working_weeks_per_year": "52 weeks minus PTO and holidays (C&V handbook)"
+    }
+  },
+  "category_map": {
+    "document": "document_chasing",
+    "review": "review_queue",
+    "keyed": "manual_keying",
+    "keying": "manual_keying"
+  },
+  "upside_not_counted": [
+    {
+      "key": "turnover",
+      "label": "Lower professional turnover",
+      "amount": 160000,
+      "basis": "Four fewer departures a year (17.9% toward 13%) x $40,000 replacement cost"
+    }
+  ],
+  "bottleneck_extras": {
+    "review_queue": {
+      "upside_not_counted": [
+        {
+          "key": "write_downs",
+          "label": "Fewer review write-downs",
+          "amount": 205000,
+          "basis": "Half of the $410,000 of FY2026 write-downs coded to review rework",
+          "unlocked_by": [
+            "tiered_review",
+            "review_queues"
+          ]
+        }
+      ]
+    },
+    "manual_keying": {
+      "upside_not_counted": [
+        {
+          "key": "overtime",
+          "label": "Less busy-season overtime",
+          "amount": 30500,
+          "basis": "Half of the $61,000 of overtime paid in the 2026 season",
+          "unlocked_by": [
+            "ai_document_extraction",
+            "import_first"
+          ]
+        }
+      ]
+    }
+  },
+  "field_mapping": {}
+}

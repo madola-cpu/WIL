@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://whitman-innovation-lab/team-tom/phase4_input.schema.json",
+  "title": "Phase 4 input (what steps 7 and 8 hand to step 9)",
+  "description": "Bottlenecks found in step 7, priced in step 8 (low, base and high cases), plus the company facts Phase 4 needs to price and choose fixes. All groups must be 5 people or more.",
+  "type": "object",
+  "required": ["schema_version", "run", "company", "assumptions", "bottlenecks"],
+  "$defs": {
+    "range": {
+      "description": "A number, or low/base/high cases. If only base is given, low and high equal base.",
+      "oneOf": [
+        {"type": "number", "minimum": 0},
+        {
+          "type": "object",
+          "required": ["base"],
+          "properties": {
+            "low": {"type": "number", "minimum": 0},
+            "base": {"type": "number", "minimum": 0},
+            "high": {"type": "number", "minimum": 0},
+            "source": {"type": "string"}
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "share_range": {
+      "oneOf": [
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {
+          "type": "object",
+          "required": ["base"],
+          "properties": {
+            "low": {"type": "number", "minimum": 0, "maximum": 1},
+            "base": {"type": "number", "minimum": 0, "maximum": 1},
+            "high": {"type": "number", "minimum": 0, "maximum": 1},
+            "source": {"type": "string"}
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "upside_item": {
+      "type": "object",
+      "required": ["label", "amount"],
+      "properties": {
+        "key": {"type": "string"},
+        "label": {"type": "string"},
+        "amount": {"type": "number"},
+        "basis": {"type": "string"},
+        "unlocked_by": {
+          "description": "Fix ids that unlock this upside. Empty or missing means it applies whatever is recommended.",
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^phase4-input/1\\.[0-9]+$"},
+    "run": {
+      "type": "object",
+      "required": ["scenario", "client_name"],
+      "properties": {
+        "run_id": {"type": "string"},
+        "scenario": {"type": "string", "enum": ["A", "B"], "description": "A = workplace data (Veloran demo). B = acquisition (two Salesforce exports)."},
+        "client_name": {"type": "string"},
+        "generated_at": {"type": "string"},
+        "source_steps": {"type": "array", "items": {"type": "string"}},
+        "synthetic": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    },
+    "company": {
+      "type": "object",
+      "required": ["employees_total"],
+      "properties": {
+        "short_name": {"type": "string"},
+        "employees_total": {"type": "integer", "minimum": 1},
+        "billable_employees": {"type": "integer", "minimum": 0},
+        "current_tools": {"type": "array", "items": {"type": "string"}},
+        "capabilities": {
+          "description": "Facts that unlock or block fixes, for example ai_policy_in_place, call_recording_consent, clean_staffing_history_months.",
+          "type": "object",
+          "additionalProperties": {"type": ["boolean", "number", "string"]}
+        },
+        "volumes": {
+          "description": "Planning quantities the fix catalog can use for pricing, for example certification_vouchers, portal_seats, complex_returns_per_year.",
+          "type": "object",
+          "additionalProperties": {"type": "number", "minimum": 0}
+        }
+      }
+    },
+    "assumptions": {
+      "type": "object",
+      "required": ["loaded_hourly_rate"],
+      "properties": {
+        "currency": {"type": "string", "default": "USD"},
+        "loaded_hourly_rate": {"$ref": "#/$defs/range"},
+        "working_weeks_per_year": {"type": "number", "minimum": 1, "maximum": 52, "default": 48},
+        "adoption_rate": {"$ref": "#/$defs/share_range", "default": 0.7},
+        "max_payback_months": {"type": "number", "minimum": 0, "default": 12},
+        "realized_billing_rate": {"type": "number", "minimum": 0},
+        "sources": {"type": "object", "additionalProperties": {"type": "string"}}
+      }
+    },
+    "bottlenecks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "employees_affected", "hours_lost_per_week"],
+        "properties": {
+          "id": {"type": "string"},
+          "rank": {"type": "integer", "minimum": 1},
+          "name": {"type": "string"},
+          "category": {"type": "string", "description": "A category id from the fix catalog. If missing or unknown, Phase 4 matches by keywords."},
+          "description": {"type": "string"},
+          "departments": {"type": "array", "items": {"type": "string"}},
+          "employees_affected": {"type": "integer", "minimum": 0},
+          "hours_lost_per_week": {"$ref": "#/$defs/range"},
+          "annual_cost": {"$ref": "#/$defs/range"},
+          "feasibility": {"type": "string", "enum": ["low", "medium", "high"]},
+          "priority_score": {"type": "number"},
+          "root_causes": {"type": "array", "items": {"type": "string"}},
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "signal": {"type": "string"},
+                "source": {"type": "string"},
+                "value": {"type": "string"}
+              }
+            }
+          },
+          "deal_impact": {
+            "description": "Scenario B: deals lost or slipped because of this bottleneck.",
+            "type": "object",
+            "required": ["deals_lost_per_year", "avg_deal_value", "contribution_margin"],
+            "properties": {
+              "deals_lost_per_year": {"$ref": "#/$defs/range"},
+              "avg_deal_value": {"type": "number", "minimum": 0},
+              "contribution_margin": {"type": "number", "minimum": 0, "maximum": 1},
+              "source": {"type": "string"}
+            }
+          },
+          "upside_not_counted": {"type": "array", "items": {"$ref": "#/$defs/upside_item"}}
+        }
+      }
+    },
+    "upside_not_counted": {"type": "array", "items": {"$ref": "#/$defs/upside_item"}},
+    "skill_signals": {
+      "description": "From step 2 (after Dec 9). Team-level only, never individuals.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["team", "skill", "signal"],
+        "properties": {
+          "team": {"type": "string"},
+          "skill": {"type": "string"},
+          "signal": {"type": "string", "enum": ["gap", "strength", "emerging"]},
+          "people": {"type": "integer", "minimum": 0},
+          "evidence": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1279 @@
+{
+  "catalog_id": "workplace",
+  "catalog_version": "2026.11.1",
+  "applies_to_scenarios": [
+    "A"
+  ],
+  "description": "Fixes for workplace bottlenecks found in calendar, time, project-tool and CRM data (scenario A). Effect sizes and cost models are calibrated so the engine reproduces the two reference reports: Veloran (v1.0, Nov 1 2026) and Corlander & Vale (v1.0, Nov 4 2026). Vendors are examples to test in demos, not endorsements; prices are indicative until quoted.",
+  "default_overlap": 0.3,
+  "categories": {
+    "staffing_visibility": {
+      "label": "Staffing and capacity blind spots",
+      "anchors": [
+        "staffing",
+        "bench time",
+        "unplanned bench",
+        "resourcing",
+        "capacity planning"
+      ],
+      "keywords": [
+        "staffing",
+        "bench",
+        "capacity",
+        "assignment",
+        "roll-off",
+        "utilization",
+        "resourcing",
+        "availability"
+      ],
+      "fixes": [
+        "ai_capacity_forecasting",
+        "psa_tool",
+        "capacity_council"
+      ]
+    },
+    "status_duplication": {
+      "label": "Status reporting repeated across tools and meetings",
+      "anchors": [
+        "status report",
+        "status update",
+        "status meeting",
+        "status deck"
+      ],
+      "keywords": [
+        "status",
+        "reporting",
+        "stand-up",
+        "standup",
+        "status meeting",
+        "steering",
+        "four places",
+        "same update"
+      ],
+      "fixes": [
+        "ai_meeting_notes",
+        "system_of_record",
+        "meeting_reset"
+      ]
+    },
+    "time_capture": {
+      "label": "Timesheets rebuilt from memory",
+      "anchors": [
+        "timesheet",
+        "time entry",
+        "time tracking",
+        "time capture"
+      ],
+      "keywords": [
+        "timesheet",
+        "time entry",
+        "time tracking",
+        "unlogged",
+        "time capture",
+        "harvest",
+        "from memory"
+      ],
+      "fixes": [
+        "ai_timesheets",
+        "psa_time_module",
+        "daily_time_rule"
+      ]
+    },
+    "document_chasing": {
+      "label": "Client documents chased by hand",
+      "anchors": [
+        "document chas",
+        "chasing documents",
+        "client documents",
+        "request list"
+      ],
+      "keywords": [
+        "document",
+        "chasing",
+        "chase",
+        "request list",
+        "follow-up",
+        "upload",
+        "intake",
+        "re-request"
+      ],
+      "fixes": [
+        "ai_followup_assistant",
+        "client_portal",
+        "intake_desk"
+      ]
+    },
+    "review_queue": {
+      "label": "Work waiting in review, with rework",
+      "anchors": [
+        "review queue",
+        "waiting in review",
+        "waiting for review",
+        "review backlog"
+      ],
+      "keywords": [
+        "review",
+        "rework",
+        "reviewer",
+        "sign-off",
+        "queue",
+        "second review"
+      ],
+      "fixes": [
+        "ai_pre_review",
+        "review_queues",
+        "tiered_review"
+      ]
+    },
+    "manual_keying": {
+      "label": "Source documents keyed in by hand",
+      "anchors": [
+        "keying",
+        "keyed",
+        "data entry",
+        "retyp"
+      ],
+      "keywords": [
+        "keying",
+        "keyed",
+        "data entry",
+        "typing",
+        "typed",
+        "retype",
+        "manual entry",
+        "transcrib"
+      ],
+      "fixes": [
+        "ai_document_extraction",
+        "import_first",
+        "offshore_data_entry"
+      ]
+    }
+  },
+  "fixes": {
+    "ai_capacity_forecasting": {
+      "name": "AI forecasting agent",
+      "fix_type": "ai_tool",
+      "how_it_solves": "An agent in the firm's own CRM predicts roll-offs and demand from pipeline and booking history, then proposes staffing moves for a person to approve",
+      "example_vendors": [
+        "Agentforce in the firm's own Salesforce org",
+        "AI features in PSA suites"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Internal build and data clean-up",
+            "basis": "flat",
+            "amount": 40000
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Run, monitor and retrain",
+            "basis": "flat",
+            "amount": 24000
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 17,
+        "weeks_max": 26,
+        "label": "4 to 6 months"
+      },
+      "effort": {
+        "level": "high",
+        "note": "High: needs 12+ months of clean staffing data"
+      },
+      "effect": {
+        "hours_share": 0.349
+      },
+      "governance": {
+        "risk": "medium",
+        "note": "Medium: reads pipeline and staff data; every move needs human sign-off",
+        "data_accessed": "Pipeline, bookings and skills (internal; personnel data)",
+        "go_live_gates": [
+          "Approve a one-page AI acceptable-use policy",
+          "A named person signs off every staffing move the agent proposes"
+        ]
+      },
+      "requires": [
+        {
+          "capability": "clean_staffing_history_months",
+          "op": ">=",
+          "value": 12,
+          "if_unmet": "defer",
+          "why": "an AI forecast needs at least 12 months of clean booking data",
+          "unlocked_by": [
+            "psa_tool"
+          ],
+          "revisit": "once the PSA holds 12 months of bookings"
+        }
+      ],
+      "risks": [
+        "Forecasts are only as good as the staffing history behind them"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 1, Option 1",
+      "confidence": "reference_calibrated"
+    },
+    "psa_tool": {
+      "name": "PSA tool",
+      "fix_type": "software",
+      "how_it_solves": "One system holds bookings, roll-offs, skills and pipeline demand on a single timeline, eight weeks out",
+      "example_vendors": [
+        "Kantata",
+        "Rocketlane",
+        "BigTime",
+        "Certinia"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Vendor onboarding",
+            "basis": "flat",
+            "amount": 10000
+          },
+          {
+            "item": "Configuration",
+            "basis": "internal_hours",
+            "hours": 140
+          },
+          {
+            "item": "Training",
+            "basis": "internal_hours",
+            "hours": 40
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Licences",
+            "basis": "per_seat_month",
+            "unit_cost": 48,
+            "qty": {
+              "var": "psa_seats",
+              "default": "employees_total"
+            },
+            "price_status": "indicative"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 6,
+        "weeks_max": 8,
+        "label": "6 to 8 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: data migration and new habits for {employees_total} people"
+      },
+      "effect": {
+        "hours_share": 0.465
+      },
+      "governance": {
+        "risk": "low",
+        "note": "Low: standard SaaS security review"
+      },
+      "risks": [
+        "Adoption",
+        "Must sync with the CRM and replace the current time tool"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 1, Option 2",
+      "confidence": "reference_calibrated"
+    },
+    "capacity_council": {
+      "name": "Capacity council and bench-to-certification",
+      "fix_type": "process",
+      "also": [
+        "reskilling"
+      ],
+      "type_label": "Process and reskilling",
+      "how_it_solves": "A 30-minute weekly meeting books the next eight weeks; any unbooked day defaults to a certification plan or a reusable asset",
+      "example_vendors": [
+        "Internal",
+        "Salesforce Trailhead and certification exams"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Certification vouchers",
+            "basis": "per_unit",
+            "unit_cost": 200,
+            "qty": {
+              "var": "certification_vouchers",
+              "default": {
+                "var": "billable_employees",
+                "mult": 0.5,
+                "round": "down"
+              }
+            }
+          }
+        ],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 2,
+        "weeks_max": 2,
+        "label": "2 weeks"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low: one meeting and one rule"
+      },
+      "effect": {
+        "hours_share": 0.233
+      },
+      "governance": {
+        "risk": "none",
+        "note": "None"
+      },
+      "reskilling_focus": "certifications",
+      "risks": [
+        "Discipline; savings stall if leaders skip the meeting"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 1, Option 3",
+      "confidence": "reference_calibrated"
+    },
+    "ai_meeting_notes": {
+      "name": "AI meeting notes and status drafts",
+      "fix_type": "ai_tool",
+      "how_it_solves": "AI joins calls, writes notes and drafts weekly status from transcripts and the work tracker",
+      "example_vendors": [
+        "Zoom AI Companion",
+        "Gemini in Google Meet",
+        "Otter",
+        "Fireflies"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Set-up and recording policy",
+            "basis": "flat",
+            "amount": 2000
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Seats",
+            "basis": "per_seat_month",
+            "unit_cost": 25,
+            "qty": {
+              "var": "meeting_ai_seats",
+              "default": {
+                "var": "employees_affected",
+                "mult": 0.75
+              }
+            },
+            "price_status": "indicative"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 2,
+        "weeks_max": 2,
+        "label": "2 weeks"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low"
+      },
+      "effect": {
+        "hours_share": 0.357
+      },
+      "governance": {
+        "risk": "high",
+        "note": "High: records client calls that carry client data; some states require every party's consent to record",
+        "data_accessed": "Call audio and transcripts, including client data",
+        "go_live_gates": [
+          "Consent from every party before any call is recorded",
+          "Approve a one-page AI acceptable-use policy",
+          "Vendor review: no training on client data"
+        ]
+      },
+      "requires": [
+        {
+          "capability": "call_recording_consent",
+          "op": "==",
+          "value": true,
+          "if_unmet": "hold",
+          "why": "recording client calls needs every party's consent and an approved AI policy first"
+        }
+      ],
+      "conflicts_with": [
+        {
+          "fix": "meeting_reset",
+          "why": "it would summarize meetings the reset cancels"
+        }
+      ],
+      "risks": [
+        "Client contracts may bar recording",
+        "Notes still need human review",
+        "The duplicate tools remain"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 2, Option 1",
+      "confidence": "reference_calibrated"
+    },
+    "system_of_record": {
+      "name": "One system of record",
+      "fix_type": "software",
+      "how_it_solves": "All delivery work moves into the one tracker the firm already licenses; client reports generate from it; the duplicate tools retire",
+      "example_vendors": [
+        "{work_tracker} dashboards and a client report template ({work_tracker} is already licensed)"
+      ],
+      "example_vendors_fallback": [
+        "Dashboards in the tracker already licensed, plus a client report template"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Migration and template build",
+            "basis": "internal_hours",
+            "hours": 80
+          }
+        ],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 4,
+        "weeks_max": 6,
+        "label": "4 to 6 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: {active_projects} active projects to migrate",
+        "note_fallback": "Medium: every active project must be migrated"
+      },
+      "effect": {
+        "hours_share": 0.313
+      },
+      "governance": {
+        "risk": "low",
+        "note": "Low"
+      },
+      "requires": [
+        {
+          "capability": "work_tracker",
+          "op": "!=",
+          "value": "",
+          "if_unmet": "block",
+          "why": "it assumes a work tracker is already licensed"
+        }
+      ],
+      "risks": [
+        "Clients used to other report formats need a new one"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 2, Option 2",
+      "confidence": "reference_calibrated"
+    },
+    "meeting_reset": {
+      "name": "Meeting and status reset",
+      "fix_type": "process",
+      "how_it_solves": "Recurring internal status meetings end; a five-line written update per project every Friday and one 30-minute weekly risk review replace them",
+      "example_vendors": [
+        "Internal",
+        "Written-update template"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Facilitation and templates",
+            "basis": "flat",
+            "amount": 2600
+          }
+        ],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 1,
+        "weeks_max": 1,
+        "label": "1 week"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low, if leaders model it"
+      },
+      "effect": {
+        "hours_share": 0.446
+      },
+      "governance": {
+        "risk": "none",
+        "note": "None"
+      },
+      "risks": [
+        "Meetings creep back without a named owner"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 2, Option 3",
+      "confidence": "reference_calibrated"
+    },
+    "ai_timesheets": {
+      "name": "AI-drafted timesheets",
+      "fix_type": "ai_tool",
+      "how_it_solves": "An app drafts each person's day from calendar, tracker and document activity; the person edits and submits. Drafts are visible only to the employee.",
+      "example_vendors": [
+        "Timely",
+        "Memtime",
+        "Clockify"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Set-up and pilot",
+            "basis": "flat",
+            "amount": 2000
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Licences",
+            "basis": "per_seat_month",
+            "unit_cost": 20,
+            "qty": {
+              "var": "timesheet_seats",
+              "default": "billable_employees"
+            },
+            "price_status": "indicative"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 3,
+        "weeks_max": 3,
+        "label": "3 weeks"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low: install plus a privacy briefing"
+      },
+      "effect": {
+        "hours_share": 0.595
+      },
+      "governance": {
+        "risk": "medium",
+        "note": "Medium: reads calendar and app activity. Mitigated by on-device processing, employee-only drafts and no manager access to raw activity",
+        "data_accessed": "Calendar titles, tracker activity, app and document names on the employee's laptop",
+        "go_live_gates": [
+          "Approve a one-page AI acceptable-use policy",
+          "Security and contract review of the timesheet tool, including no-training terms",
+          "Drafts stay employee-only; managers never see raw activity"
+        ]
+      },
+      "risks": [
+        "Staff may fear surveillance",
+        "Must export to the PSA if one is chosen"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 3, Option 1",
+      "confidence": "reference_calibrated"
+    },
+    "psa_time_module": {
+      "name": "PSA time module",
+      "fix_type": "software",
+      "how_it_solves": "Time entry moves into the PSA chosen for staffing, next to bookings, with approvals in one place",
+      "example_vendors": [
+        "Same vendor as the PSA tool"
+      ],
+      "cost_note": "$0 extra once the PSA tool is approved",
+      "costs": {
+        "upfront": [],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 6,
+        "weeks_max": 8,
+        "label": "Arrives with the PSA, weeks 6 to 8"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low: new screen, same habit"
+      },
+      "effect": {
+        "hours_share": 0.286
+      },
+      "governance": {
+        "risk": "low",
+        "note": "Low"
+      },
+      "requires_fix": [
+        "psa_tool"
+      ],
+      "risks": [
+        "Depends on the PSA decision",
+        "Moves the same manual entry to a new screen"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 3, Option 2",
+      "confidence": "reference_calibrated"
+    },
+    "daily_time_rule": {
+      "name": "Daily time rule",
+      "fix_type": "process",
+      "how_it_solves": "Log time before leaving each day: a 4:30 p.m. chat nudge, a 15-minute end-of-day calendar block, and on-time rates shared by team, never by name",
+      "example_vendors": [
+        "Internal",
+        "Slack or Teams reminders"
+      ],
+      "costs": {
+        "upfront": [],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 1,
+        "weeks_max": 1,
+        "label": "1 week"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low"
+      },
+      "effect": {
+        "hours_share": 0.357
+      },
+      "governance": {
+        "risk": "none",
+        "note": "None"
+      },
+      "risks": [
+        "The habit fades without the nudge and team-level feedback"
+      ],
+      "evidence": "Veloran reference report v1.0, Bottleneck 3, Option 3",
+      "confidence": "reference_calibrated"
+    },
+    "ai_followup_assistant": {
+      "name": "AI follow-up assistant",
+      "fix_type": "ai_tool",
+      "how_it_solves": "AI inside the email client drafts follow-up emails from each client thread and summarizes long threads; staff still send and track them",
+      "example_vendors": [
+        "Microsoft 365 Copilot Business (if the firm runs Microsoft 365)"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Set-up and prompt library",
+            "basis": "flat",
+            "amount": 3000
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Seats",
+            "basis": "per_seat_month",
+            "unit_cost": 21,
+            "qty": {
+              "var": "email_ai_seats",
+              "default": {
+                "var": "employees_affected",
+                "mult": 0.7
+              }
+            },
+            "price_status": "list"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 2,
+        "weeks_max": 2,
+        "label": "2 weeks"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low"
+      },
+      "effect": {
+        "hours_share": 0.104
+      },
+      "governance": {
+        "risk": "medium",
+        "note": "Medium: reads client email that holds confidential data; needs the AI policy and consent language first",
+        "data_accessed": "Client email threads and attachments",
+        "go_live_gates": [
+          "Approve a one-page AI acceptable-use policy",
+          "Client consent language for AI processing"
+        ]
+      },
+      "risks": [
+        "Drafts better emails but keeps no list, so nothing is tracked"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 1, Option 1",
+      "confidence": "reference_calibrated"
+    },
+    "client_portal": {
+      "name": "Client portal with automatic reminders",
+      "fix_type": "software",
+      "how_it_solves": "Every request becomes a tracked list in a portal; clients upload against each item; reminders go out automatically until the list is complete",
+      "example_vendors": [
+        "Karbon (Business plan)",
+        "TaxDome",
+        "Suralink for audit request lists"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Vendor onboarding",
+            "basis": "flat",
+            "amount": 12000
+          },
+          {
+            "item": "Configuration",
+            "basis": "internal_hours",
+            "hours": 150
+          },
+          {
+            "item": "Training",
+            "basis": "internal_hours",
+            "hours": 1.5,
+            "qty": {
+              "var": "portal_seats",
+              "default": "employees_total"
+            }
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Licences (annual list price)",
+            "basis": "per_seat_month",
+            "unit_cost": 89,
+            "qty": {
+              "var": "portal_seats",
+              "default": "employees_total"
+            },
+            "price_status": "list"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 6,
+        "weeks_max": 8,
+        "label": "6 to 8 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: {portal_seats} staff and their clients learn a new portal",
+        "note_fallback": "Medium: staff and clients learn a new portal"
+      },
+      "effect": {
+        "hours_share": 0.415
+      },
+      "governance": {
+        "risk": "low",
+        "note": "Low: standard security review"
+      },
+      "risks": [
+        "Client adoption",
+        "Often the largest licence cost in the program"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 1, Option 2",
+      "confidence": "reference_calibrated"
+    },
+    "intake_desk": {
+      "name": "Intake desk and document deadline",
+      "fix_type": "process",
+      "how_it_solves": "One intake desk sends one combined request list per client, logs receipts and chases on a fixed schedule; anything incomplete on the deadline is extended by rule",
+      "example_vendors": [
+        "Internal",
+        "Engagement-letter clause",
+        "Standard request lists"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Request-list templates, engagement-letter wording and desk training",
+            "basis": "internal_hours",
+            "hours": 80
+          }
+        ],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 3,
+        "weeks_max": 3,
+        "label": "3 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: clients must hear the deadline in their engagement letters, and partners must hold it"
+      },
+      "effect": {
+        "hours_share": 0.291
+      },
+      "governance": {
+        "risk": "none",
+        "note": "None"
+      },
+      "risks": [
+        "Clients who miss the cut-off",
+        "Partners making exceptions"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 1, Option 3",
+      "confidence": "reference_calibrated"
+    },
+    "ai_pre_review": {
+      "name": "AI pre-review agent",
+      "fix_type": "ai_tool",
+      "how_it_solves": "An agent reconciles each prepared return with its source documents and the prior year, and flags differences and risky items before a person reviews",
+      "example_vendors": [
+        "TaxGPT review agent",
+        "Thomson Reuters CoCounsel tools"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Pilot set-up and integration testing",
+            "basis": "flat",
+            "amount": 10000
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Subscription",
+            "basis": "flat",
+            "amount": 36000,
+            "price_status": "indicative"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 8,
+        "weeks_max": 10,
+        "label": "8 to 10 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: integration and client consent work"
+      },
+      "effect": {
+        "hours_share": 0.25
+      },
+      "governance": {
+        "risk": "high",
+        "note": "High: full returns and source documents go to a third-party AI; needs signed client consent and a vendor review",
+        "data_accessed": "Full returns and source documents",
+        "go_live_gates": [
+          "Signed client consent for AI processing",
+          "Vendor security review",
+          "Approve a one-page AI acceptable-use policy"
+        ]
+      },
+      "requires": [
+        {
+          "capability": "client_ai_consent",
+          "op": "==",
+          "value": true,
+          "if_unmet": "hold",
+          "why": "full client files would go to a third-party AI, which needs signed client consent and a vendor review first"
+        },
+        {
+          "capability": "document_intake_tracked",
+          "op": "==",
+          "value": true,
+          "if_unmet": "defer",
+          "why": "an AI pre-review works best on work that arrives complete through a tracked queue",
+          "unlocked_by": [
+            "client_portal"
+          ],
+          "revisit": "after one season on the portal"
+        }
+      ],
+      "risks": [
+        "The vendor may not support the firm's software version",
+        "A clean AI check can breed false comfort"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 2, Option 1",
+      "confidence": "reference_calibrated"
+    },
+    "review_queues": {
+      "name": "Review queues in the portal",
+      "fix_type": "software",
+      "how_it_solves": "Every item carries a status, a named reviewer and a due date; reviewers see their queue and its age; review notes are logged per item",
+      "example_vendors": [
+        "Same vendor as the client portal"
+      ],
+      "cost_note": "$0 extra once the client portal is approved",
+      "costs": {
+        "upfront": [],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 6,
+        "weeks_max": 8,
+        "label": "Arrives with the client portal"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low: same tool, new screens"
+      },
+      "effect": {
+        "hours_share": 0.222
+      },
+      "governance": {
+        "risk": "low",
+        "note": "Low"
+      },
+      "requires_fix": [
+        "client_portal"
+      ],
+      "risks": [
+        "Depends on the client portal decision"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 2, Option 2",
+      "confidence": "reference_calibrated"
+    },
+    "tiered_review": {
+      "name": "Tiered review and review-ready checklist",
+      "fix_type": "reskilling",
+      "also": [
+        "process"
+      ],
+      "type_label": "Reskilling and process",
+      "how_it_solves": "Preparers clear a one-page checklist before review; work is tiered by complexity so trained seniors sign off the simplest third and partners review only the complex third; a monthly debrief fixes the most repeated notes",
+      "example_vendors": [
+        "Internal checklist",
+        "Review-skills courses from professional bodies"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Checklist design",
+            "basis": "internal_hours",
+            "hours": 40
+          },
+          {
+            "item": "Reviewer training",
+            "basis": "internal_hours",
+            "hours": 16,
+            "qty": {
+              "var": "reviewers_to_train",
+              "default": {
+                "var": "employees_affected",
+                "mult": 0.1
+              }
+            }
+          },
+          {
+            "item": "Outside facilitator",
+            "basis": "flat",
+            "amount": 6160
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Review stipend",
+            "basis": "per_unit",
+            "unit_cost": 2500,
+            "qty": {
+              "var": "reviewers_to_train",
+              "default": {
+                "var": "employees_affected",
+                "mult": 0.1
+              }
+            }
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 6,
+        "weeks_max": 6,
+        "label": "6 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: senior reviewers must let go of simple work"
+      },
+      "effect": {
+        "hours_share": 0.416
+      },
+      "governance": {
+        "risk": "none",
+        "note": "None"
+      },
+      "reskilling_focus": "review skills",
+      "risks": [
+        "Partner habits",
+        "Quality must hold under peer review"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 2, Option 3",
+      "confidence": "reference_calibrated"
+    },
+    "ai_document_extraction": {
+      "name": "AI document extraction",
+      "fix_type": "ai_tool",
+      "how_it_solves": "Software reads scanned documents, bookmarks them, extracts the data and fills the return; the preparer checks flagged fields instead of typing",
+      "example_vendors": [
+        "SurePrep 1040SCAN (Thomson Reuters)",
+        "Thomson Reuters Ready to Review",
+        "GruntWorx"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Set-up, scanning standards and a pilot",
+            "basis": "flat",
+            "amount": 12000
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Per-document fee",
+            "basis": "per_unit",
+            "unit_cost": 37.5,
+            "qty": {
+              "var": "complex_returns_per_year"
+            },
+            "price_status": "list price from 2023; quote needed"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 6,
+        "weeks_max": 6,
+        "label": "6 weeks"
+      },
+      "effort": {
+        "level": "medium",
+        "note": "Medium: new scanning habits and a verification step"
+      },
+      "effect": {
+        "hours_share": 0.595
+      },
+      "governance": {
+        "risk": "medium",
+        "note": "Medium: documents are processed by a vendor; confirm US-only processing, no training on client data and deletion terms",
+        "data_accessed": "Scanned client documents and return data",
+        "go_live_gates": [
+          "Vendor security and contract review: US-only processing, no training on client data, deletion terms",
+          "Client consent for AI processing in engagement letters"
+        ]
+      },
+      "risks": [
+        "Scan quality",
+        "Per-unit price creep",
+        "Staff over-trusting extracted figures"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 3, Option 1",
+      "confidence": "reference_calibrated"
+    },
+    "import_first": {
+      "name": "Import-first standard and training",
+      "fix_type": "reskilling",
+      "how_it_solves": "Everything that can be imported is imported; staff get short training and a one-page import checklist",
+      "example_vendors": [
+        "Import features already licensed in the firm's software"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Trainer",
+            "basis": "flat",
+            "amount": 3000
+          },
+          {
+            "item": "Staff training time",
+            "basis": "internal_hours",
+            "hours": 3,
+            "qty": "employees_affected"
+          }
+        ],
+        "ongoing": []
+      },
+      "implementation": {
+        "weeks_min": 3,
+        "weeks_max": 3,
+        "label": "3 weeks"
+      },
+      "effort": {
+        "level": "low",
+        "note": "Low"
+      },
+      "effect": {
+        "hours_share": 0.198
+      },
+      "governance": {
+        "risk": "none",
+        "note": "None"
+      },
+      "reskilling_focus": "software imports",
+      "risks": [
+        "The habit fades without spot checks"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 3, Option 2",
+      "confidence": "reference_calibrated"
+    },
+    "offshore_data_entry": {
+      "name": "Offshore data-entry partner",
+      "fix_type": "process",
+      "type_label": "Process (outsourcing)",
+      "how_it_solves": "Scanned documents go to an outsourced team that keys them overnight; staff check the result",
+      "example_vendors": [
+        "US-managed offshore preparation providers"
+      ],
+      "costs": {
+        "upfront": [
+          {
+            "item": "Onboarding and a consent campaign",
+            "basis": "flat",
+            "amount": 8000
+          }
+        ],
+        "ongoing": [
+          {
+            "item": "Per-document fee",
+            "basis": "per_unit",
+            "unit_cost": 40,
+            "qty": {
+              "var": "offshore_returns_per_year"
+            },
+            "price_status": "indicative"
+          }
+        ]
+      },
+      "implementation": {
+        "weeks_min": 8,
+        "weeks_max": 8,
+        "label": "8 weeks plus consent collection"
+      },
+      "effort": {
+        "level": "high",
+        "note": "High: signed consent from every client in scope; quality control across time zones"
+      },
+      "effect": {
+        "hours_share": 0.51
+      },
+      "governance": {
+        "risk": "high",
+        "note": "High: sending client data outside the US needs each client's signed consent",
+        "data_accessed": "Client source documents",
+        "go_live_gates": [
+          "Signed consent from every client in scope"
+        ]
+      },
+      "requires": [
+        {
+          "capability": "client_offshore_consent",
+          "op": "==",
+          "value": true,
+          "if_unmet": "hold",
+          "why": "sending client information outside the US needs every client's signed consent first"
+        }
+      ],
+      "risks": [
+        "Consent refusals",
+        "Client perception",
+        "Quality"
+      ],
+      "evidence": "Corlander & Vale reference report v1.0, Bottleneck 3, Option 3",
+      "confidence": "reference_calibrated"
+    }
+  },
+  "pair_overlaps": [
+    {
+      "pair": [
+        "psa_tool",
+        "capacity_council"
+      ],
+      "overlap": 0.167,
+      "together_note": "The PSA makes capacity visible, the council turns it into decisions, and the certification rule gives every unplanned free day a use."
+    },
+    {
+      "pair": [
+        "ai_capacity_forecasting",
+        "psa_tool"
+      ],
+      "overlap": 0.5,
+      "overlap_note": "Both forecast capacity; the PSA's booking data is what the agent later learns from."
+    },
+    {
+      "pair": [
+        "meeting_reset",
+        "system_of_record"
+      ],
+      "overlap": 0.286,
+      "together_note": "The reset frees most of the time at once, and one system of record stops the copying behind the remaining updates."
+    },
+    {
+      "pair": [
+        "ai_meeting_notes",
+        "system_of_record"
+      ],
+      "overlap": 0.4
+    },
+    {
+      "pair": [
+        "daily_time_rule",
+        "ai_timesheets"
+      ],
+      "overlap": 0.333,
+      "together_note": "The rule fixes when time is logged; the drafts fix the effort and the forgetting."
+    },
+    {
+      "pair": [
+        "ai_timesheets",
+        "psa_time_module"
+      ],
+      "overlap": 1.0,
+      "overlap_note": "Once the PSA is live, drafts flow into it instead of the old time tool; no extra savings are counted, to avoid double counting."
+    },
+    {
+      "pair": [
+        "daily_time_rule",
+        "psa_time_module"
+      ],
+      "overlap": 0.5
+    },
+    {
+      "pair": [
+        "client_portal",
+        "intake_desk"
+      ],
+      "overlap": 0.4286,
+      "together_note": "The intake desk owns the chase, and the portal does the remembering."
+    },
+    {
+      "pair": [
+        "ai_followup_assistant",
+        "intake_desk"
+      ],
+      "overlap": 0.6,
+      "overlap_note": "The intake desk takes over most of the chasing the assistant would help with."
+    },
+    {
+      "pair": [
+        "ai_followup_assistant",
+        "client_portal"
+      ],
+      "overlap": 0.9,
+      "overlap_note": "The portal sends reminders without anyone writing them."
+    },
+    {
+      "pair": [
+        "tiered_review",
+        "review_queues"
+      ],
+      "overlap": 0.375,
+      "together_note": "The checklist cuts second reviews at the source, tiering moves simple work off senior desks, and the queue shows everyone what is waiting."
+    },
+    {
+      "pair": [
+        "ai_pre_review",
+        "tiered_review"
+      ],
+      "overlap": 0.4
+    },
+    {
+      "pair": [
+        "ai_document_extraction",
+        "import_first"
+      ],
+      "overlap": 0.4286,
+      "together_note": "Extraction removes most typing on complex documents; the standard stops anyone typing what already exists as data."
+    },
+    {
+      "pair": [
+        "ai_document_extraction",
+        "offshore_data_entry"
+      ],
+      "overlap": 0.8
+    },
+    {
+      "pair": [
+        "import_first",
+        "offshore_data_entry"
+      ],
+      "overlap": 0.4
+    }
+  ]
+}

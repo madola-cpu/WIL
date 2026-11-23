@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phase 4 manager view demo</title>
+  <style>body{margin:0;padding:24px 16px;background:#F4F5F7}</style>
+</head>
+<body>
+  <!-- Serve this folder (python -m http.server) and open demo.html.
+       Swap the fetch for your backend: GET your stored manager_view.json, or POST to the Phase 4 service. -->
+  <main id="phase4">Loading Phase 4 results…</main>
+  <script type="module">
+    import { renderPhase4Panel } from "./phase4-panel.js";
+    const target = document.getElementById("phase4");
+    try {
+      const view = await (await fetch("./sample_manager_view.json")).json();
+      renderPhase4Panel(target, view);
+    } catch (err) {
+      target.textContent = "Could not load the Phase 4 results: " + err;
+    }
+  </script>
+</body>
+</html>

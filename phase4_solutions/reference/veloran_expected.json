@@ -1,0 +1,133 @@
+{
+  "reference": "Veloran Consulting Workflow Efficiency Report v1.0 (Nov 1, 2026): solution-option tables for Bottlenecks 1-3 and the Recommendations and ROI table",
+  "input": "samples/veloran_input.json",
+  "status_mapping": "Report wording mapped to engine statuses: 'the right second step' = deferred; 'not recommended now' = on_hold; 'we count no extra savings' = follow_on.",
+  "bottlenecks": {
+    "BN-1": {
+      "category": "staffing_visibility",
+      "options": {
+        "ai_capacity_forecasting": {
+          "upfront_cost": 40000,
+          "ongoing_cost_per_year": 24000,
+          "hours_saved_per_week": 45,
+          "annual_savings": 136080,
+          "payback_months": 5.6,
+          "status": "deferred"
+        },
+        "psa_tool": {
+          "upfront_cost": 26200,
+          "ongoing_cost_per_year": 28800,
+          "hours_saved_per_week": 60,
+          "annual_savings": 181440,
+          "payback_months": 3.6
+        },
+        "capacity_council": {
+          "upfront_cost": 3600,
+          "ongoing_cost_per_year": 0,
+          "hours_saved_per_week": 30,
+          "annual_savings": 90720,
+          "payback_months": 0.5
+        }
+      },
+      "recommended": [
+        "psa_tool",
+        "capacity_council"
+      ],
+      "recommendation": {
+        "hours_saved_per_week": 85,
+        "year_one_cost": 58600,
+        "ongoing_cost_per_year": 28800,
+        "annual_savings": 257040,
+        "payback_months": 2.7
+      }
+    },
+    "BN-2": {
+      "category": "status_duplication",
+      "options": {
+        "ai_meeting_notes": {
+          "upfront_cost": 2000,
+          "ongoing_cost_per_year": 9000,
+          "hours_saved_per_week": 40,
+          "annual_savings": 120960,
+          "payback_months": 1.1,
+          "status": "on_hold"
+        },
+        "system_of_record": {
+          "upfront_cost": 7200,
+          "ongoing_cost_per_year": 0,
+          "hours_saved_per_week": 35,
+          "annual_savings": 105840,
+          "payback_months": 0.8
+        },
+        "meeting_reset": {
+          "upfront_cost": 2600,
+          "ongoing_cost_per_year": 0,
+          "hours_saved_per_week": 50,
+          "annual_savings": 151200,
+          "payback_months": 0.2
+        }
+      },
+      "recommended": [
+        "meeting_reset",
+        "system_of_record"
+      ],
+      "recommendation": {
+        "hours_saved_per_week": 75,
+        "year_one_cost": 9800,
+        "ongoing_cost_per_year": 0,
+        "annual_savings": 226800,
+        "payback_months": 0.5
+      }
+    },
+    "BN-3": {
+      "category": "time_capture",
+      "options": {
+        "ai_timesheets": {
+          "upfront_cost": 2000,
+          "ongoing_cost_per_year": 9120,
+          "hours_saved_per_week": 25,
+          "annual_savings": 75600,
+          "payback_months": 1.8
+        },
+        "psa_time_module": {
+          "upfront_cost": 0,
+          "ongoing_cost_per_year": 0,
+          "hours_saved_per_week": 12,
+          "annual_savings": 36288,
+          "payback_months": 0,
+          "status": "follow_on"
+        },
+        "daily_time_rule": {
+          "upfront_cost": 0,
+          "ongoing_cost_per_year": 0,
+          "hours_saved_per_week": 15,
+          "annual_savings": 45360,
+          "payback_months": 0
+        }
+      },
+      "recommended": [
+        "daily_time_rule",
+        "ai_timesheets"
+      ],
+      "recommendation": {
+        "hours_saved_per_week": 35,
+        "year_one_cost": 11120,
+        "ongoing_cost_per_year": 9120,
+        "annual_savings": 105840,
+        "payback_months": 1.3
+      }
+    }
+  },
+  "program": {
+    "year_one_cost": 79520,
+    "ongoing_cost_per_year": 37920,
+    "gross_hours_saved_per_week": 195,
+    "effective_hours_saved_per_week": 136.5,
+    "annual_savings": 589680,
+    "net_benefit_year_one": 510160,
+    "net_benefit_year_two_onward": 551760,
+    "payback_months": 1.6,
+    "upside_not_counted_total": 415171
+  },
+  "matching": "Bottlenecks are matched by id first, then by fix category, so any Phase 3 ids work."
+}

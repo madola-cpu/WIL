@@ -1,0 +1,110 @@
+{
+  "schema_version": "phase4-input/1.0",
+  "run": {
+    "run_id": "corlander-vale-reference",
+    "scenario": "A",
+    "client_name": "Corlander & Vale CPAs",
+    "generated_at": "2026-11-22T00:00:00Z",
+    "source_steps": ["step7", "step8"],
+    "synthetic": true,
+    "notes": "Second reference case, built from the Corlander & Vale report v1.0 (synthetic). Used to check that Phase 4 is not tuned to Veloran only."
+  },
+  "company": {
+    "short_name": "C&V",
+    "employees_total": 130,
+    "billable_employees": 110,
+    "current_tools": ["UltraTax CS", "Practice CS", "Caseware Working Papers", "QuickBooks Online Accountant", "ShareFile", "Microsoft 365", "Excel due-date tracker"],
+    "capabilities": {
+      "ai_policy_in_place": false,
+      "client_ai_consent": false,
+      "client_offshore_consent": false,
+      "document_intake_tracked": false
+    },
+    "volumes": {
+      "portal_seats": 120,
+      "reviewers_to_train": 8,
+      "complex_returns_per_year": 2200,
+      "offshore_returns_per_year": 1650,
+      "email_ai_seats": 60
+    }
+  },
+  "assumptions": {
+    "currency": "USD",
+    "loaded_hourly_rate": 80,
+    "working_weeks_per_year": 48,
+    "adoption_rate": {"low": 0.5, "base": 0.7, "high": 0.85},
+    "max_payback_months": 12,
+    "realized_billing_rate": 149,
+    "sources": {
+      "loaded_hourly_rate": "Average salary $100,000 x 1.30 plus $23,600 overhead per person, divided by 1,920 working hours (C&V finance, FY2026)",
+      "working_weeks_per_year": "52 weeks minus PTO and holidays (C&V handbook)"
+    }
+  },
+  "bottlenecks": [
+    {
+      "id": "BN-1",
+      "rank": 1,
+      "name": "Client documents chased and re-requested by hand",
+      "category": "document_chasing",
+      "departments": ["Tax Services", "Audit & Assurance", "CAS", "Firm Operations"],
+      "employees_affected": 86,
+      "hours_lost_per_week": 240.8,
+      "annual_cost": 924672,
+      "feasibility": "medium",
+      "priority_score": 82,
+      "root_causes": ["Requests are emails, not lists", "Every team chases on its own", "No deadline with a consequence"]
+    },
+    {
+      "id": "BN-2",
+      "rank": 2,
+      "name": "Returns and workpapers waiting in review, with rework",
+      "category": "review_queue",
+      "departments": ["Tax Services", "Audit & Assurance"],
+      "employees_affected": 80,
+      "hours_lost_per_week": 180.3,
+      "annual_cost": 692352,
+      "feasibility": "medium",
+      "priority_score": 68,
+      "root_causes": ["Returns reach review before they are ready", "Every return goes to a partner", "The queue is invisible"],
+      "upside_not_counted": [
+        {"key": "write_downs", "label": "Fewer review write-downs", "amount": 205000,
+         "basis": "Half of the $410,000 of FY2026 write-downs coded to review rework",
+         "unlocked_by": ["tiered_review", "review_queues"]}
+      ]
+    },
+    {
+      "id": "BN-3",
+      "rank": 3,
+      "name": "Source documents keyed into tax software by hand",
+      "category": "manual_keying",
+      "departments": ["Tax Services"],
+      "employees_affected": 41,
+      "hours_lost_per_week": 176.5,
+      "annual_cost": 677760,
+      "feasibility": "high",
+      "priority_score": 66,
+      "root_causes": ["Documents arrive as images, not data", "The imports already licensed go unused", "The same few people key all season"],
+      "upside_not_counted": [
+        {"key": "overtime", "label": "Less busy-season overtime", "amount": 30500,
+         "basis": "Half of the $61,000 of overtime paid in the 2026 season",
+         "unlocked_by": ["ai_document_extraction", "import_first"]}
+      ]
+    },
+    {"id": "BN-4", "rank": 4, "name": "Status questions answered by hand", "category": "status_questions",
+     "departments": ["Tax Services", "Audit & Assurance", "CAS", "Firm Operations"], "employees_affected": 87,
+     "hours_lost_per_week": 116.8, "annual_cost": 448512, "feasibility": "medium", "priority_score": 56},
+    {"id": "BN-5", "rank": 5, "name": "CAS transaction coding and reconciliations", "category": "cas_coding",
+     "departments": ["CAS"], "employees_affected": 15, "hours_lost_per_week": 75.0, "annual_cost": 288000,
+     "feasibility": "high", "priority_score": 39},
+    {"id": "BN-6", "rank": 6, "name": "Audit tie-outs and confirmations by hand", "category": "audit_tieouts",
+     "departments": ["Audit & Assurance"], "employees_affected": 22, "hours_lost_per_week": 74.0, "annual_cost": 284160,
+     "feasibility": "medium", "priority_score": 32},
+    {"id": "BN-7", "rank": 7, "name": "Bills drafted from WIP by hand", "category": "billing",
+     "departments": ["Tax Services", "Audit & Assurance", "CAS", "Firm Operations"], "employees_affected": 35,
+     "hours_lost_per_week": 51.6, "annual_cost": 198144, "feasibility": "medium", "priority_score": 31}
+  ],
+  "upside_not_counted": [
+    {"key": "turnover", "label": "Lower professional turnover", "amount": 160000,
+     "basis": "Four fewer departures a year (17.9% toward 13%) x $40,000 replacement cost"}
+  ]
+}
