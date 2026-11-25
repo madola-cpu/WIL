@@ -1,0 +1,46 @@
+{
+  "dataset": "mini_v1 (synthetic)",
+  "bottlenecks": [
+    {
+      "id": "K1",
+      "name": "status reporting",
+      "kpi": "status_hours",
+      "group": {
+        "teams": [
+          "Team A"
+        ]
+      },
+      "true_total_hours_lost_per_week": 18,
+      "true_people_affected": 6,
+      "tolerance": 0.15
+    },
+    {
+      "id": "K2",
+      "name": "timesheets rebuilt from memory",
+      "kpi": "share_entered_friday_or_later",
+      "group": {
+        "teams": [
+          "Team A"
+        ]
+      },
+      "true_total_hours_lost_per_week": 6,
+      "true_people_affected": 6,
+      "tolerance": 0.15
+    }
+  ],
+  "traps": [
+    {
+      "kpi": "internal_meeting_load",
+      "group": {
+        "team": "Team B"
+      },
+      "reason": "recurring external client meetings, not internal status"
+    }
+  ],
+  "small_groups": [
+    {
+      "team": "Team C",
+      "size": 3
+    }
+  ]
+}

@@ -15,7 +15,7 @@ Its output feeds Phase 5: the manager view (frontend) and the step 10 report and
 ## Commands (run from this folder)
 
 ```bash
-python -m pytest -q                       # must stay green: 50 tests
+python -m pytest -q                       # must stay green: 82 tests
 python -m phase4 check samples/veloran_input.json --expected veloran          # must print 75 of 75
 python -m phase4 pipeline examples/phase3/veloran_step7_8.json --profile veloran --expected veloran --out-dir /tmp/p4
 python -m phase4 adapt <phase3 output file> --profile veloran                 # shows how Phase 3 fields map
@@ -32,6 +32,23 @@ python -m phase4 adapt <phase3 output file> --profile veloran                 # 
 - **Privacy.** Phase 4 works on team totals only. Never pass lists of people or per-person data into Phase 4. Groups under 5 people are dropped on purpose.
 - **Numbers never come from a language model.** Optional Claude text goes through the number guard in `phase4/narrative.py`; keep it that way.
 - Keep the folder self-contained: paths resolve relative to `phase4_solutions/`, so the folder can be moved as a unit.
+
+## Impact engine (`engine/`, steps 4–9)
+
+### Commands
+
+```bash
+python tests/fixtures/make_mini.py && python -m engine.validate tests/fixtures/mini   # must PASS
+python -m engine.cli score tests/fixtures/mini                                         # must PASS: 2 of 2, 0 false alarms
+```
+
+### Rules
+
+- **Read the spec first.** Read `PHASE_4_PROMPT.md` before changing any formula, threshold or output field.
+- **Every number has a source.** Each output number comes from the data, `config/evidence.json`, `config/assumptions.json`, or a client file, and carries a `source` tag. Never type wages or effect sizes from memory.
+- **Report teams and roles, never people.** Groups under 5 people are suppressed. Per-person values stay in memory.
+- **Stay deterministic.** The engine makes no LLM calls, trains no models and never reads the wall clock. The same seed must give a byte-identical `findings.json`.
+- **Never write to a data folder.** `data/lev/` is the team's fake data.
 
 ## Where things are
 

@@ -21,12 +21,56 @@ Requirements: Python 3.10+, standard library only. `pip install anthropic` is ne
 
 ```bash
 cd phase4_solutions
-python -m pytest -q                                                    # 50 tests
+python -m pytest -q                                                    # 82 tests
 python -m phase4 pipeline examples/phase3/veloran_step7_8.json \
        --profile veloran --expected veloran --out-dir phase4_out       # Phase 3 output -> every Phase 5 file
 python -m phase4 adapt examples/phase3/veloran_bottlenecks.csv --profile veloran   # how Phase 3 fields map
 python -m phase4 serve --port 8040                                     # HTTP service for any language
 ```
+
+## Measured impact engine (steps 4–9)
+
+`engine/` measures the bottlenecks from work data instead of taking them from a report. It is specified in **[PHASE_4_PROMPT.md](PHASE_4_PROMPT.md)**.
+
+**What it does:**
+
+- reads team-level CSV exports (`people`, `activity`, `work_item_events`, `time_entries`, `bookings`)
+- computes KPIs
+- detects and sizes bottlenecks
+- pools published studies for each fix's effect
+- runs a seeded Monte Carlo
+- ranks fixes by value × confidence ÷ effort
+
+**How it stays honest:**
+
+- Every number carries a source tag.
+- Groups under 5 people are suppressed.
+- There are no LLM calls and no trained models.
+
+```bash
+python tests/fixtures/make_mini.py                              # seeded 3-team fixture + answer key
+python -m engine.validate tests/fixtures/mini                   # data contract check (max 30 lines)
+python -m engine.cli run tests/fixtures/mini --phase4-profile veloran   # outputs/<run_id>/ + step 9 via the existing pipeline
+python -m engine.cli score tests/fixtures/mini                  # scorecard vs answer_key.json -> validation.md
+```
+
+**What `outputs/<run_id>/` holds:**
+
+| File | Contents |
+| --- | --- |
+| `findings.json` | What the front end reads |
+| `report.md` | The written findings |
+| `kpis.csv` | Group-level KPIs |
+| `fixes_ranked.csv` | The fix ranking |
+| `bottlenecks.json` | The bottleneck records |
+| `preview.html` | A page you can open from disk |
+| `phase3_handoff.json` | Steps 7–8, in the shape this folder's adapter reads |
+| `phase4/` | The step 9 files and the manager-view preview (only when you pass `--phase4-profile`) |
+
+**Limits:**
+
+- **Dollars:** until `data/reference/wages.csv` is filled from BLS OEWS by hand (see `data/reference/README.md`), or a `client_rates.csv` is supplied, dollars read "not computed".
+- **Savings:** they rest on published effect sizes, so only a pilot can confirm them.
 
 ## Ways to use it
 
@@ -107,5 +151,10 @@ profiles/               client facts Phase 3 doesn't have (Veloran, Corlander & 
 contracts/              JSON Schemas (input, output, manager view, profile) and phase4.d.ts
 examples/               Phase 3 output examples, frontend (React and plain JS), Node and Python callers
 samples/, reference/    engine inputs and outputs, and the numbers printed in the two reference reports
-tests/                  50 tests
+tests/                  82 tests (50 for phase4/, 32 for engine/)
+PHASE_4_PROMPT.md       spec for the measured impact engine (steps 4-9)
+engine/                 the impact engine: contract, kpis, bottlenecks, evidence, impact, prioritize, report, cli
+config/                 engine assumptions, bottleneck rules, fixes, evidence studies (JSON)
+data/reference/         wages.csv (fill from BLS OEWS by hand)
+tests/fixtures/         make_mini.py and the generated mini fixture with its answer key
 ```

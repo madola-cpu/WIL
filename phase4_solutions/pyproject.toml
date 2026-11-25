@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "phase4-solutions"
 version = "0.2.0"
-description = "Team Tom AI consultant, Phase 4 (step 9): AI, software, process and reskilling fixes per bottleneck"
+description = "Team Tom AI consultant, Phase 4: fixes per bottleneck (step 9) and the measured impact engine (steps 4-9)"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
@@ -18,7 +18,7 @@ dev = ["pytest", "jsonschema"]
 phase4 = "phase4.cli:main"
 
 [tool.setuptools]
-packages = ["phase4"]
+packages = ["phase4", "engine"]
 
 [tool.setuptools.package-data]
 phase4 = ["data/*.json"]

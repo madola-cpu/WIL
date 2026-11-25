@@ -1,0 +1,15 @@
+person_id,team,role,soc_code,weekly_hours,billable
+A01,Team A,consultant,13-1111,40,true
+A02,Team A,consultant,13-1111,40,true
+A03,Team A,consultant,13-1111,40,true
+A04,Team A,consultant,13-1111,40,true
+A05,Team A,consultant,13-1111,40,true
+A06,Team A,consultant,13-1111,40,true
+B01,Team B,account_manager,11-2022,40,true
+B02,Team B,account_manager,11-2022,40,true
+B03,Team B,account_manager,11-2022,40,true
+B04,Team B,account_manager,11-2022,40,true
+B05,Team B,account_manager,11-2022,40,true
+C01,Team C,analyst,15-2051,40,false
+C02,Team C,analyst,15-2051,40,false
+C03,Team C,analyst,15-2051,40,false

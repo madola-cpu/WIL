@@ -1,0 +1,9 @@
+{
+  "routine_writing_admin": ["status_update", "timesheet", "admin", "business_writing"],
+  "meetings": ["internal_meeting"],
+  "proposals": ["proposal"],
+  "analysis_and_delivery": ["client_work", "consulting_analysis", "analysis"],
+  "search": ["search"],
+  "rework": ["rework"],
+  "customer_support": ["customer_support"]
+}

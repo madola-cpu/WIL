@@ -1,0 +1,27 @@
+{
+  "_scores": {
+    "setting": "2 = their own job at work, 1 = realistic tasks done by professionals, 0 = students or lab puzzles",
+    "tool": "per component: 2 = the same fix, 1 = the same kind of tool used differently, 0 = different",
+    "outcome": "2 = time on the task, 1 = output per hour or another proxy, 0 = self-report only",
+    "se": "Enter the paper's standard error, or ci_low and ci_high. Until then the engine uses 1/sqrt(n) and flags it.",
+    "provenance": "Entries copied from the team's Phase 4 prompt; effect sizes not yet re-checked against the papers."
+  },
+  "studies": [
+    {"id": "noy_zhang_2023", "source": "Noy and Zhang, Science (2023)",
+     "url": "https://news.mit.edu/2023/study-finds-chatgpt-boosts-worker-productivity-writing-0714",
+     "design": "online_rct", "data_year": 2023, "n": 453, "metric": "time_reduction", "effect": 0.40, "se": null,
+     "task": "business_writing", "soc_codes": [], "soc_major_groups": ["11", "13", "15", "27"], "setting": 1, "outcome": 2,
+     "applies_to": [{"component": "ai_timesheet_drafts", "tool": 1}]},
+    {"id": "dellacqua_2023", "source": "Dell'Acqua et al., Organization Science (2025), BCG experiment run in 2023",
+     "url": "https://pubsonline.informs.org/doi/full/10.1287/orsc.2025.21838",
+     "design": "lab_in_field_rct", "data_year": 2023, "n": 758, "metric": "time_reduction", "effect": 0.251, "se": null,
+     "task": "consulting_analysis", "soc_codes": ["13-1111"], "soc_major_groups": ["13"], "setting": 1, "outcome": 2,
+     "caution": "Outside the AI frontier, users were 19 points less likely to be correct",
+     "applies_to": [{"component": "ai_timesheet_drafts", "tool": 1}]},
+    {"id": "brynjolfsson_li_raymond_2025", "source": "Brynjolfsson, Li and Raymond, Quarterly Journal of Economics 140(2), 2025",
+     "url": "https://www.nber.org/papers/w31161",
+     "design": "field_quasi", "data_year": 2021, "n": 5179, "metric": "productivity_gain", "effect": 0.14, "se": null,
+     "task": "customer_support", "soc_codes": ["43-4051"], "soc_major_groups": ["43"], "setting": 2, "outcome": 1,
+     "applies_to": [{"component": "ai_timesheet_drafts", "tool": 1}]}
+  ]
+}

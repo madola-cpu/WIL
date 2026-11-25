@@ -35,3 +35,8 @@ jobs:
         run: python -m phase4 check samples/veloran_input.json --expected veloran
       - name: Pipeline from example Phase 3 output
         run: python -m phase4 pipeline examples/phase3/veloran_step7_8.json --profile veloran --expected veloran --out-dir /tmp/phase4_out
+      - name: Impact engine on the mini fixture (contract, run, scorecard)
+        run: |
+          python tests/fixtures/make_mini.py
+          python -m engine.validate tests/fixtures/mini
+          python -m engine.cli score tests/fixtures/mini --out /tmp/engine_out

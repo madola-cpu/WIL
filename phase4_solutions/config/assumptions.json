@@ -1,0 +1,15 @@
+{
+  "weeks_per_year": {"value": 48, "source": "Veloran reference case; replace per client"},
+  "wage_share_of_compensation": {"value": 0.70, "source": "BLS Employer Costs for Employee Compensation, June 2026: wages and salaries are 70.0% of private-industry employer costs", "url": "https://www.bls.gov/news.release/ecec.nr0.htm"},
+  "adoption": {"low": 0.5, "base": 0.7, "high": 0.85, "source": "Veloran reference report v1.0 and profiles/veloran.json (50%/70%/85%). The team's Phase 4 prompt draft proposed 0.9 for the high case; confirm."},
+  "transfer_sd_at_zero_alignment": {"value": 0.30, "source": "assumption: a study with zero alignment could be off by about 30 percentage points"},
+  "drift_per_year": {"ai_tool": 0.03, "process": 0.01, "source": "assumption: AI evidence ages faster; METR finds the task length AI agents can complete doubling about every 7 months", "url": "https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/"},
+  "design_discount": {"field_rct": 1.0, "field_quasi": 1.0, "lab_in_field_rct": 0.9, "online_rct": 0.8, "observational": 0.8, "vendor_case": 0.5, "expert_estimate": 1.0, "source": "assumption: lab and vendor results overstate workplace gains"},
+  "expert_se_share": {"value": 0.5, "source": "assumption: an expert estimate could be off by about half"},
+  "tau_min": {"value": 0.05, "source": "assumption: the smallest spread of true effects between firms"},
+  "monte_carlo": {"draws": 10000, "seed": 42, "source": "assumption: enough draws for stable P10/P90; a fixed seed gives reproducible output"},
+  "min_group_size": {"value": 5, "source": "project privacy rule: groups under 5 people are suppressed"},
+  "min_weeks": {"value": 3, "source": "assumption: fewer weeks cannot separate a pattern from a one-off"},
+  "allowance_hours": {"value": 0, "source": "assumption: status hours per person-week that count as normal, not lost"},
+  "work_hours_local": {"start": "08:00", "end": "18:00", "source": "assumption: core working hours for the after-hours guardrail"}
+}

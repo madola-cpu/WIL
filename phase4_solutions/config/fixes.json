@@ -1,0 +1,13 @@
+[
+  {"id": "F1", "name": "PSA tool plus weekly capacity council", "bottleneck": "staffing_blind_spots",
+   "components": [{"id": "psa_and_capacity_council", "kind": "process", "report_estimate": 0.659, "note": "85 of 129 hours (Veloran report)"}],
+   "year_one_cost": 58600, "ongoing_cost": 28800, "effort": "medium", "time_to_value_weeks": 8},
+  {"id": "F2", "name": "End recurring status meetings; one system of record", "bottleneck": "status_reporting",
+   "components": [{"id": "meeting_reset_and_one_system", "kind": "process", "report_estimate": 0.670, "note": "75 of 112 hours (Veloran report)"}],
+   "year_one_cost": 9800, "ongoing_cost": 0, "effort": "low", "time_to_value_weeks": 4},
+  {"id": "F3", "name": "Daily time rule plus AI-drafted timesheets", "bottleneck": "timesheets_from_memory",
+   "components": [
+     {"id": "daily_time_rule", "kind": "process", "report_estimate": 0.357, "note": "15 of 42 hours (Veloran report); no study entered yet"},
+     {"id": "ai_timesheet_drafts", "kind": "ai_tool", "report_estimate": 0.595, "note": "25 of 42 hours (Veloran report); checked against the studies"}],
+   "year_one_cost": 11120, "ongoing_cost": 9120, "effort": "low", "time_to_value_weeks": 3}
+]

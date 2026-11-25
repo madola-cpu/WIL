@@ -1,0 +1,18 @@
+{
+  "_doc": "Bottleneck rules, evaluated per team. See PHASE_4_PROMPT.md section 5.",
+  "rules": [
+    {"id": "staffing_blind_spots", "name": "Staffing blind spots", "kpi": "unplanned_bench", "comparator": ">", "threshold": 1.0,
+     "work_type": null, "sizing": "bench_hours", "affected": "billable",
+     "source": "team Phase 4 prompt (Veloran starter rule): more than 1 unplanned bench hour per billable person-week"},
+    {"id": "status_reporting", "name": "Status reporting", "kpi": "status_hours", "comparator": ">", "threshold_share_of_contracted": 0.05,
+     "work_type": "status_update", "sizing": "status_hours", "affected": "all",
+     "source": "team Phase 4 prompt (Veloran starter rule): status hours above 5% of contracted hours"},
+    {"id": "timesheets_from_memory", "name": "Timesheets rebuilt from memory", "kpi": "share_entered_friday_or_later", "comparator": ">", "threshold": 0.40,
+     "work_type": "timesheet", "sizing": "timesheet_hours", "affected": "all",
+     "source": "team Phase 4 prompt (Veloran starter rule): over 40% of Monday-Thursday entries made Friday or later"},
+    {"id": "flow_delays", "name": "Flow delays", "kpi": "flow_efficiency", "comparator": "<", "threshold": 0.30,
+     "or": {"kpi": "wait_p90_days", "comparator": ">", "threshold": 5},
+     "work_type": null, "sizing": "diagnostic", "affected": "all",
+     "source": "team Phase 4 prompt: flow efficiency below 0.30. The P90 wait limit of 5 days is a placeholder awaiting team confirmation"}
+  ]
+}
